@@ -39,6 +39,7 @@ public class MakeMap : MonoBehaviour
 
     }
 
+    // TODO 무한루프 해결
     private void _SortTiles(GameObject[] tiles_)
     {
         float y = 0;
@@ -53,22 +54,27 @@ public class MakeMap : MonoBehaviour
             // -(-12.5f) 는 제일 왼쪽에 위치한 타일의 x값
 
             GameObject tileTemp_ = tiles_[i];
-            tiles_[i] = tiles_[(int)y * 21 + (int)x];
-            tiles_[(int)y * 21 + (int)x] = tileTemp_;
+            tiles_[i] = tiles_[Mathf.RoundToInt(y * 21f + x)];
+            tiles_[Mathf.RoundToInt(y * 21f + x)] = tileTemp_;
             // 스왑
 
-            if ((tiles_[(int)y * 21 + (int)x].transform.position.y * 21 + tiles_[(int)y * 21 + (int)x].transform.position.x) != i)
-            {
-                // 스왑한 타일의 좌표가 새로운 좌표에 맞지 않을 경우
-                continue;
-                // 다시 루프
-            }
-            else
-            {
-                // 스왑한 타일의 좌표가 새로운 좌표에 맞을 경우
-                i += 1;
-                // 다음 타일의 좌표를 본다
-            }
+            y = Mathf.Abs(tiles_[i].transform.position.y - 5.5f);
+            // 5.5f 는 제일 위에 위치한 타일의 y값
+
+            x = Mathf.Abs(tiles_[i].transform.position.x + 12.5f);
+            // -(-12.5f) 는 제일 왼쪽에 위치한 타일의 x값
+
+            //if (Mathf.RoundToInt(y * 21f + x) != i)
+            //{
+            //    Debug.Log("걸러지나?");
+            //    // 스왑한 타일의 좌표가 새로운 좌표에 맞지 않을 경우
+            //    continue;
+            //    // 다시 루프
+            //}
+
+            // 스왑한 타일의 좌표가 새로운 좌표에 맞을 경우
+            i += 1;
+            // 다음 타일의 좌표를 본다
         }
     }
 }
