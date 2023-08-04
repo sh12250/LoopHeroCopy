@@ -66,66 +66,67 @@ public class CardManager : MonoBehaviour
         if (randNum >= 0 && randNum < 4)
         {   // 망각
             theTile_ = Instantiate(mightCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[0];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[0];
         }
         else if (randNum >= 4 && randNum < 12)
         {   // 금고
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[14];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[14];
         }
         else if (randNum >= 12 && randNum < 20)
         {   // 등대
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[8];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[8];
         }
         else if (randNum >= 20 && randNum < 32)
         {   // 바위
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[9];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[9];
         }
         else if (randNum >= 32 && randNum < 42)
         {   // 산
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[10];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[10];
         }
         else if (randNum >= 42 && randNum < 52)
         {   // 목초지
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[15];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[15];
         }
         else if (randNum >= 52 && randNum < 60)
         {   // 묘지
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[1];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[1];
         }
         else if (randNum >= 60 && randNum < 70)
         {   // 수풀
             theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[3];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[3];
         }
         else if (randNum >= 70 && randNum < 76)
         {   // 가로등
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[12];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[12];
         }
         else if (randNum >= 76 && randNum < 84)
         {   // 거미고치
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[5];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[5];
         }
         else if (randNum >= 84 && randNum < 92)
         {   // 전장
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[7];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[7];
         }
         else if (randNum >= 92 && randNum < 100)
         {   // 저택
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentInChildren<Image>().sprite = faceSprites[6];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[6];
         }
 
         if (theTile_ != null || theTile_ != default)
         {
+            theTile_.GetComponentsInChildren<Image>()[1].enabled = true;
             return theTile_;
         }
         else { return MakeCard(); }
