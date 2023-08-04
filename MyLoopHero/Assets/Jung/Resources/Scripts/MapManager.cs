@@ -33,7 +33,7 @@ public class MapManager : MonoBehaviour
         }
 
         voidTiles = SortTiles(voidTiles);
-        // 타일 정렬
+        // 정렬한 타일 대입
 
         int campsiteY_ = Random.Range(MAP_LENGTH / 3, MAP_LENGTH * 2 / 3);
         int campsiteX_ = Random.Range(MAP_WIDTH / 3, MAP_WIDTH * 2 / 3);
