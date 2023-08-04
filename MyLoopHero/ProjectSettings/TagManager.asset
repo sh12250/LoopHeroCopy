@@ -4,9 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Road
-  - RoadSide
-  - RoadEtc.
+  - RoadCard
+  - SideCard
+  - EtcCard
+  - RoadTile
+  - SideTile
+  - EtcTile
+  - Oblivion
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Hands
   - 
   - 
   - 
