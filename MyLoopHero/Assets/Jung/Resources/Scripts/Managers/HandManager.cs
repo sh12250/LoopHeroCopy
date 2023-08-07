@@ -32,7 +32,7 @@ public class HandManager : MonoBehaviour
     {
         RaycastHit2D hit_ = GameManager.instance.GetHit("Hands");
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
         {
             if (hit_.collider != null)
             {
@@ -40,7 +40,7 @@ public class HandManager : MonoBehaviour
                 GameObject obj = CardManager.instance.MakeCard();
                 myHands.Add(obj);
 
-                obj.transform.localPosition = new Vector3(-451 + (myHands.IndexOf(obj) * 2 * 41), -14, 0);
+                obj.transform.localPosition = new Vector3(-451 + (myHands.IndexOf(obj) * 2 * 41), 0, 0);
 
                 switch (hit_.collider.tag)
                 {

@@ -131,7 +131,7 @@ public class CardManager : MonoBehaviour
         }
         #endregion // 각 카드 생성 확률
 
-        theTile_.GetComponent<RectTransform>().localPosition = new Vector3(-451 + (cardCnt * 2 * 41), -14, 0);
+        //theTile_.GetComponent<RectTransform>().localPosition = new Vector3(-451 + (cardCnt * 2 * 41), -14, 0);
 
         if (theTile_ != null || theTile_ != default)
         {

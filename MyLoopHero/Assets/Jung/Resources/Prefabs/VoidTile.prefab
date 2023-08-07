@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206988513072316921}
   - component: {fileID: 3355260679131940653}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VoidTile
   m_TagString: EtcTile
   m_Icon: {fileID: 0}

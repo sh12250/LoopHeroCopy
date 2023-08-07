@@ -39,6 +39,8 @@ public class MapManager : MonoBehaviour
     public Sprite roadSprite_4;
     // 길 타일 스프라이트
 
+    public Sprite any;
+
     private static int MAP_LENGTH = 12;
     private static int MAP_WIDTH = 21;
     // 크기는 12 X 21
@@ -50,7 +52,15 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
+        RaycastHit2D hit = GameManager.instance.GetHit("Tiles");
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (hit.collider != null)
+            {
+                hit.collider.gameObject.AddComponent<RockTile>();
+            }
+        }
     }
 
     private void CreateMap()
@@ -68,24 +78,114 @@ public class MapManager : MonoBehaviour
         voidTiles = SortTiles(voidTiles);
         // 정렬한 타일 대입
 
-        int randIdxY_ = Random.Range(MAP_LENGTH / 3, MAP_LENGTH * 2 / 3);
-        int randIdxX_ = Random.Range(MAP_WIDTH / 3, MAP_WIDTH * 2 / 3);
+        //int randIdxY_ = Random.Range(MAP_LENGTH / 3, MAP_LENGTH * 2 / 3);
+        //int randIdxX_ = Random.Range(MAP_WIDTH / 3, MAP_WIDTH * 2 / 3);
         // 랜덤한 타일 의 인덱스를 구하기 위한 변수 2개
 
-        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
-        // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-        // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+        //voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
+        //// 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+        //voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+        //// 지정된 타일의 태그를 RoadTile 로 바꿔준다
 
         List<GameObject> passPoints_ = new List<GameObject>();
         // 길이 지나갈 타일들
-        passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+
+        //passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
         // 야영지도 포함된다
 
-        while (passPoints_.Count < 3)
+        while (passPoints_.Count < 8)
         {
-            //randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
-            //randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
+            int randIdxY_ = Random.Range(2, 5);
+            int randIdxX_ = Random.Range(4, 9);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(2, 5);
+            randIdxX_ = Random.Range(8, 13);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(2, 5);
+            randIdxX_ = Random.Range(12, 17);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+
+            randIdxY_ = Random.Range(4, 7);
+            randIdxX_ = Random.Range(12, 17);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(6, 9);
+            randIdxX_ = Random.Range(12, 17);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(6, 9);
+            randIdxX_ = Random.Range(8, 13);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(6, 9);
+            randIdxX_ = Random.Range(4, 9);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            randIdxY_ = Random.Range(4, 7);
+            randIdxX_ = Random.Range(4, 9);
+
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            // 지나갈 타일에 추가
+
+            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            /*
             randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
             randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
             // 너무 맵 가장자리에 생기지 않도록 범위 설정
@@ -112,7 +212,9 @@ public class MapManager : MonoBehaviour
                 loopCnt += 1;
             }
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
+            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+            */
         }
 
         LinkPassPoints(passPoints_, passPoints_[0]);

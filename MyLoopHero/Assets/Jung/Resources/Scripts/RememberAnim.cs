@@ -17,7 +17,6 @@ public class RememberAnim : MonoBehaviour
 
     public void DestroyAnim()
     {
-        // transform.SetParent(null);
         RememberAnimPool.ReturnObject(this);
     }
 }
