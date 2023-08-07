@@ -84,8 +84,10 @@ public class MapManager : MonoBehaviour
 
         while (passPoints_.Count < 3)
         {
-            randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
-            randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
+            //randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
+            //randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
+            randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
+            randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
             // 너무 맵 가장자리에 생기지 않도록 범위 설정
 
             int loopCnt = 0;
@@ -96,8 +98,10 @@ public class MapManager : MonoBehaviour
                     break;
                 }
 
-                randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
-                randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
+                //randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
+                //randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
+                randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
+                randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
                 // 다시 랜덤 인덱스 설정
 
                 if (passPoints_.IndexOf(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]) == -1)
