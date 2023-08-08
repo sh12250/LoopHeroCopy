@@ -31,56 +31,50 @@ public class HandManager : MonoBehaviour
     }
     void Update()
     {
-        RaycastHit2D hit_ = GameManager.instance.GetHit("Hands");
-        RaycastHit2D hit2_ = GameManager.instance.GetHit("Cards");
+        RaycastHit2D hit_Hands = GameManager.instance.GetHit("Hands");
+        RaycastHit2D hit_Cards = GameManager.instance.GetHit("Cards");
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (hit2_.collider != null)
+            if (hit_Cards.collider != null)
             {
-                switch (hit2_.collider.name)
-                {
-                    case "ROCK":
-                        hit2_.collider.GetComponent<FollowMouse>().enabled = true;
-
-                        break;
-                    case "SideTile":
-                        break;
-                    case "EtcTile":
-                        break;
-                    case "Oblivion":
-                        break;
-                }
+                hit_Cards.collider.GetComponent<CardController>().enabled = true;
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if (hit2_.collider != null)
+            if (hit_Cards.collider != null)
             {
-                switch (hit2_.collider.name)
-                {
-                    case "ROCK":
-                        hit2_.collider.GetComponent<FollowMouse>().enabled = false;
+                hit_Cards.collider.GetComponent<CardController>().enabled = false;
 
-
-                        int idx = myHands.IndexOf(hit2_.collider.gameObject);
-                        myHands[idx].transform.localPosition = new Vector3(-451 + (idx * 2 * 41), 0, 0);
-                        myHands[idx].GetComponent<FollowMouse>().OnHand();
-
-                        break;
-                    case "SideTile":
-                        break;
-                    case "EtcTile":
-                        break;
-                    case "Oblivion":
-                        break;
-                }
+                int idx = myHands.IndexOf(hit_Cards.collider.gameObject);
+                myHands[idx].transform.localPosition = new Vector3(-451 + (idx * 2 * 41), 0, 0);
+                myHands[idx].GetComponent<CardController>().OnHand();
             }
         }
 
+        /*
+        OBLIVION = 0,
+        CEMETARY
+        VILLAGE
+        BUSH
+        CORNFIELD
+        COCOON
+        MANSION
+        BATTLEFIELD
+        LIGHTHOUSE
+        ROCK
+        MOUNT
+        BLOODYBUSH
+        LAMP
+        SWAMP
+        SAFE
+        GRASS
+        */
+
         if (Input.GetMouseButtonDown(1))
         {
-            if (hit_.collider != null)
+            if (hit_Hands.collider != null)
             {
                 Debug.Log("hit ∞À√‚µ ");
                 GameObject obj = CardManager.instance.MakeCard();

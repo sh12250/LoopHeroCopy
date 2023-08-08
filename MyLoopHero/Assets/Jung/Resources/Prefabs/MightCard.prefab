@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3309476596979191221}
   - component: {fileID: 3309476596979191220}
   - component: {fileID: 2422157482913040838}
-  - component: {fileID: -614958191183935086}
+  - component: {fileID: 6836060362841452414}
   m_Layer: 12
   m_Name: MightCard
   m_TagString: Oblivion
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 82, y: 110}
   m_EdgeRadius: 0
---- !u!114 &-614958191183935086
+--- !u!114 &6836060362841452414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

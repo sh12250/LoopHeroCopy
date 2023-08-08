@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 794269122084691245}
   - component: {fileID: 794269122084691244}
   - component: {fileID: 6696865498034324242}
-  - component: {fileID: 7073522575062628273}
+  - component: {fileID: 8894990716709708655}
   m_Layer: 12
   m_Name: SideCard
   m_TagString: SideCard
@@ -195,7 +195,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 82, y: 110}
   m_EdgeRadius: 0
---- !u!114 &7073522575062628273
+--- !u!114 &8894990716709708655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

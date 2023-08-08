@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7536019595761200473}
   - component: {fileID: 7536019595761200472}
   - component: {fileID: 6123251967515510277}
-  - component: {fileID: 1460427469758185108}
+  - component: {fileID: -8753383034051997760}
   m_Layer: 12
   m_Name: EtcCard
   m_TagString: EtcCard
@@ -271,7 +271,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 82, y: 110}
   m_EdgeRadius: 0
---- !u!114 &1460427469758185108
+--- !u!114 &-8753383034051997760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
