@@ -4,6 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - RoadCard
+  - SideCard
+  - EtcCard
+  - RoadTile
+  - SideTile
+  - EtcTile
+  - Oblivion
   - Sword
   - Ring
   - Shield
@@ -20,10 +27,10 @@ TagManager:
   - 
   - 
   - 
+  - Tiles
   - 
-  - 
-  - 
-  - 
+  - Hands
+  - Cards
   - 
   - 
   - 
