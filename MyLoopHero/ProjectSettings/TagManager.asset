@@ -11,6 +11,12 @@ TagManager:
   - SideTile
   - EtcTile
   - Oblivion
+  - Sword
+  - Ring
+  - Shield
+  - Armor
+  - ItemSlot
+  - Effect
   layers:
   - Default
   - TransparentFX
