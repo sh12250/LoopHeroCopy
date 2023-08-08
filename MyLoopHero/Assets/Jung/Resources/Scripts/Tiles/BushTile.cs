@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BushTile : Tile
 {
+
+
     void Start()
     {
         CreateTile();

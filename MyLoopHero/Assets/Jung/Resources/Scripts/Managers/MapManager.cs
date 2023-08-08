@@ -52,15 +52,15 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D hit = GameManager.instance.GetHit("Tiles");
+        //RaycastHit2D hit = GameManager.instance.GetHit("Tiles");
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (hit.collider != null)
-            {
-                hit.collider.gameObject.AddComponent<RockTile>();
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (hit.collider != null)
+        //    {
+        //        hit.collider.gameObject.AddComponent<RockTile>();
+        //    }
+        //}
     }
 
     private void CreateMap()
@@ -78,20 +78,8 @@ public class MapManager : MonoBehaviour
         voidTiles = SortTiles(voidTiles);
         // 정렬한 타일 대입
 
-        //int randIdxY_ = Random.Range(MAP_LENGTH / 3, MAP_LENGTH * 2 / 3);
-        //int randIdxX_ = Random.Range(MAP_WIDTH / 3, MAP_WIDTH * 2 / 3);
-        // 랜덤한 타일 의 인덱스를 구하기 위한 변수 2개
-
-        //voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
-        //// 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-        //voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-        //// 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
         List<GameObject> passPoints_ = new List<GameObject>();
         // 길이 지나갈 타일들
-
-        //passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-        // 야영지도 포함된다
 
         while (passPoints_.Count < 8)
         {
@@ -109,44 +97,23 @@ public class MapManager : MonoBehaviour
             randIdxY_ = Random.Range(2, 5);
             randIdxX_ = Random.Range(8, 13);
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(2, 5);
             randIdxX_ = Random.Range(12, 17);
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
-
             randIdxY_ = Random.Range(4, 7);
             randIdxX_ = Random.Range(12, 17);
-
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
 
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(12, 17);
-
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
 
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
@@ -154,21 +121,11 @@ public class MapManager : MonoBehaviour
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(8, 13);
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(4, 9);
-
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
 
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
@@ -176,15 +133,9 @@ public class MapManager : MonoBehaviour
             randIdxY_ = Random.Range(4, 7);
             randIdxX_ = Random.Range(4, 9);
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
             passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             /*
             randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
             randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
@@ -224,7 +175,7 @@ public class MapManager : MonoBehaviour
     {
         if (points_.Count == 0) { return; }
 
-        GameObject target_ = new GameObject();
+        GameObject target_ = default;
 
         // 야영지만 남았을 경우를 확인
         if (points_.Count > 1)
@@ -236,21 +187,19 @@ public class MapManager : MonoBehaviour
             int targetY_ = voidTiles.IndexOf(target_) / 21;
             int targetX_ = voidTiles.IndexOf(target_) % 21;
 
-            // Vector2 distance = startPoint_.transform.localPosition - points_[1].transform.localPosition;
             Vector2 distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
-            float minDist = distance.magnitude;
+            //float minDist = distance.magnitude;
 
-            for (int i = 1; i < points_.Count; i++)
-            {   // 타일중 야영지와 가장 가까운 타일 서치
-                // distance = startPoint_.transform.localPosition - points_[i].transform.localPosition;
-                distance = new Vector2(points_[i].transform.localPosition.x - startX_, points_[i].transform.localPosition.y - startY_);
+            //for (int i = 1; i < points_.Count; i++)
+            //{   // 타일중 야영지와 가장 가까운 타일 서치
+            //    distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
 
-                if (minDist > distance.magnitude)
-                {
-                    minDist = distance.magnitude;
-                    target_ = points_[i];
-                }
-            }
+            //    if (minDist > distance.magnitude)
+            //    {
+            //        minDist = distance.magnitude;
+            //        target_ = points_[i];
+            //    }
+            //}
 
             int currY_ = startY_;
             int currX_ = startX_;
@@ -304,7 +253,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 1);
                         }
                     }
-                    if (startY_ == targetY_) { /* PASS */ }
+                    if (startY_ == targetY_)
+                    {
+                        CreateRoad(currY_, currX_, 0);
+                    }
                     // Y좌표 이동
 
                     // 나머지 반 이동
@@ -360,7 +312,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 1);
                         }
                     }
-                    if (startY_ == targetY_) { /* PASS */ }
+                    if (startY_ == targetY_)
+                    {
+                        CreateRoad(currY_, currX_, 0);
+                    }
                     // Y좌표 이동
 
                     // 나머지 반 이동
@@ -418,7 +373,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 0);
                         }
                     }
-                    if (startX_ == targetX_) { /* PASS */ }
+                    if (startX_ == targetX_)
+                    {
+                        CreateRoad(currY_, currX_, 1);
+                    }
                     // X좌표 이동
 
                     // 나머지 반 이동
@@ -474,7 +432,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 0);
                         }
                     }
-                    if (startX_ == targetX_) { /* PASS */ }
+                    if (startX_ == targetX_)
+                    {
+                        CreateRoad(currY_, currX_, 1);
+                    }
                     // X좌표 이동
 
                     // 나머지 반 이동
@@ -551,7 +512,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 1);
                         }
                     }
-                    if (startY_ == targetY_) { /* PASS */ }
+                    if (startY_ == targetY_)
+                    {
+                        CreateRoad(currY_, currX_, 0);
+                    }
                     // Y좌표 이동
 
                     // 나머지 반 이동
@@ -607,7 +571,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 1);
                         }
                     }
-                    if (startY_ == targetY_) { /* PASS */ }
+                    if (startY_ == targetY_)
+                    {
+                        CreateRoad(currY_, currX_, 0);
+                    }
                     // Y좌표 이동
 
                     // 나머지 반 이동
@@ -665,7 +632,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 0);
                         }
                     }
-                    if (startX_ == targetX_) { /* PASS */ }
+                    if (startX_ == targetX_)
+                    {
+                        CreateRoad(currY_, currX_, 1);
+                    }
                     // X좌표 이동
 
                     // 나머지 반 이동
@@ -721,7 +691,10 @@ public class MapManager : MonoBehaviour
                             CreateRoad(currY_, currX_, 0);
                         }
                     }
-                    if (startX_ == targetX_) { /* PASS */ }
+                    if (startX_ == targetX_)
+                    {
+                        CreateRoad(currY_, currX_, 1);
+                    }
                     // X좌표 이동
 
                     // 나머지 반 이동

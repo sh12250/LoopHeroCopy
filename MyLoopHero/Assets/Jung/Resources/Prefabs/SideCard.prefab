@@ -44,7 +44,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711595348852955002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -101,7 +101,8 @@ GameObject:
   - component: {fileID: 794269122084691245}
   - component: {fileID: 794269122084691244}
   - component: {fileID: 6696865498034324242}
-  m_Layer: 11
+  - component: {fileID: 7073522575062628273}
+  m_Layer: 12
   m_Name: SideCard
   m_TagString: SideCard
   m_Icon: {fileID: 0}
@@ -194,6 +195,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 82, y: 110}
   m_EdgeRadius: 0
+--- !u!114 &7073522575062628273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794269122084691246}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b1cffb24c52534b8d3486f02379bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3413476242425390372
 GameObject:
   m_ObjectHideFlags: 0
