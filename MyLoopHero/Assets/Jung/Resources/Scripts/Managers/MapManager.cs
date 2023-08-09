@@ -143,37 +143,6 @@ public class MapManager : MonoBehaviour
 
             passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
-
-            /*
-            randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
-            randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
-            // 너무 맵 가장자리에 생기지 않도록 범위 설정
-
-            int loopCnt = 0;
-            while (passPoints_.IndexOf(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]) >= 0)
-            {   // 이미 passPoints 에 속한 타일인지 확인
-                if (loopCnt == 100)
-                {   // 무한 루프 방지
-                    break;
-                }
-
-                //randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
-                //randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
-                randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
-                randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
-                // 다시 랜덤 인덱스 설정
-
-                if (passPoints_.IndexOf(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]) == -1)
-                {   // 속하지 않을 경우 루프 탈출
-                    break;
-                }
-
-                loopCnt += 1;
-            }
-
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            */
         }
 
         LinkPassPoints(passPoints, passPoints[0]);
@@ -199,18 +168,6 @@ public class MapManager : MonoBehaviour
             int targetX_ = voidTiles.IndexOf(target_) % 21;
 
             Vector2 distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
-            //float minDist = distance.magnitude;
-
-            //for (int i = 1; i < points_.Count; i++)
-            //{   // 타일중 야영지와 가장 가까운 타일 서치
-            //    distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
-
-            //    if (minDist > distance.magnitude)
-            //    {
-            //        minDist = distance.magnitude;
-            //        target_ = points_[i];
-            //    }
-            //}
 
             int currY_ = startY_;
             int currX_ = startX_;
