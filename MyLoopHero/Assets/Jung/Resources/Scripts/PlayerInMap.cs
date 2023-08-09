@@ -31,7 +31,7 @@ public class PlayerInMap : MonoBehaviour
         float targetX_ = path[targetIdx_].transform.localPosition.x;
         float targetY_ = path[targetIdx_].transform.localPosition.y;
 
-        Debug.LogFormat("내 좌표: {0, 1}, 목표 좌표: {2, 3}", transform.position.x, transform.position.y, targetX_, targetY_);
+        // Debug.LogFormat("내 좌표: {0, 1}, 목표 좌표: {2, 3}", transform.position.x, transform.position.y, targetX_, targetY_);
 
         // 조건에 맞으면 인덱스를 증가시키고 함수 종료
         if (transform.localPosition.x >= targetX_ - 0.005f
