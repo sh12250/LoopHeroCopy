@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager instance;
+
     [SerializeField]
     private Tilemap tileMap;
     // 타일맵, 하위로 타일을 생성시키 위해 받아온다
@@ -39,11 +41,25 @@ public class MapManager : MonoBehaviour
     public Sprite roadSprite_4;
     // 길 타일 스프라이트
 
-    public Sprite any;
+    public GameObject playerInMap;
+
+    public List<GameObject> passPoints;
 
     private static int MAP_LENGTH = 12;
     private static int MAP_WIDTH = 21;
     // 크기는 12 X 21
+
+    private void Awake()
+    {
+        if (instance == null || instance == default)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("MapManager가 너무 많습니다");
+        }
+    }
 
     void Start()
     {
@@ -52,15 +68,7 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        //RaycastHit2D hit = GameManager.instance.GetHit("Tiles");
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (hit.collider != null)
-        //    {
-        //        hit.collider.gameObject.AddComponent<RockTile>();
-        //    }
-        //}
     }
 
     private void CreateMap()
@@ -78,10 +86,10 @@ public class MapManager : MonoBehaviour
         voidTiles = SortTiles(voidTiles);
         // 정렬한 타일 대입
 
-        List<GameObject> passPoints_ = new List<GameObject>();
+        passPoints = new List<GameObject>();
         // 길이 지나갈 타일들
 
-        while (passPoints_.Count < 8)
+        while (passPoints.Count < 8)
         {
             int randIdxY_ = Random.Range(2, 5);
             int randIdxX_ = Random.Range(4, 9);
@@ -91,49 +99,49 @@ public class MapManager : MonoBehaviour
             voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
             // 지정된 타일의 태그를 RoadTile 로 바꿔준다
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(2, 5);
             randIdxX_ = Random.Range(8, 13);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(2, 5);
             randIdxX_ = Random.Range(12, 17);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(4, 7);
             randIdxX_ = Random.Range(12, 17);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(12, 17);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(8, 13);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(6, 9);
             randIdxX_ = Random.Range(4, 9);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             randIdxY_ = Random.Range(4, 7);
             randIdxX_ = Random.Range(4, 9);
 
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
 
             /*
@@ -168,19 +176,22 @@ public class MapManager : MonoBehaviour
             */
         }
 
-        LinkPassPoints(passPoints_, passPoints_[0]);
+        LinkPassPoints(passPoints, passPoints[0]);
+
+        playerInMap.transform.localPosition = passPoints[0].transform.localPosition;
+        playerInMap.GetComponent<PlayerInMap>().enabled = true;
     }
 
     private void LinkPassPoints(List<GameObject> points_, GameObject startPoint_)
     {
-        if (points_.Count == 0) { return; }
+        if (points_ == null || points_ == default || points_.Count == 0) { return; }
 
         GameObject target_ = default;
 
         // 야영지만 남았을 경우를 확인
-        if (points_.Count > 1)
+        if (points_.IndexOf(startPoint_) != points_.Count - 1)
         {   // 야영지를 제외한 타일이 남았을 경우
-            target_ = points_[1];
+            target_ = points_[points_.IndexOf(startPoint_) + 1];
 
             int startY_ = voidTiles.IndexOf(startPoint_) / 21;
             int startX_ = voidTiles.IndexOf(startPoint_) % 21;
@@ -448,10 +459,10 @@ public class MapManager : MonoBehaviour
                 }
             }
 
-            points_.Remove(target_);
+            //points_.Remove(target_);
             LinkPassPoints(points_, target_);
         }
-        else if (points_.Count == 1)
+        else if (points_.IndexOf(startPoint_) == points_.Count - 1)
         {   // 야영지를 제외한 타일이 남지 않았을 경우
             target_ = points_[0];
 
@@ -706,7 +717,10 @@ public class MapManager : MonoBehaviour
                     // 나머지 반 이동
                 }
             }
+
         }
+
+        return;
     }
 
     private void CreateRoad(int y_, int x_, int spriteIdx)
