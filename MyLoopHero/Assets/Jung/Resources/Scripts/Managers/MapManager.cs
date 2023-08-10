@@ -81,9 +81,9 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < tileMap.gameObject.transform.childCount; i++)
         {
-            GameObject obj = tileMap.gameObject.transform.GetChild(i).gameObject;
+            GameObject tile = tileMap.gameObject.transform.GetChild(i).gameObject;
             // tileMap의 하위 오브젝트 Hierarchy상의 순서대로 찾기
-            voidTiles.Add(obj);
+            voidTiles.Add(tile);
             // 찾아온 하위 오브젝트 add
         }
 
@@ -93,78 +93,65 @@ public class MapManager : MonoBehaviour
         passPoints = new List<GameObject>();
         // 길이 지나갈 타일들
 
-        while (passPoints.Count < 8)
-        {
-            int randIdxY_ = Random.Range(2, 4);
-            int randIdxX_ = Random.Range(4, 8);
+        int randIdxY_ = Random.Range(3, 4);
+        int randIdxX_ = Random.Range(5, 8);
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-            GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
-            obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
+        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
+        // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+        // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+        GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
+        obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 1
 
-            randIdxY_ = Random.Range(2, 4);
-            randIdxX_ = Random.Range(9, 12);
+        randIdxY_ = Random.Range(1, 2);
+        randIdxX_ = Random.Range(9, 12);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 2
 
-            randIdxY_ = Random.Range(2, 4);
-            randIdxX_ = Random.Range(13, 17);
+        randIdxY_ = Random.Range(3, 4);
+        randIdxX_ = Random.Range(13, 16);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 3
 
-            randIdxY_ = Random.Range(5, 6);
-            randIdxX_ = Random.Range(13, 17);
+        randIdxY_ = Random.Range(5, 6);
+        randIdxX_ = Random.Range(14, 17);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 4
 
-            randIdxY_ = Random.Range(7, 9);
-            randIdxX_ = Random.Range(13, 17);
+        randIdxY_ = Random.Range(7, 8);
+        randIdxX_ = Random.Range(13, 16);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 5
 
-            randIdxY_ = Random.Range(7, 9);
-            randIdxX_ = Random.Range(9, 12);
+        randIdxY_ = Random.Range(9, 10);
+        randIdxX_ = Random.Range(9, 12);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 6
 
-            randIdxY_ = Random.Range(7, 9);
-            randIdxX_ = Random.Range(4, 8);
+        randIdxY_ = Random.Range(7, 8);
+        randIdxX_ = Random.Range(5, 8);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 7
 
-            randIdxY_ = Random.Range(5, 6);
-            randIdxX_ = Random.Range(4, 8);
+        randIdxY_ = Random.Range(5, 6);
+        randIdxX_ = Random.Range(4, 7);
 
-            passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-        }
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 8
 
         LinkPassPoints(passPoints, passPoints[0]);
 
         playerInMap.transform.localPosition = passPoints[0].transform.localPosition;
         playerInMap.GetComponent<PlayerInMap>().enabled = true;
-    }
-
-    private void MakePassPoints(List<GameObject> points_)
-    {
-        List<GameObject> temp_ = new List<GameObject>();
-
-        for (int i = 0; i < points_.Count; i++)
-        {
-            temp_.Add(points_[i]);
-        }
     }
 
     // 수평길
@@ -354,7 +341,81 @@ public class MapManager : MonoBehaviour
                 MakeCurvedRoadDownLeft(startY_, targetY_, startX_, targetX_);
             }
 
+            MakePassPointsSprite(points_);
             return;
+        }
+    }
+
+    private void MakePassPointsSprite(List<GameObject> points_)
+    {
+        // 야영지를 제외하고 체크
+        GameObject target_ = default;
+
+        for (int i = 1; i < points_.Count; i++)
+        {
+            target_ = points_[i];
+
+            int targetY_ = voidTiles.IndexOf(target_) / MAP_WIDTH;
+            int targetX_ = voidTiles.IndexOf(target_) % MAP_WIDTH;
+
+            bool isUp = false;
+            bool isDown = false;
+            bool isLeft = false;
+            bool isRight = false;
+
+            // 상하좌우 모든 타일 체크
+            if (voidTiles[(targetY_ - 1) * MAP_WIDTH + targetX_].tag.Equals("RoadTile"))
+            {
+                isUp = true;
+            }   // 상
+
+            if (voidTiles[(targetY_ + 1) * MAP_WIDTH + targetX_].tag.Equals("RoadTile"))
+            {
+                isDown = true;
+            }   // 하
+
+            if (voidTiles[targetY_ * MAP_WIDTH + targetX_ - 1].tag.Equals("RoadTile"))
+            {
+                isLeft = true;
+            }   // 좌
+
+            if (voidTiles[targetY_ * MAP_WIDTH + targetX_ + 1].tag.Equals("RoadTile"))
+            {
+                isRight = true;
+            }   // 우
+            // 상하좌우 모든 타일 체크
+
+            // 알맞은 스프라이트로 변경
+            if (isLeft && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 0);
+            }
+
+            if (isUp && isDown)
+            {
+                CreateRoad(targetY_, targetX_, 1);
+            }
+
+            if (isDown && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 2);
+            }
+
+            if (isDown && isLeft)
+            {
+                CreateRoad(targetY_, targetX_, 3);
+            }
+
+            if (isUp && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 4);
+            }
+
+            if (isUp && isLeft)
+            {
+                CreateRoad(targetY_, targetX_, 5);
+            }
+            // 알맞은 스프라이트로 변경
         }
     }
 
