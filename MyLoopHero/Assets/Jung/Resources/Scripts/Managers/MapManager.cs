@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Tilemaps;
+using static UnityEngine.GraphicsBuffer;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager instance;
+
     [SerializeField]
     private Tilemap tileMap;
     // 타일맵, 하위로 타일을 생성시키 위해 받아온다
@@ -39,11 +44,26 @@ public class MapManager : MonoBehaviour
     public Sprite roadSprite_4;
     // 길 타일 스프라이트
 
-    public Sprite any;
+    public GameObject playerInMap;
+
+    public List<GameObject> passPoints;
+    public GameObject richPrefab;
 
     private static int MAP_LENGTH = 12;
     private static int MAP_WIDTH = 21;
     // 크기는 12 X 21
+
+    private void Awake()
+    {
+        if (instance == null || instance == default)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("MapManager가 너무 많습니다");
+        }
+    }
 
     void Start()
     {
@@ -52,15 +72,7 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        //RaycastHit2D hit = GameManager.instance.GetHit("Tiles");
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (hit.collider != null)
-        //    {
-        //        hit.collider.gameObject.AddComponent<RockTile>();
-        //    }
-        //}
     }
 
     private void CreateMap()
@@ -69,646 +81,350 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < tileMap.gameObject.transform.childCount; i++)
         {
-            GameObject obj = tileMap.gameObject.transform.GetChild(i).gameObject;
+            GameObject tile = tileMap.gameObject.transform.GetChild(i).gameObject;
             // tileMap의 하위 오브젝트 Hierarchy상의 순서대로 찾기
-            voidTiles.Add(obj);
+            voidTiles.Add(tile);
             // 찾아온 하위 오브젝트 add
         }
 
         voidTiles = SortTiles(voidTiles);
         // 정렬한 타일 대입
 
-        List<GameObject> passPoints_ = new List<GameObject>();
+        passPoints = new List<GameObject>();
         // 길이 지나갈 타일들
 
-        while (passPoints_.Count < 8)
+        int randIdxY_ = Random.Range(3, 4);
+        int randIdxX_ = Random.Range(5, 8);
+
+        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
+        // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
+        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
+        // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+        GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
+        obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 1
+
+        randIdxY_ = Random.Range(1, 2);
+        randIdxX_ = Random.Range(9, 12);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 2
+
+        randIdxY_ = Random.Range(3, 4);
+        randIdxX_ = Random.Range(13, 16);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 3
+
+        randIdxY_ = Random.Range(5, 6);
+        randIdxX_ = Random.Range(14, 17);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 4
+
+        randIdxY_ = Random.Range(7, 8);
+        randIdxX_ = Random.Range(13, 16);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 5
+
+        randIdxY_ = Random.Range(9, 10);
+        randIdxX_ = Random.Range(9, 12);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 6
+
+        randIdxY_ = Random.Range(7, 8);
+        randIdxX_ = Random.Range(5, 8);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 7
+
+        randIdxY_ = Random.Range(5, 6);
+        randIdxX_ = Random.Range(4, 7);
+
+        passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
+        // 지나갈 타일에 추가 8
+
+        LinkPassPoints(passPoints, passPoints[0]);
+
+        playerInMap.transform.localPosition = passPoints[0].transform.localPosition;
+        playerInMap.GetComponent<PlayerInMap>().enabled = true;
+    }
+
+    // 수평길
+    private void MakeHorizontalRoad(int fromX_, int toX_, int posY_)
+    {
+        if (fromX_ > toX_)
         {
-            int randIdxY_ = Random.Range(2, 5);
-            int randIdxX_ = Random.Range(4, 9);
-
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
-            // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            // 지정된 타일의 태그를 RoadTile 로 바꿔준다
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(2, 5);
-            randIdxX_ = Random.Range(8, 13);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(2, 5);
-            randIdxX_ = Random.Range(12, 17);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(4, 7);
-            randIdxX_ = Random.Range(12, 17);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(6, 9);
-            randIdxX_ = Random.Range(12, 17);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(6, 9);
-            randIdxX_ = Random.Range(8, 13);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(6, 9);
-            randIdxX_ = Random.Range(4, 9);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            randIdxY_ = Random.Range(4, 7);
-            randIdxX_ = Random.Range(4, 9);
-
-            passPoints_.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
-            // 지나갈 타일에 추가
-
-            /*
-            randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
-            randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
-            // 너무 맵 가장자리에 생기지 않도록 범위 설정
-
-            int loopCnt = 0;
-            while (passPoints_.IndexOf(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]) >= 0)
-            {   // 이미 passPoints 에 속한 타일인지 확인
-                if (loopCnt == 100)
-                {   // 무한 루프 방지
-                    break;
-                }
-
-                //randIdxY_ = Random.Range(3, MAP_LENGTH - 3);
-                //randIdxX_ = Random.Range(5, MAP_WIDTH - 5);
-                randIdxY_ = Random.Range(0, MAP_LENGTH - 0);
-                randIdxX_ = Random.Range(0, MAP_WIDTH - 0);
-                // 다시 랜덤 인덱스 설정
-
-                if (passPoints_.IndexOf(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]) == -1)
-                {   // 속하지 않을 경우 루프 탈출
-                    break;
-                }
-
-                loopCnt += 1;
+            for (int i = fromX_ - 1; i > toX_; i--)
+            {
+                CreateRoad(posY_, i, 0);
             }
+        }
+        else if (fromX_ < toX_)
+        {
+            for (int i = fromX_ + 1; i < toX_; i++)
+            {
+                CreateRoad(posY_, i, 0);
+            }
+        }
+    }
 
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = any;
-            voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-            */
+    // 수직길
+    private void MakeVerticalRoad(int fromY_, int toY_, int posX_)
+    {
+        if (fromY_ > toY_)
+        {
+            for (int i = fromY_ - 1; i > toY_; i--)
+            {
+                CreateRoad(i, posX_, 1);
+            }
+        }
+        else if (fromY_ < toY_)
+        {
+            for (int i = fromY_ + 1; i < toY_; i++)
+            {
+                CreateRoad(i, posX_, 1);
+            }
         }
 
-        LinkPassPoints(passPoints_, passPoints_[0]);
     }
+
+    // 꺽인길
+    private void MakeCurvedRoadUpRight(int fromY_, int toY_, int fromX_, int toX_)
+    {
+        for (int i = fromY_ - 1; i > toY_; i--)
+        {
+            CreateRoad(i, fromX_, 1);
+        }
+
+        CreateRoad(toY_, fromX_, 2);
+
+        fromX_ += 1;
+
+        for (int i = fromX_; i < toX_; i++)
+        {
+            CreateRoad(toY_, i, 0);
+        }
+    }
+
+    private void MakeCurvedRoadUpLeft(int fromY_, int toY_, int fromX_, int toX_)
+    {
+        for (int i = fromY_ - 1; i > toY_; i--)
+        {
+            CreateRoad(i, fromX_, 1);
+        }
+
+        CreateRoad(toY_, fromX_, 3);
+
+        fromX_ -= 1;
+
+        for (int i = fromX_; i > toX_; i--)
+        {
+            CreateRoad(toY_, i, 0);
+        }
+    }
+
+    private void MakeCurvedRoadDownRight(int fromY_, int toY_, int fromX_, int toX_)
+    {
+        for (int i = fromY_ + 1; i < toY_; i++)
+        {
+            CreateRoad(i, fromX_, 1);
+        }
+
+        CreateRoad(toY_, fromX_, 4);
+
+        fromX_ += 1;
+
+        for (int i = fromX_; i < toX_; i++)
+        {
+            CreateRoad(toY_, i, 0);
+        }
+    }
+
+    private void MakeCurvedRoadDownLeft(int fromY_, int toY_, int fromX_, int toX_)
+    {
+        for (int i = fromY_ + 1; i < toY_; i++)
+        {
+            CreateRoad(i, fromX_, 1);
+        }
+
+        CreateRoad(toY_, fromX_, 5);
+
+        fromX_ -= 1;
+
+        for (int i = fromX_; i > toX_; i--)
+        {
+            CreateRoad(toY_, i, 0);
+        }
+    }
+    //꺽인길
 
     private void LinkPassPoints(List<GameObject> points_, GameObject startPoint_)
     {
-        if (points_.Count == 0) { return; }
-
         GameObject target_ = default;
 
-        // 야영지만 남았을 경우를 확인
-        if (points_.Count > 1)
-        {   // 야영지를 제외한 타일이 남았을 경우
-            target_ = points_[1];
+        int startY_ = voidTiles.IndexOf(startPoint_) / MAP_WIDTH;
+        int startX_ = voidTiles.IndexOf(startPoint_) % MAP_WIDTH;
 
-            int startY_ = voidTiles.IndexOf(startPoint_) / 21;
-            int startX_ = voidTiles.IndexOf(startPoint_) % 21;
-            int targetY_ = voidTiles.IndexOf(target_) / 21;
-            int targetX_ = voidTiles.IndexOf(target_) % 21;
+        if (points_.IndexOf(startPoint_) != points_.Count - 1)
+        {
+            target_ = points_[points_.IndexOf(startPoint_) + 1];
 
-            Vector2 distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
-            //float minDist = distance.magnitude;
+            int targetY_ = voidTiles.IndexOf(target_) / MAP_WIDTH;
+            int targetX_ = voidTiles.IndexOf(target_) % MAP_WIDTH;
 
-            //for (int i = 1; i < points_.Count; i++)
-            //{   // 타일중 야영지와 가장 가까운 타일 서치
-            //    distance = new Vector2(targetX_ - startX_, targetY_ - startY_);
-
-            //    if (minDist > distance.magnitude)
-            //    {
-            //        minDist = distance.magnitude;
-            //        target_ = points_[i];
-            //    }
-            //}
-
-            int currY_ = startY_;
-            int currX_ = startX_;
-
-            int distY_ = 0;
-            int distX_ = 0;
-
-            if (Mathf.Abs(targetX_ - startX_) >= Mathf.Abs(targetY_ - startY_))
+            if (startY_ == targetY_)
             {
-                if (startX_ > targetX_)
-                {
-                    distX_ = startX_ - targetX_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distX_ / 2; i++)
-                    {
-                        currX_ -= 1;
-                        if (i != (distX_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // Y좌표 이동
-                    if (startY_ > targetY_)
-                    {
-                        distY_ = startY_ - targetY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 4);
-                            }
-                            currY_ -= 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ < targetY_)
-                    {
-                        distY_ = targetY_ - startY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 2);
-                            }
-                            currY_ += 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ == targetY_)
-                    {
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // Y좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distX_ - (distX_ / 2); i++)
-                    {
-                        currX_ -= 1;
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // 나머지 반 이동
-                }
-
-                if (startX_ < targetX_)
-                {
-                    distX_ = targetX_ - startX_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distX_ / 2; i++)
-                    {
-                        currX_ += 1;
-                        if (i != (distX_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // Y좌표 이동
-                    if (startY_ > targetY_)
-                    {
-                        distY_ = startY_ - targetY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 5);
-                            }
-                            currY_ -= 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ < targetY_)
-                    {
-                        distY_ = targetY_ - startY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 3);
-                            }
-                            currY_ += 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ == targetY_)
-                    {
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // Y좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distX_ - (distX_ / 2); i++)
-                    {
-                        currX_ += 1;
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // 나머지 반 이동
-                }
-            }
-            else if (Mathf.Abs(targetX_ - startX_) < Mathf.Abs(targetY_ - startY_))
-            {
-                if (startY_ > targetY_)
-                {
-                    distY_ = startY_ - targetY_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distY_ / 2; i++)
-                    {
-                        currY_ -= 1;
-                        if (i != (distY_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // X좌표 이동
-                    if (startX_ > targetX_)
-                    {
-                        distX_ = startX_ - targetX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 3);
-                            }
-                            currX_ -= 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ < targetX_)
-                    {
-                        distX_ = targetX_ - startX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 2);
-                            }
-                            currX_ += 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ == targetX_)
-                    {
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // X좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distY_ - (distY_ / 2); i++)
-                    {
-                        currY_ -= 1;
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // 나머지 반 이동
-                }
-
-                if (startY_ < targetY_)
-                {
-                    distY_ = targetY_ - startY_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distY_ / 2; i++)
-                    {
-                        currY_ += 1;
-                        if (i != (distY_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // X좌표 이동
-                    if (startX_ > targetX_)
-                    {
-                        distX_ = startX_ - targetX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 5);
-                            }
-                            currX_ -= 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ < targetX_)
-                    {
-                        distX_ = targetX_ - startX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 4);
-                            }
-                            currX_ += 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ == targetX_)
-                    {
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // X좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distY_ - (distY_ / 2); i++)
-                    {
-                        currY_ += 1;
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // 나머지 반 이동
-                }
+                MakeHorizontalRoad(startX_, targetX_, startY_);
             }
 
-            points_.Remove(target_);
+            if (startX_ == targetX_)
+            {
+                MakeVerticalRoad(startY_, targetY_, startX_);
+            }
+
+            if (startY_ > targetY_ && startX_ < targetX_)
+            {
+                MakeCurvedRoadUpRight(startY_, targetY_, startX_, targetX_);
+            }
+
+            if (startY_ > targetY_ && startX_ > targetX_)
+            {
+                MakeCurvedRoadUpLeft(startY_, targetY_, startX_, targetX_);
+            }
+
+            if (startY_ < targetY_ && startX_ < targetX_)
+            {
+                MakeCurvedRoadDownRight(startY_, targetY_, startX_, targetX_);
+            }
+
+            if (startY_ < targetY_ && startX_ > targetX_)
+            {
+                MakeCurvedRoadDownLeft(startY_, targetY_, startX_, targetX_);
+            }
+
             LinkPassPoints(points_, target_);
         }
-        else if (points_.Count == 1)
-        {   // 야영지를 제외한 타일이 남지 않았을 경우
+        else if (points_.IndexOf(startPoint_) == points_.Count - 1)
+        {
             target_ = points_[0];
 
-            int startY_ = voidTiles.IndexOf(startPoint_) / 21;
-            int startX_ = voidTiles.IndexOf(startPoint_) % 21;
-            int targetY_ = voidTiles.IndexOf(target_) / 21;
-            int targetX_ = voidTiles.IndexOf(target_) % 21;
+            int targetY_ = voidTiles.IndexOf(target_) / MAP_WIDTH;
+            int targetX_ = voidTiles.IndexOf(target_) % MAP_WIDTH;
 
-            int currY_ = startY_;
-            int currX_ = startX_;
-
-            int distY_ = 0;
-            int distX_ = 0;
-
-            if (Mathf.Abs(targetX_ - startX_) >= Mathf.Abs(targetY_ - startY_))
+            if (startY_ == targetY_)
             {
-                if (startX_ > targetX_)
-                {
-                    distX_ = startX_ - targetX_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distX_ / 2; i++)
-                    {
-                        currX_ -= 1;
-                        if (i != (distX_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // Y좌표 이동
-                    if (startY_ > targetY_)
-                    {
-                        distY_ = startY_ - targetY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 4);
-                            }
-                            currY_ -= 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ < targetY_)
-                    {
-                        distY_ = targetY_ - startY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 2);
-                            }
-                            currY_ += 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ == targetY_)
-                    {
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // Y좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distX_ - (distX_ / 2); i++)
-                    {
-                        currX_ -= 1;
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // 나머지 반 이동
-                }
-
-                if (startX_ < targetX_)
-                {
-                    distX_ = targetX_ - startX_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distX_ / 2; i++)
-                    {
-                        currX_ += 1;
-                        if (i != (distX_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // Y좌표 이동
-                    if (startY_ > targetY_)
-                    {
-                        distY_ = startY_ - targetY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 4);
-                            }
-                            currY_ -= 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ < targetY_)
-                    {
-                        distY_ = targetY_ - startY_;
-
-                        for (int i = 0; i < distY_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 2);
-                            }
-                            currY_ += 1;
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    if (startY_ == targetY_)
-                    {
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // Y좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distX_ - (distX_ / 2); i++)
-                    {
-                        currX_ += 1;
-                        CreateRoad(currY_, currX_, 0);
-                    }
-                    // 나머지 반 이동
-                }
+                MakeHorizontalRoad(startX_, targetX_, startY_);
             }
-            else if (Mathf.Abs(targetX_ - startX_) < Mathf.Abs(targetY_ - startY_))
+            if (startX_ == targetX_)
             {
-                if (startY_ > targetY_)
-                {
-                    distY_ = startY_ - targetY_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distY_ / 2; i++)
-                    {
-                        currY_ -= 1;
-                        if (i != (distY_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // X좌표 이동
-                    if (startX_ > targetX_)
-                    {
-                        distX_ = startX_ - targetX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 3);
-                            }
-                            currX_ -= 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ < targetX_)
-                    {
-                        distX_ = targetX_ - startX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 2);
-                            }
-                            currX_ += 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ == targetX_)
-                    {
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // X좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distY_ - (distY_ / 2); i++)
-                    {
-                        currY_ -= 1;
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // 나머지 반 이동
-                }
-
-                if (startY_ < targetY_)
-                {
-                    distY_ = targetY_ - startY_;
-
-                    // 일단 반만 이동
-                    for (int i = 0; i < distY_ / 2; i++)
-                    {
-                        currY_ += 1;
-                        if (i != (distY_ / 2) - 1)
-                        {
-                            CreateRoad(currY_, currX_, 1);
-                        }
-                    }
-                    // 일단 반만 이동
-
-                    // X좌표 이동
-                    if (startX_ > targetX_)
-                    {
-                        distX_ = startX_ - targetX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 5);
-                            }
-                            currX_ -= 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ < targetX_)
-                    {
-                        distX_ = targetX_ - startX_;
-
-                        for (int i = 0; i < distX_; i++)
-                        {
-                            if (i == 0)
-                            {
-                                CreateRoad(currY_, currX_, 4);
-                            }
-                            currX_ += 1;
-                            CreateRoad(currY_, currX_, 0);
-                        }
-                    }
-                    if (startX_ == targetX_)
-                    {
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // X좌표 이동
-
-                    // 나머지 반 이동
-                    for (int i = 0; i < distY_ - (distY_ / 2); i++)
-                    {
-                        currY_ += 1;
-                        CreateRoad(currY_, currX_, 1);
-                    }
-                    // 나머지 반 이동
-                }
+                MakeVerticalRoad(startY_, targetY_, startX_);
             }
+            if (startY_ > targetY_ && startX_ < targetX_)
+            {
+                MakeCurvedRoadUpRight(startY_, targetY_, startX_, targetX_);
+            }
+            if (startY_ > targetY_ && startX_ > targetX_)
+            {
+                MakeCurvedRoadUpLeft(startY_, targetY_, startX_, targetX_);
+            }
+            if (startY_ < targetY_ && startX_ < targetX_)
+            {
+                MakeCurvedRoadDownRight(startY_, targetY_, startX_, targetX_);
+            }
+            if (startY_ < targetY_ && startX_ > targetX_)
+            {
+                MakeCurvedRoadDownLeft(startY_, targetY_, startX_, targetX_);
+            }
+
+            MakePassPointsSprite(points_);
+            return;
         }
     }
 
+    private void MakePassPointsSprite(List<GameObject> points_)
+    {
+        // 야영지를 제외하고 체크
+        GameObject target_ = default;
+
+        for (int i = 1; i < points_.Count; i++)
+        {
+            target_ = points_[i];
+
+            int targetY_ = voidTiles.IndexOf(target_) / MAP_WIDTH;
+            int targetX_ = voidTiles.IndexOf(target_) % MAP_WIDTH;
+
+            bool isUp = false;
+            bool isDown = false;
+            bool isLeft = false;
+            bool isRight = false;
+
+            // 상하좌우 모든 타일 체크
+            if (voidTiles[(targetY_ - 1) * MAP_WIDTH + targetX_].tag.Equals("RoadTile"))
+            {
+                isUp = true;
+            }   // 상
+
+            if (voidTiles[(targetY_ + 1) * MAP_WIDTH + targetX_].tag.Equals("RoadTile"))
+            {
+                isDown = true;
+            }   // 하
+
+            if (voidTiles[targetY_ * MAP_WIDTH + targetX_ - 1].tag.Equals("RoadTile"))
+            {
+                isLeft = true;
+            }   // 좌
+
+            if (voidTiles[targetY_ * MAP_WIDTH + targetX_ + 1].tag.Equals("RoadTile"))
+            {
+                isRight = true;
+            }   // 우
+            // 상하좌우 모든 타일 체크
+
+            // 알맞은 스프라이트로 변경
+            if (isLeft && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 0);
+            }
+
+            if (isUp && isDown)
+            {
+                CreateRoad(targetY_, targetX_, 1);
+            }
+
+            if (isDown && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 2);
+            }
+
+            if (isDown && isLeft)
+            {
+                CreateRoad(targetY_, targetX_, 3);
+            }
+
+            if (isUp && isRight)
+            {
+                CreateRoad(targetY_, targetX_, 4);
+            }
+
+            if (isUp && isLeft)
+            {
+                CreateRoad(targetY_, targetX_, 5);
+            }
+            // 알맞은 스프라이트로 변경
+        }
+    }
+
+    /// <summary>
+    /// voidTiles에서 [y, x] 위치의 타일 스프라이트를 spriteIdx에 맞춰 바꿔준다
+    /// </summary>
+    /// <param name="y_">타일의 행 위치</param>
+    /// <param name="x_">타일의 열 위치</param>
+    /// <param name="spriteIdx">타일 스프라이트 인덱스 (0: ─, 1: │, 2: ┌, 3: ┐, 4: └, 5: ┘)</param>
     private void CreateRoad(int y_, int x_, int spriteIdx)
     {
         Sprite sprite = default;
