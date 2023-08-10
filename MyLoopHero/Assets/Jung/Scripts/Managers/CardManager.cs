@@ -113,81 +113,109 @@ public class CardManager : MonoBehaviour
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[0];
             theTile_.name = CardName.OBLIVION.ToString();
         }
-        else if (randNum >= 4 && randNum < 12)
-        {   // 금고 8
-            theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[14];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[14];
-            theTile_.name = CardName.SAFE.ToString();
-        }
-        else if (randNum >= 12 && randNum < 20)
-        {   // 등대 8
-            theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[8];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[8];
-            theTile_.name = CardName.LIGHTHOUSE.ToString();
-        }
-        else if (randNum >= 20 && randNum < 32)
-        {   // 바위 12
-            theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[9];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[9];
-            theTile_.name = CardName.ROCK.ToString();
-        }
-        else if (randNum >= 32 && randNum < 42)
-        {   // 산 10
-            theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[10];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[10];
-            theTile_.name = CardName.MOUNT.ToString();
-        }
-        else if (randNum >= 42 && randNum < 52)
-        {   // 목초지 10
-            theTile_ = Instantiate(etcCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[15];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[15];
-            theTile_.name = CardName.GRASS.ToString();
-        }
-        else if (randNum >= 52 && randNum < 60)
-        {   // 묘지 8
+        else if (randNum >= 4 && randNum < 14)
+        {   // 묘지 10
             theTile_ = Instantiate(etcCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[1];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[1];
-            theTile_.name = CardName.CEMETARY.ToString();
+            theTile_.name = CardName.SAFE.ToString();
         }
-        else if (randNum >= 60 && randNum < 70)
+        else if (randNum >= 14 && randNum < 24)
+        {   // 마을 10
+            theTile_ = Instantiate(etcCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[2];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[2];
+            theTile_.name = CardName.LIGHTHOUSE.ToString();
+        }
+        else if (randNum >= 24 && randNum < 34)
         {   // 수풀 10
             theTile_ = Instantiate(etcCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[3];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[3];
-            theTile_.name = CardName.BUSH.ToString();
+            theTile_.name = CardName.ROCK.ToString();
         }
-        else if (randNum >= 70 && randNum < 76)
-        {   // 가로등 6
+        else if (randNum >= 34 && randNum < 44)
+        {   // 밀밭 10
+            theTile_ = Instantiate(etcCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[4];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[4];
+            theTile_.name = CardName.MOUNT.ToString();
+        }
+        //else if (randNum >= 42 && randNum < 52)
+        //{   // 거미 고치 10
+        //    theTile_ = Instantiate(etcCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[5];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[5];
+        //    theTile_.name = CardName.GRASS.ToString();
+        //}
+        //else if (randNum >= 52 && randNum < 60)
+        //{   // 흡혈귀 저택 8
+        //    theTile_ = Instantiate(etcCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[6];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[6];
+        //    theTile_.name = CardName.CEMETARY.ToString();
+        //}
+        //else if (randNum >= 60 && randNum < 70)
+        //{   // 전장 10
+        //    theTile_ = Instantiate(etcCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[7];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[7];
+        //    theTile_.name = CardName.BUSH.ToString();
+        //}
+        else if (randNum >= 44 && randNum < 54)
+        {   // 등대 10
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[12];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[12];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[8];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[8];
             theTile_.name = CardName.LAMP.ToString();
         }
-        else if (randNum >= 76 && randNum < 84)
-        {   // 거미고치 8
+        else if (randNum >= 54 && randNum < 64)
+        {   // 바위 10
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[5];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[5];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[9];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[9];
             theTile_.name = CardName.COCOON.ToString();
         }
-        else if (randNum >= 84 && randNum < 92)
-        {   // 전장 8
+        else if (randNum >= 64 && randNum < 74)
+        {   // 산 10
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[7];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[7];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[10];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[10];
             theTile_.name = CardName.BATTLEFIELD.ToString();
         }
-        else if (randNum >= 92 && randNum < 100)
-        {   // 저택 8
+        //else if (randNum >= 92 && randNum < 100)
+        //{   // 피투성이 수풀 8
+        //    theTile_ = Instantiate(sideCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[11];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[11];
+        //    theTile_.name = CardName.MANSION.ToString();
+        //}
+        //else if (randNum >= 92 && randNum < 100)
+        //{   // 가로등 8
+        //    theTile_ = Instantiate(sideCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[12];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[12];
+        //    theTile_.name = CardName.MANSION.ToString();
+        //}
+        else if (randNum >= 74 && randNum < 84)
+        {   // 늪 10
             theTile_ = Instantiate(sideCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[6];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[6];
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[13];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[13];
+            theTile_.name = CardName.MANSION.ToString();
+        }
+        else if (randNum >= 84 && randNum < 90)
+        {   // 금고 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[14];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[14];
+            theTile_.name = CardName.MANSION.ToString();
+        }
+        else if (randNum >= 90 && randNum < 100)
+        {   // 목초지 10
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[15];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[15];
             theTile_.name = CardName.MANSION.ToString();
         }
         #endregion // 각 카드 생성 확률
