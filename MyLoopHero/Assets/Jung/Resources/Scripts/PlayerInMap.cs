@@ -11,6 +11,9 @@ public class PlayerInMap : MonoBehaviour
     int startIdx_;
     int targetIdx_;
 
+    [Header("For Test")]
+    [Space(2)]
+    [SerializeField]
     float moveSpeed;
 
     private void Start()
