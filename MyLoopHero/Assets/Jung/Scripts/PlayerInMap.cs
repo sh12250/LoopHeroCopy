@@ -48,7 +48,6 @@ public class PlayerInMap : MonoBehaviour
         float targetY_ = path[targetIdx_].transform.localPosition.y;
         float targetX_ = path[targetIdx_].transform.localPosition.x;
 
-        float distY_ = default;
         float distanceToMove = moveSpeed * Time.deltaTime;
 
         if (startY_ > targetY_)
@@ -59,47 +58,6 @@ public class PlayerInMap : MonoBehaviour
             }
             else
             {
-                //transform.localPosition = new Vector2(startX_, targetY_);
-
-                if(startX_ > targetX_)
-                {
-                    if(transform.localPosition.x > targetX_)
-                    {
-                        transform.Translate(Vector2.left * distanceToMove);
-                    }
-                    else
-                    {
-                        transform.localPosition = new Vector2(targetX_, targetY_);
-
-                        LoopIdx();
-                    }
-                }
-
-                if (startX_ < targetX_)
-                {
-                    if (transform.localPosition.x < targetX_)
-                    {
-                        transform.Translate(Vector2.right * distanceToMove);
-                    }
-                    else
-                    {
-                        transform.localPosition = new Vector2(targetX_, targetY_);
-
-                        LoopIdx();
-                    }
-                }
-            }
-        }
-        else if (startY_ < targetY_)
-        {
-            if (transform.localPosition.y < targetY_)
-            {
-                transform.Translate(Vector2.up * distanceToMove);
-            }
-            else
-            {
-                //transform.localPosition = new Vector2(startX_, targetY_);
-
                 if (startX_ > targetX_)
                 {
                     if (transform.localPosition.x > targetX_)
@@ -111,10 +69,10 @@ public class PlayerInMap : MonoBehaviour
                         transform.localPosition = new Vector2(targetX_, targetY_);
 
                         LoopIdx();
+                        return;
                     }
                 }
-
-                if (startX_ < targetX_)
+                else if (startX_ < targetX_)
                 {
                     if (transform.localPosition.x < targetX_)
                     {
@@ -125,7 +83,54 @@ public class PlayerInMap : MonoBehaviour
                         transform.localPosition = new Vector2(targetX_, targetY_);
 
                         LoopIdx();
+                        return;
                     }
+                }
+                else if (startX_ == targetX_)
+                {
+                    LoopIdx();
+                }
+            }
+        }
+        else if (startY_ < targetY_)
+        {
+            if (transform.localPosition.y < targetY_)
+            {
+                transform.Translate(Vector2.up * distanceToMove);
+            }
+            else
+            {
+                if (startX_ > targetX_)
+                {
+                    if (transform.localPosition.x > targetX_)
+                    {
+                        transform.Translate(Vector2.left * distanceToMove);
+                    }
+                    else
+                    {
+                        transform.localPosition = new Vector2(targetX_, targetY_);
+
+                        LoopIdx();
+                        return;
+                    }
+                }
+                else if (startX_ < targetX_)
+                {
+                    if (transform.localPosition.x < targetX_)
+                    {
+                        transform.Translate(Vector2.right * distanceToMove);
+                    }
+                    else
+                    {
+                        transform.localPosition = new Vector2(targetX_, targetY_);
+
+                        LoopIdx();
+                        return;
+                    }
+                }
+                else if (startX_ == targetX_)
+                {
+                    LoopIdx();
                 }
             }
         }
