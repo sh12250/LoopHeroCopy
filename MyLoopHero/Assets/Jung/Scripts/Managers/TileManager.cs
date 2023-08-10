@@ -37,8 +37,11 @@ public class TileManager : MonoBehaviour
         
     }
 
-    private void TileOnMap(string name_)
+    private void ChangeTile(GameObject tile_, Sprite img_)
     {
         // name_ 을 체크해서 스프라이트 제공
+        if (tile_ == null) { return; }
+
+        tile_.GetComponentInChildren<SpriteRenderer>().sprite = img_;
     }
 }

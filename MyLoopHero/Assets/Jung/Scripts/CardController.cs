@@ -77,6 +77,11 @@ public class CardController : MonoBehaviour
             {
                 transform.position = hit_Tiles.transform.position;
 
+                if (Input.GetMouseButtonUp(0))
+                {
+                    
+                }
+
                 return;
             }
         }

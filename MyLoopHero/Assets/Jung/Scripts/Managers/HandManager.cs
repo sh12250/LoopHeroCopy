@@ -51,6 +51,14 @@ public class HandManager : MonoBehaviour
                 myHands[idx].transform.localPosition = new Vector3(-451 + (idx * 2 * 41), 0, 0);
                 myHands[idx].GetComponent<CardController>().OnHand();
             }
+            else if (hit_Cards.collider != null)
+            {
+                for (int i = 0; i < myHands.Count; i++)
+                {
+                    myHands[i].transform.localPosition = new Vector3(-451 + (i * 2 * 41), 0, 0);
+                    myHands[i].GetComponent<CardController>().OnHand();
+                }
+            }
         }
 
         /*
