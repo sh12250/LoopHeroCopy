@@ -15,48 +15,32 @@ public class CardController : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit2D hit_Tiles = GameManager.instance.GetHit("Tiles");
-        RaycastHit2D hit_Hands = GameManager.instance.GetHit("Hands");
-
         switch (name)
         {
             case "OBLIVION":
+                BuildOnMap();
                 break;
             case "CEMETARY":
-                break;
             case "VILLAGE":
-                break;
             case "BUSH":
-                break;
             case "CORNFIELD":
+            case "SWAMP":
+                BuildOnMap("RoadTile");
                 break;
             case "COCOON":
-                break;
             case "MANSION":
-                break;
             case "BATTLEFIELD":
-                break;
             case "LIGHTHOUSE":
+            case "LAMP":
+            case "BLOODYBUSH":
+                BuildOnMap("SideTile");
                 break;
             case "ROCK":
-                break;
             case "MOUNT":
-                break;
-            case "BLOODYBUSH":
-                break;
-            case "LAMP":
-                break;
-            case "SWAMP":
-                break;
             case "SAFE":
-                break;
             case "GRASS":
+                BuildOnMap("EtcTile");
                 break;
-        }
-
-        if (hit_Tiles.collider != null)
-        {
-
         }
 
         if (transform.localPosition.y <= 40)
@@ -66,6 +50,35 @@ public class CardController : MonoBehaviour
         else if (transform.localPosition.y > 40)
         {
             OnBuild();
+        }
+    }
+
+    private void BuildOnMap()
+    {
+        RaycastHit2D hit_Tiles = GameManager.instance.GetHit("Tiles");
+
+        if (hit_Tiles.collider != null)
+        {
+            transform.position = hit_Tiles.transform.position;
+
+            return;
+        }
+
+        FollowMouse();
+    }
+
+    private void BuildOnMap(string tagName_)
+    {
+        RaycastHit2D hit_Tiles = GameManager.instance.GetHit("Tiles");
+
+        if (hit_Tiles.collider != null)
+        {
+            if (hit_Tiles.collider.tag.Equals(tagName_))
+            {
+                transform.position = hit_Tiles.transform.position;
+
+                return;
+            }
         }
 
         FollowMouse();
