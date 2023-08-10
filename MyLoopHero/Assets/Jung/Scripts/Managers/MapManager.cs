@@ -102,6 +102,7 @@ public class MapManager : MonoBehaviour
         // 지정된 타일의 태그를 RoadTile 로 바꿔준다
         GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
         obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
+        obj.SetActive(false);
 
         passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
         // 지나갈 타일에 추가 1

@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    [SerializeField]
-    private Sprite[] tileSprites;
+    public Sprite[] cemetary;
+    public Sprite[] village;
+    public Sprite[] bush;
+    public Sprite[] cornfield;
+    public Sprite cocoon;
+    public Sprite mansion;
+    public Sprite battlefield;
+    public Sprite lighthouse;
+    public Sprite rock;
+    public Sprite mount;
+    public Sprite bloodybush;
+    public Sprite lamp;
+    public Sprite swamp;
+    public Sprite safe;
+    public Sprite grass;
 
     private string scriptNames;
 
     private void Awake()
     {
-        
+
     }
 
     void Start()
@@ -22,5 +35,10 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void TileOnMap(string name_)
+    {
+        // name_ 을 체크해서 스프라이트 제공
     }
 }
