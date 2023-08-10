@@ -8,7 +8,7 @@ public class UI_DragZone_Equip : MonoBehaviour
     private GameObject[] equipSlots;
     private GameObject[] effects;
 
-    enum ChildrenInDragZone_Equip
+    enum ChildrenOfDragZone_Equip
     {
         Equip_Slot_Weapon = 0,
         Equip_Slot_Ring = 1,
@@ -16,7 +16,7 @@ public class UI_DragZone_Equip : MonoBehaviour
         Equip_Slot_Armor = 3
     }
 
-    enum ChildrenInEquipSlots
+    enum ChildrenOfEquipSlots
     {
         SwordEffect1 = 0,
         SwordEffect2 = 1,
@@ -41,23 +41,23 @@ public class UI_DragZone_Equip : MonoBehaviour
 
     //=========================================================================================
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log(other.tag);
         //Debug.Log(equipSlots[0].tag);
-        if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Weapon].tag)
+        if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Weapon].tag)
         {
             TurnSwordEffectsOn();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Ring].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Ring].tag)
         {
             TurnRingEffectsOn();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Shield].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Shield].tag)
         {
             TurnShieldEffectsOn();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Armor].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Armor].tag)
         {
             TurnArmorEffectsOn();
         }
@@ -67,19 +67,19 @@ public class UI_DragZone_Equip : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Weapon].tag)
+        if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Weapon].tag)
         {
             TurnAllEffectsOff();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Ring].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Ring].tag)
         {
             TurnAllEffectsOff();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Shield].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Shield].tag)
         {
             TurnAllEffectsOff();
         }
-        else if (other.tag == equipSlots[(int)ChildrenInDragZone_Equip.Equip_Slot_Armor].tag)
+        else if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Armor].tag)
         {
             TurnAllEffectsOff();
         }
@@ -108,7 +108,7 @@ public class UI_DragZone_Equip : MonoBehaviour
         {
             for (int i = 0; i < equipSlots[j].transform.childCount; i++)
             {
-                effects[(2 * j) + i] = equipSlots[j].transform.GetChild(i).gameObject;
+                effects[(equipSlots[0].transform.childCount * j) + i] = equipSlots[j].transform.GetChild(i).gameObject;
             }
         }
     }
@@ -117,45 +117,45 @@ public class UI_DragZone_Equip : MonoBehaviour
 
     private void TurnAllEffectsOff() 
     {
-        effects[(int)ChildrenInEquipSlots.SwordEffect1].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.SwordEffect2].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.RingEffect1].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.RingEffect2].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.ShieldEffect1].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.ShieldEffect2].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.ArmorEffect1].SetActive(false);
-        effects[(int)ChildrenInEquipSlots.ArmorEffect2].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.SwordEffect1].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.SwordEffect2].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.RingEffect1].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.RingEffect2].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.ShieldEffect1].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.ShieldEffect2].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.ArmorEffect1].SetActive(false);
+        effects[(int)ChildrenOfEquipSlots.ArmorEffect2].SetActive(false);
     }
 
     //=========================================================================================
 
     private void TurnSwordEffectsOn() 
     {
-        effects[(int)ChildrenInEquipSlots.SwordEffect1].SetActive(true);
-        effects[(int)ChildrenInEquipSlots.SwordEffect2].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.SwordEffect1].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.SwordEffect2].SetActive(true);
     }
 
     //=========================================================================================
 
     private void TurnRingEffectsOn()
     {
-        effects[(int)ChildrenInEquipSlots.RingEffect1].SetActive(true);
-        effects[(int)ChildrenInEquipSlots.RingEffect2].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.RingEffect1].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.RingEffect2].SetActive(true);
     }
 
     //=========================================================================================
 
     private void TurnShieldEffectsOn()
     {
-        effects[(int)ChildrenInEquipSlots.ShieldEffect1].SetActive(true);
-        effects[(int)ChildrenInEquipSlots.ShieldEffect2].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.ShieldEffect1].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.ShieldEffect2].SetActive(true);
     }
 
     //=========================================================================================
 
     private void TurnArmorEffectsOn()
     {
-        effects[(int)ChildrenInEquipSlots.ArmorEffect1].SetActive(true);
-        effects[(int)ChildrenInEquipSlots.ArmorEffect2].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.ArmorEffect1].SetActive(true);
+        effects[(int)ChildrenOfEquipSlots.ArmorEffect2].SetActive(true);
     }
 }

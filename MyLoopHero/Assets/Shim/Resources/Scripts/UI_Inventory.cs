@@ -16,6 +16,9 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     // 현재 드래그 중인 아이콘의 RectTransform.transform 값을 알아오기 위한 변수
     private RectTransform rectHolding;
 
+    //
+    private UI_DragZone_Inven ui_DragZone_Inven;
+
     // 마우스의 ScreenToWorldPoint 좌표를 저장하기 위한 변수
     private Vector3 mouseLocation;
 
@@ -40,6 +43,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         // ui_Inventory와 RectHolding의 컴포넌트를 불러온다.
         ui_Inventory = GetComponent<Canvas>();
         rectHolding = GetComponent<RectTransform>();
+        ui_DragZone_Inven = GetComponent<UI_DragZone_Inven>();
 
         #region 로그 확인용 코드
         // GameObject invenEquip = GameObject.FindGameObjectWithTag("InvenEquip");
@@ -88,7 +92,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         if (Input.GetMouseButtonDown(0))
         {
             // 1. 만약 레이가 검출한 콜라이더가 있을 경우
-            if (hit_.collider != null)
+            if (hit_.collider != null && hit_.collider.tag != "ItemSlot")
             {
                 // 지금 검출한 아이콘의 transform 값을 RectHolding에 저장한다.
                 rectHolding = (RectTransform)hit_.transform;
