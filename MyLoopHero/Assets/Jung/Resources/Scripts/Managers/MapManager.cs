@@ -44,6 +44,7 @@ public class MapManager : MonoBehaviour
     public GameObject playerInMap;
 
     public List<GameObject> passPoints;
+    public GameObject richPrefab;
 
     private static int MAP_LENGTH = 12;
     private static int MAP_WIDTH = 21;
@@ -98,6 +99,8 @@ public class MapManager : MonoBehaviour
             // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
             voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
             // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+            GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
+            obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
 
             passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
             // 지나갈 타일에 추가
@@ -157,9 +160,11 @@ public class MapManager : MonoBehaviour
 
         GameObject target_ = default;
 
-        // 야영지만 남았을 경우를 확인
-        if (points_.IndexOf(startPoint_) != points_.Count - 1)
-        {   // 야영지를 제외한 타일이 남았을 경우
+        int startIdx_ = points_.IndexOf(startPoint_);
+
+        // 마지막 중계점인지 체크
+        if (startIdx_ != points_.Count - 1)
+        {   // 야영지를 제외한 중계점이 남았을 경우
             target_ = points_[points_.IndexOf(startPoint_) + 1];
 
             int startY_ = voidTiles.IndexOf(startPoint_) / 21;
@@ -419,8 +424,8 @@ public class MapManager : MonoBehaviour
             //points_.Remove(target_);
             LinkPassPoints(points_, target_);
         }
-        else if (points_.IndexOf(startPoint_) == points_.Count - 1)
-        {   // 야영지를 제외한 타일이 남지 않았을 경우
+        else if (startIdx_ == points_.Count - 1)
+        {   // 야영지를 제외한 중계점이 남지 않았을 경우
             target_ = points_[0];
 
             int startY_ = voidTiles.IndexOf(startPoint_) / 21;

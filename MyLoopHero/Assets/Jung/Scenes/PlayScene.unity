@@ -3381,6 +3381,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4304752599830973724, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304752599830973724, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.49999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304752599830973724, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304752599830973724, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7864771045065848553, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
       propertyPath: m_Size.x
       value: 0.25
@@ -7136,6 +7152,7 @@ MonoBehaviour:
   roadSprite_4: {fileID: 21300000, guid: 632dffcfc9df08e4db53304d93d37cc1, type: 3}
   playerInMap: {fileID: 236397315}
   passPoints: []
+  richPrefab: {fileID: 7063054577530583678, guid: 78b927acfd87aa8449825a8f3aee56ee, type: 3}
 --- !u!1001 &814033208
 PrefabInstance:
   m_ObjectHideFlags: 0
