@@ -2,19 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BushTile : Tile
+public class BushTile : SpawnTile
 {
+    [SerializeField]
+    private Sprite redWolf;
 
-
-    void Start()
+    private void Start()
     {
-        CreateTile();
+        spawnRate = 5;
+        spawnTime = 2;
+        currDay = GameManager.instance.dayCnt;
     }
 
-    public override void CreateTile()
+    private void Update()
     {
-        base.CreateTile();
-        anim.transform.SetParent(transform);
-        anim.transform.localPosition = Vector3.zero;
+        if (GameManager.instance.dayCnt == currDay + spawnTime)
+        {
+            currDay = GameManager.instance.dayCnt;
+            if (Random.Range(0, 100) <= spawnRate)
+            {
+                SpawnMonster(transform);
+            }
+        }
+    }
+
+    public override void SpawnMonster(Transform parent_)
+    {
+        base.SpawnMonster(parent_);
+        // 몬스터 능력치 조정(할 예정)
+        // 몬스터 능력치 조정(할 예정)
     }
 }

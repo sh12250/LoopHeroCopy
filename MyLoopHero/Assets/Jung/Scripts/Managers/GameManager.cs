@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class GameManager : MonoBehaviour
 
     public RaycastHit2D hit;
     // 여러스크립트에 뿌려줄 예정
+
+    [SerializeField]
+    private Image dayGauge;
+
+    public const float DAYCYCLE = 24f;
+    public float globalTime;
+    public int dayCnt;
 
     private void Awake()
     {
@@ -23,12 +31,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        globalTime = 0f;
+        dayCnt = 0;
     }
 
     void Update()
     {
+        globalTime += Time.deltaTime * 4;
 
+        if (globalTime >= DAYCYCLE)
+        {
+            globalTime = 0f;
+            dayCnt += 1;
+        }
+
+        dayGauge.fillAmount = globalTime / DAYCYCLE;
     }
 
     public RaycastHit2D GetHit(string layerMaskName_)

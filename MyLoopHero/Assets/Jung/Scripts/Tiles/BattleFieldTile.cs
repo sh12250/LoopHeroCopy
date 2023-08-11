@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleFieldTile : Tile
+public class BattleFieldTile : SpawnTile
 {
     void Start()
     {
-        CreateTile();
-    }
 
-    public override void CreateTile()
-    {
-        base.CreateTile();
-        anim.transform.SetParent(transform);
-        anim.transform.localPosition = Vector3.zero;
     }
 }

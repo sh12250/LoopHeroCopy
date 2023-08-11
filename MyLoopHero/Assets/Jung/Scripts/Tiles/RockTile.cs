@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockTile : Tile
+public class RockTile : MonoBehaviour
 {
     // 체력
 
@@ -13,19 +13,12 @@ public class RockTile : Tile
 
     void Start()
     {
-        CreateTile();
+
 
         // ApplyStat() 실행
     }
 
-    public override void CreateTile()
-    {
-        base.CreateTile();
-        anim.transform.SetParent(transform);
-        anim.transform.localPosition = Vector3.zero;
 
-        // CheckCondition() 실행
-    }
 
     private void ApplyStat()
     {

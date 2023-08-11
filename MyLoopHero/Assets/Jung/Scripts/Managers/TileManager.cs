@@ -61,6 +61,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = cemetary[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<CemetaryTile>();
                 }
 
                 break;

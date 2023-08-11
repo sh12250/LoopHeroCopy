@@ -81,10 +81,13 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < tileMap.gameObject.transform.childCount; i++)
         {
-            GameObject tile = tileMap.gameObject.transform.GetChild(i).gameObject;
-            // tileMap의 하위 오브젝트 Hierarchy상의 순서대로 찾기
-            voidTiles.Add(tile);
-            // 찾아온 하위 오브젝트 add
+            if (tileMap.gameObject.transform.GetChild(i).name == "VoidTile")
+            {
+                GameObject tile = tileMap.gameObject.transform.GetChild(i).gameObject;
+                // tileMap의 하위 오브젝트 Hierarchy상의 순서대로 찾기
+                voidTiles.Add(tile);
+                // 찾아온 하위 오브젝트 add
+            }
         }
 
         voidTiles = SortTiles(voidTiles);
@@ -464,6 +467,7 @@ public class MapManager : MonoBehaviour
             // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
             voidTiles[y_ * MAP_WIDTH + x_].transform.tag = "RoadTile";
             // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+            voidTiles[y_ * MAP_WIDTH + x_].AddComponent<RoadTile>();
         }
     }
 
@@ -491,6 +495,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < sortedTiles_.Length; i++)
         {
             GameObject obj = sortedTiles_[i];
+            obj.GetComponentInChildren<SpriteRenderer>().sortingOrder = i / MAP_WIDTH;
             temp_.Add(obj);
             // sortedTiles_를 순서대로 add
         }
