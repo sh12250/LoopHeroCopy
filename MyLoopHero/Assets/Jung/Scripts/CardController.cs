@@ -15,33 +15,7 @@ public class CardController : MonoBehaviour
 
     private void Update()
     {
-        switch (name)
-        {
-            case "OBLIVION":
-                BuildOnMap();
-                break;
-            case "CEMETARY":
-            case "VILLAGE":
-            case "BUSH":
-            case "CORNFIELD":
-            case "SWAMP":
-                BuildOnMap("RoadTile");
-                break;
-            case "COCOON":
-            case "MANSION":
-            case "BATTLEFIELD":
-            case "LIGHTHOUSE":
-            case "LAMP":
-            case "BLOODYBUSH":
-                BuildOnMap("SideTile");
-                break;
-            case "ROCK":
-            case "MOUNT":
-            case "SAFE":
-            case "GRASS":
-                BuildOnMap("EtcTile");
-                break;
-        }
+        FollowMouse();
 
         if (transform.localPosition.y <= 40)
         {
@@ -51,42 +25,6 @@ public class CardController : MonoBehaviour
         {
             OnBuild();
         }
-    }
-
-    private void BuildOnMap()
-    {
-        RaycastHit2D hit_Tiles = GameManager.instance.GetHit("Tiles");
-
-        if (hit_Tiles.collider != null)
-        {
-            transform.position = hit_Tiles.transform.position;
-
-            return;
-        }
-
-        FollowMouse();
-    }
-
-    private void BuildOnMap(string tagName_)
-    {
-        RaycastHit2D hit_Tiles = GameManager.instance.GetHit("Tiles");
-
-        if (hit_Tiles.collider != null)
-        {
-            if (hit_Tiles.collider.tag.Equals(tagName_))
-            {
-                transform.position = hit_Tiles.transform.position;
-
-                if (Input.GetMouseButtonUp(0))
-                {
-                    
-                }
-
-                return;
-            }
-        }
-
-        FollowMouse();
     }
 
     public void OnHand()

@@ -100,6 +100,7 @@ public class MapManager : MonoBehaviour
         // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
         voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
         // 지정된 타일의 태그를 RoadTile 로 바꿔준다
+        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].name = "CampsiteTile";
         GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
         obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
         obj.SetActive(false);
@@ -433,21 +434,27 @@ public class MapManager : MonoBehaviour
         {
             case 0:
                 sprite = roadSprite_H;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_H";
                 break;
             case 1:
                 sprite = roadSprite_V;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_V";
                 break;
             case 2:
                 sprite = roadSprite_1;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_UR";
                 break;
             case 3:
                 sprite = roadSprite_2;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_UL";
                 break;
             case 4:
                 sprite = roadSprite_3;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_DR";
                 break;
             case 5:
                 sprite = roadSprite_4;
+                voidTiles[y_ * MAP_WIDTH + x_].name = "ROAD_DL";
                 break;
         }
 
