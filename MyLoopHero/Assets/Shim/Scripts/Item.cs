@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
     // { 아이템 데이터 관련 변수 (UI에 표현되지 않음)
     public int itemID = default;
     public string itemType = default;
-    public string itemSprite = default;
+    public Sprite itemSprite = null;
     public float itemAbilityRatio = default;
     public int itemAbilityCount = default;
     // } 아이템 데이터 관련 변수 (UI에 표현되지 않음)

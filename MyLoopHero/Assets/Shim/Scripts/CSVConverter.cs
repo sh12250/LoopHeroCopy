@@ -6,6 +6,7 @@ using UnityEditor;
 //using UnityEditor.UIElements;
 //using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Android;
 //using UnityEngine.Rendering;
 
 public class CSVConverter : MonoBehaviour
@@ -103,7 +104,7 @@ public class CSVConverter : MonoBehaviour
 
     private void ReadCSV()
     {
-        itemDataFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Shim/Resources/DataFiles/ItemDatabase_Test.csv");
+        itemDataFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Shim/DataFiles/ItemDatabase_Test.csv");
         //Debug.Log(itemDataFile);
     }
 
@@ -122,7 +123,6 @@ public class CSVConverter : MonoBehaviour
 
     private void SplitData()
     {
-        Debug.Log(itemDataFile.text);
         string dataTrimNull_ = itemDataFile.text.TrimEnd();
         string[] splitdata_ = default;
 
@@ -161,6 +161,7 @@ public class CSVConverter : MonoBehaviour
 
     private void SortData() 
     {
+        // TODO : 매직넘버 없애기
         for (int i = 0; i < csvRowCount - 1; i++)
         {
             itemID[i] = int.Parse(itemDataList[csvColumnCount * (i + 1)]);

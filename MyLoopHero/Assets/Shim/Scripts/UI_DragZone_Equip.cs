@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_DragZone_Equip : MonoBehaviour
 {
     private GameObject dragZone_Equip;
-    private GameObject[] equipSlots;
+    static public GameObject[] equipSlots { get; private set; }
     private GameObject[] effects;
 
     enum ChildrenOfDragZone_Equip
@@ -41,6 +42,7 @@ public class UI_DragZone_Equip : MonoBehaviour
 
     //=========================================================================================
 
+    #region OnTriggerStay
     private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log(other.tag);
@@ -62,9 +64,11 @@ public class UI_DragZone_Equip : MonoBehaviour
             TurnArmorEffectsOn();
         }
     }
+    #endregion
 
     //=========================================================================================
 
+    #region OnTriggerExit
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == equipSlots[(int)ChildrenOfDragZone_Equip.Equip_Slot_Weapon].tag)
@@ -84,9 +88,11 @@ public class UI_DragZone_Equip : MonoBehaviour
             TurnAllEffectsOff();
         }
     }
+    #endregion
 
     //=========================================================================================
 
+    #region FindingEquipSlot
     private void MakeEquipSlotArray() 
     {
         dragZone_Equip = this.gameObject;
@@ -97,9 +103,11 @@ public class UI_DragZone_Equip : MonoBehaviour
             equipSlots[i] = gameObject.transform.GetChild(i).gameObject;
         }
     }
+    #endregion
 
     //=========================================================================================
 
+    #region FindingEffect
     private void MakeEffectArray() 
     {
         effects = new GameObject[(equipSlots.Length) * (equipSlots[0].transform.childCount)];
@@ -112,9 +120,11 @@ public class UI_DragZone_Equip : MonoBehaviour
             }
         }
     }
+    #endregion
 
     //=========================================================================================
 
+    #region EffectsOFf
     private void TurnAllEffectsOff() 
     {
         effects[(int)ChildrenOfEquipSlots.SwordEffect1].SetActive(false);
@@ -126,9 +136,11 @@ public class UI_DragZone_Equip : MonoBehaviour
         effects[(int)ChildrenOfEquipSlots.ArmorEffect1].SetActive(false);
         effects[(int)ChildrenOfEquipSlots.ArmorEffect2].SetActive(false);
     }
+    #endregion
 
     //=========================================================================================
 
+    #region EffectsOn
     private void TurnSwordEffectsOn() 
     {
         effects[(int)ChildrenOfEquipSlots.SwordEffect1].SetActive(true);
@@ -158,4 +170,14 @@ public class UI_DragZone_Equip : MonoBehaviour
         effects[(int)ChildrenOfEquipSlots.ArmorEffect1].SetActive(true);
         effects[(int)ChildrenOfEquipSlots.ArmorEffect2].SetActive(true);
     }
+    #endregion
+
+    //=========================================================================================
+
+    private void ChangeEquipSlotSprite() 
+    {
+    }
+
+
+
 }
