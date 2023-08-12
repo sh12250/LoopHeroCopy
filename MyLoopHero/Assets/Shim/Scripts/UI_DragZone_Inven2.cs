@@ -46,7 +46,7 @@ public class UI_DragZone_Inven2 : MonoBehaviour
     {
         for (int i = 0; i < invenSlots.Length; i++)
         {
-            invenSlots[i].tag = "ItemSlot";
+            invenSlots[i].tag = "Inven";
             // 나중에 레이어 추가 생성시 변경
             invenSlots[i].layer = LayerMask.GetMask("UI");
             invenSlots[i].GetComponent<Image>().sprite = null;
@@ -86,7 +86,7 @@ public class UI_DragZone_Inven2 : MonoBehaviour
 
         for (int i = 0; i < dragZone_Inven.transform.childCount; i++)
         {
-            if (invenSlots[i].tag != "ItemSlot") 
+            if (invenSlots[i].tag != "Inven") 
             {
                 itemCount++;
             }

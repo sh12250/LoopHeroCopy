@@ -75,7 +75,7 @@ public class UI_DragZone_Inven : MonoBehaviour
     {
         for (int i = 0; i < invenSlots.Length; i++)
         {
-            invenSlots[i].tag = "ItemSlot";
+            invenSlots[i].tag = "Inven";
             slotImages[i].GetComponent<Image>().sprite = null;
         }
     }
@@ -87,7 +87,7 @@ public class UI_DragZone_Inven : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             // 인벤 비어있을 때
-            if (invenSlots[0].tag == "ItemSlot") 
+            if (invenSlots[0].tag == "Inven") 
             {
                 invenSlots[0].tag = itemBuilder.items[randomIdx_].tag;
                 invenSlots[0].name = itemBuilder.items[randomIdx_].itemName;
@@ -95,15 +95,15 @@ public class UI_DragZone_Inven : MonoBehaviour
                 slotImages[0].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
             }
             // 인벤 꽉 찼을 때
-            else if (invenSlots[0].tag != "ItemSlot" 
-                && invenSlots[invenSlots.Length - 1].tag != "ItemSlot") 
+            else if (invenSlots[0].tag != "Inven" 
+                && invenSlots[invenSlots.Length - 1].tag != "Inven") 
             {
                 
                 
             }
             // 인벤 적당히 차 있을 때
-            else if (invenSlots[0].tag != "ItemSlot"
-                && invenSlots[invenSlots.Length - 1].tag == "ItemSlot")
+            else if (invenSlots[0].tag != "Inven"
+                && invenSlots[invenSlots.Length - 1].tag == "Inven")
             {
                 
 
@@ -114,7 +114,7 @@ public class UI_DragZone_Inven : MonoBehaviour
             // for 문을 돌려서 현재 아이템이 있는 제일 마지막 슬롯을 찾는다.
             for (int i = invenSlots.Length - 1; i >= 0; i--)
             {
-                if (invenSlots[i].tag != "ItemSlot")
+                if (invenSlots[i].tag != "Inven")
                 {
                     GameObject lastItem = invenSlots[i];
                     break;
@@ -129,17 +129,17 @@ public class UI_DragZone_Inven : MonoBehaviour
 
 
             // 인벤 비어있을 때
-            if (invenSlots[0].tag == "ItemSlot") 
+            if (invenSlots[0].tag == "Inven") 
             {
                 /*Do Nothing*/
             }
 
-            else if (invenSlots[0].tag != "ItemSlot" && invenSlots[0].tag != "ItemSlot") 
+            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven") 
             {
             
             }
 
-            else if (invenSlots[0].tag != "ItemSlot" && invenSlots[0].tag != "ItemSlot")
+            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven")
             {
 
             }

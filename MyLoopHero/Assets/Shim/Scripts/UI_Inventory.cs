@@ -61,7 +61,6 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         //Debug.Log(collidertsInUI_Inventory[3].CompareTag(rectHolding.GetComponentsInChildren<Image>()[0].tag));
         #endregion
 
-        MakeRayOriginAndDirection();
 
 
         // 아이템의 처음 위치를 각각 anchored position으로 저장한다.
@@ -74,10 +73,13 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     }
     #endregion
 
-    private void MakeRayOriginAndDirection() 
+    private void MakeRayOriginAndDirection()
     {
+        // 클릭 시의 마우스 좌표를 ScreenToWorldPoint로 변환하여 저장한다.
         mouseLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // ray의 출발점은 마우스의 좌표값이다.
         rayOrigin = new Vector2(mouseLocation.x, mouseLocation.y);
+        // ray의 도착점
         rayDirection = Vector2.zero;
     }
 
@@ -86,16 +88,9 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     #region OnPointerDown // ! 아이템 슬롯을 제일 마지막 children으로 변경하는 로직 필요 -> 가려지는 현상 제어
     public void OnPointerDown(PointerEventData eventData)
     {
-        RaycastHit2D hit_ = Physics2D.Raycast(rayOrigin, rayDirection, Mathf.Infinity, LayerMask.GetMask("UI"));
+        MakeRayOriginAndDirection();
 
-
-        // 클릭 시의 마우스 좌표를 ScreenToWorldPoint로 변환하여 저장한다.
-        mouseLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // ray의 출발점은 마우스의 좌표값이다.
-        rayOrigin = new Vector2(mouseLocation.x, mouseLocation.y);
-        // ray의 도착점
-        rayDirection = Vector2.zero;
-
+        RaycastHit2D hit_ = Physics2D.Raycast(rayOrigin, rayDirection, Mathf.Infinity, LayerMask.GetMask("InvenSlot"));
 
         #region Debug
         //RaycastHit2D hitTest = Physics2D.Raycast(rayOrigin, rayDirection, Mathf.Infinity, LayerMask.GetMask("Test001"));
@@ -108,7 +103,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         if (Input.GetMouseButtonDown(0))
         {
             // 1. 만약 레이가 검출한 콜라이더가 있을 경우
-            if (hit_.collider.tag != null && hit_.collider.tag != "ItemSlot")
+            if (hit_.collider.tag != null)
             {
                 // 지금 검출한 아이콘의 transform 값을 RectHolding에 저장한다.
                 rectHolding = (RectTransform)hit_.transform;
@@ -152,8 +147,10 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     {
         if (isDragging == true)
         {
+            MakeRayOriginAndDirection();
+
             // ! 추후에 레이어를 다시 만들어서 재명명 해야할 필요성이 있을 수 있음 (검출할 장비창 레이어 -> Water)
-            RaycastHit2D hit_ = Physics2D.Raycast(rayOrigin, rayDirection, Mathf.Infinity, LayerMask.GetMask("Water"));
+            RaycastHit2D hit_ = Physics2D.Raycast(rayOrigin, rayDirection, Mathf.Infinity, LayerMask.GetMask("EquipSlot"));
             #region Debug
             //Debug.LogFormat("[OnPointerUp] hitTest name: {0}, layer: {1} / Test001", 
             //    hit_.transform.name, hit_.transform.gameObject.layer);
@@ -162,7 +159,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
             if (hit_.collider == null)
             {
                 Debug.Log("여기 있니? -1");
-                // 드래그 중이고, 검출된 Water 레이어가 없다면
+                // 드래그 중이고, 검출된 EquipSlot 레이어가 없다면
                 rectHolding.anchoredPosition = itemDefaultLocation;
                 isDragging = false;
             }
@@ -175,7 +172,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     UI_DragZone_Equip.equipSlots[0].GetComponent<Image>().sprite =
                             rectHolding.GetComponentsInChildren<Image>()[1].sprite;
 
-                    rectHolding.tag = "ItemSlot";
+                    rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
@@ -188,7 +185,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     UI_DragZone_Equip.equipSlots[1].GetComponent<Image>().sprite =
                             rectHolding.GetComponentsInChildren<Image>()[1].sprite;
 
-                    rectHolding.tag = "ItemSlot";
+                    rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
@@ -201,7 +198,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     UI_DragZone_Equip.equipSlots[2].GetComponent<Image>().sprite =
                             rectHolding.GetComponentsInChildren<Image>()[1].sprite;
 
-                    rectHolding.tag = "ItemSlot";
+                    rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
@@ -215,7 +212,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                             rectHolding.GetComponentsInChildren<Image>()[1].sprite;
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
-                    rectHolding.tag = "ItemSlot";
+                    rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
 
                     rectHolding.anchoredPosition = itemDefaultLocation;

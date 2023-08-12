@@ -21,7 +21,7 @@ public class RoadTile : SpawnTile
             currDay = GameManager.instance.dayCnt;
             if (Random.Range(0, 100) <= spawnRate)
             {
-                 SpawnMonster(transform);
+                 //SpawnMonster(transform);
             }
         }
     }
