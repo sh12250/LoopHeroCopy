@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MonsterManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static MonsterManager instance;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if (instance == null || instance == default)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("MonsterManager가 너무 많습니다");
+        }
     }
 }
