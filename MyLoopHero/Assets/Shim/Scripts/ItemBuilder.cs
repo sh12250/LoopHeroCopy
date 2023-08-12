@@ -27,22 +27,24 @@ public class ItemBuilder : MonoBehaviour
     public CSVConverter csvConverter { get; private set; }
     public GameObject itemPrefab;
     public Item[] items { get; private set; }
-    public Sprite[] itemSprites { get; private set; }
+    //public Dictionary<int, Item[]> itemDictionary { get; private set; }
+    public Object[] itemSprites { get; private set; }
 
 
     private void Awake()
     {
         csvConverter = transform.parent.GetComponentInChildren<CSVConverter>();
         items = new Item[csvConverter.csvRowCount];
-        itemSprites = new Sprite[csvConverter.csvRowCount];
-        Debug.Log(csvConverter);
+        //itemDictionary = new Dictionary<int, Item[]>();
+        itemSprites = new Object[csvConverter.csvRowCount];
+        //Debug.Log(csvConverter);
 
 
         InstantiateItem();
         GiveItemHiddenValue();
         GiveItemValue();
         GiveItemTag();
-        //GiveItemSprite();
+        GiveItemSprite();
 
 
         //gameObject.SetActive(true);
@@ -63,7 +65,7 @@ public class ItemBuilder : MonoBehaviour
         {
             items[i].itemID = csvConverter.itemID[i];
             items[i].itemType = csvConverter.itemType[i];
-            items[i].itemSprite = csvConverter.itemSprite[i];
+            //items[i].itemSprite = csvConverter.itemSprite[i];
             items[i].itemAbilityRatio = csvConverter.itemAbilityRatio[i];
             items[i].itemAbilityCount = csvConverter.itemAbilityCount[i];
         }
@@ -119,14 +121,23 @@ public class ItemBuilder : MonoBehaviour
     }
 
 
-    //private void GiveItemSprite() 
-    //{
-    //    itemSprites = (Sprite[])AssetDatabase.LoadAllAssetRepresentationsAtPath
-    //            ("Assets/Shim/Resources/Sprites/Equipment" + );
+    private void GiveItemSprite()
+    {
+        // ! 스프라이트 배열의 수를 맞추기 위해서 Equiptest 폴더 새로 생성
+        // ! LoadAll은 모든 파일을 불러오므로, sprite 파일을 감싸는 texture도 같이 불러옴
+        // ! 이 문제 때문에 배열이 2배로 커짐 -> 받아올 데이터의 자료형을 명시해야함
+        itemSprites = Resources.LoadAll<Sprite>("Sprites/Equiptest");
 
-    //    for (int i = 0; i < itemSprites.Length; i++)
-    //    {
-    //        Debug.Log(itemSprites[i]);
-    //    }
-    //}
+        // csv 파일을 준비할 때 Resources.LoadAll로 불러오는 순서를 고려해야함
+        for (int i = 0; i < itemSprites.Length; i++)
+        {
+            Debug.LogFormat("저장소 : {0}", itemSprites[i].name);
+            Debug.LogFormat("CSV : {0}", csvConverter.itemSprite[i]);
+
+            if (itemSprites[i].name == csvConverter.itemSprite[i])
+            {
+                items[i].itemSprite = (Sprite)itemSprites[i];
+            }
+        }
+    }
 }

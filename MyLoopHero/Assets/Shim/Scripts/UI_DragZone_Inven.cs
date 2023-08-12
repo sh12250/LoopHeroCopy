@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 //using System.Collections.Generic;
 //using Unity.VisualScripting;
 //using Unity.VisualScripting.FullSerializer;
@@ -10,8 +11,8 @@ public class UI_DragZone_Inven : MonoBehaviour
 {
     private ItemBuilder itemBuilder;
     private GameObject dragZone_Inven;
-    private GameObject[] invenSlots;
-    //private GameObject[] itemImage;
+    static public GameObject[] invenSlots { get; private set; }
+    static public GameObject[] slotImages { get; private set; }
 
     //enum ChildrenOfDragZone_Inven
     //{
@@ -34,7 +35,7 @@ public class UI_DragZone_Inven : MonoBehaviour
         itemBuilder = transform.parent.GetComponentInChildren<ItemBuilder>();
 
         MakeInvenSlotArray();
-
+        MakeSlotImageArray();
         TurnAllInvenSlotDefault();
     }
 
@@ -53,6 +54,21 @@ public class UI_DragZone_Inven : MonoBehaviour
         {
             invenSlots[i] = gameObject.transform.GetChild(i).gameObject;
         }
+
+        //Debug.LogFormat("[MakeInvenSlotArray] 여기에 비어있나?? {0}", invenSlots.Length);
+    }
+
+    private void MakeSlotImageArray() 
+    {
+        slotImages = new GameObject[(invenSlots.Length) * (invenSlots[0].transform.childCount)];
+
+        for (int j = 0; j < invenSlots.Length; j++)
+        {
+            for (int i = 0; i < invenSlots[j].transform.childCount; i++)
+            {
+                slotImages[(invenSlots[0].transform.childCount * j) + i] = invenSlots[j].transform.GetChild(i).gameObject;
+            }
+        }
     }
 
     private void TurnAllInvenSlotDefault() 
@@ -60,22 +76,13 @@ public class UI_DragZone_Inven : MonoBehaviour
         for (int i = 0; i < invenSlots.Length; i++)
         {
             invenSlots[i].tag = "ItemSlot";
-            invenSlots[i].GetComponent<Image>().sprite = null;
+            slotImages[i].GetComponent<Image>().sprite = null;
         }
-    }
-
-    private void PutItemDataToSlot() 
-    {
-        int randomIdx = Random.Range(0, itemBuilder.csvConverter.csvRowCount);
-
-         //= itemBuilder.items[randomIdx].tag;
-
-    
     }
 
     private void MakeItemAndRemove()
     {
-        int randomIdx_ = Random.Range(0, itemBuilder.csvConverter.csvRowCount);
+        int randomIdx_ = Random.Range(0, itemBuilder.csvConverter.csvRowCount - 1);
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -84,18 +91,8 @@ public class UI_DragZone_Inven : MonoBehaviour
             {
                 invenSlots[0].tag = itemBuilder.items[randomIdx_].tag;
                 invenSlots[0].name = itemBuilder.items[randomIdx_].itemName;
-                //AssetBundleRequest LoadAssetAsync("Assets/Shim/Resources/Sprites/Items/Items/"
-                //    + itemBuilder.items[randomIdx].itemType, itemBuilder.items[randomIdx].itemSprit);
-
-
-
-                //invenSlots[0].GetComponent<Image>().sprite = 
-                //            invenSlots[0].GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>
-                //("Assets/Shim/Resources/Sprites/Items/Items/" + itemBuilder.items[randomIdx].itemType + "/"
-                //+ itemBuilder.items[randomIdx].itemSprite + "png");
-
-
-                //invenSlots[0].GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Shim/Resources/Sprites/Items/Items" + 
+                slotImages[0].GetComponent<Image>().color = Color.white;
+                slotImages[0].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
             }
             // 인벤 꽉 찼을 때
             else if (invenSlots[0].tag != "ItemSlot" 
