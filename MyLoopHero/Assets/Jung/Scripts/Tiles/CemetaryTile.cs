@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CemetaryTile : SpawnTile
+public class CemetaryTile : MonoBehaviour
 {
     void Start()
     {

@@ -99,7 +99,7 @@ public class ItemBuilder : MonoBehaviour
             // itemType은 폴더명과 똑같이 만들면 편하다.
             if (items[i].itemType == "Weapon")
             {
-                items[i].tag = "Sword";
+                items[i].tag = "Weapon";
             }
             else if (items[i].itemType == "Ring")
             {

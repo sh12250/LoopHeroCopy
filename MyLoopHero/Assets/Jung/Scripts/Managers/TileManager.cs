@@ -61,6 +61,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = cemetary[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.GetComponent<RoadTile>().enabled = false;
                     tile_.AddComponent<CemetaryTile>();
                 }
 
@@ -70,6 +71,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = village[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.GetComponent<RoadTile>().enabled = false;
                 }
 
                 break;
@@ -78,6 +80,8 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = bush[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.GetComponent<RoadTile>().enabled = false;
+                    tile_.AddComponent<BushTile>();
                 }
 
                 break;
@@ -86,6 +90,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = cornfield[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.GetComponent<RoadTile>().enabled = false;
                 }
 
                 break;
@@ -94,6 +99,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = swamp[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
+                    tile_.GetComponent<RoadTile>().enabled = false;
                 }
 
                 break;

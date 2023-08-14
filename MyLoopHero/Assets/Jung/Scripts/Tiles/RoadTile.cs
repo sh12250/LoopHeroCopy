@@ -2,35 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadTile : SpawnTile
+public class RoadTile : MonoBehaviour
 {
     [SerializeField]
-    private Sprite redWolf;
+    private Sprite slime;
+
+    public int spawnRate;
+    public int spawnCycle;
+    public int currDay;
+
+    public int monsterCnt;
 
     private void Start()
     {
         spawnRate = 5;
-        spawnTime = 1;
+        spawnCycle = 1;
         currDay = GameManager.instance.dayCnt;
+
+        monsterCnt = 0;
     }
 
     private void Update()
     {
-        if (GameManager.instance.dayCnt == currDay + spawnTime)
+        if (GameManager.instance.dayCnt == currDay + spawnCycle)
         {
             currDay = GameManager.instance.dayCnt;
-            if (Random.Range(0, 100) <= spawnRate)
+
+            if (Random.Range(0, 100) <= spawnRate && monsterCnt <= 4)
             {
-                 //SpawnMonster(transform);
+                GameObject slime_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
+
+                monsterCnt += 1;
             }
         }
-    }
-
-    public override void SpawnMonster(Transform parent_)
-    {
-        base.SpawnMonster(parent_);
-
-        // 몬스터 능력치 조정(할 예정)
-        // 몬스터 능력치 조정(할 예정)
     }
 }
