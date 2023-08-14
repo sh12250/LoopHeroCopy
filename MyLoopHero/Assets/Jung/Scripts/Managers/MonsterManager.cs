@@ -24,7 +24,6 @@ public class MonsterManager : MonoBehaviour
     public GameObject SpawnMonster(Transform parent_)
     {
         GameObject monster_ = Instantiate(monsterPrefab, parent_);
-        monster_.transform.localPosition = Vector3.zero;
         return monster_;
     }
 }

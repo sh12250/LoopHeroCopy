@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BushTile : Monster
+public class SwampTile : Monster
 {
     private void Start()
     {
-        Init(2, GameManager.instance.dayCnt, 0);
+        Init(3, GameManager.instance.dayCnt, 0);
     }
 
     private void Update()
@@ -20,9 +19,9 @@ public class BushTile : Monster
             {
                 monsterCnt += 1;
 
-                GameObject redWolf_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
-                redWolf_.GetComponentInChildren<Animator>().SetTrigger("RedWolf");
-                SetMonsterPosition(redWolf_, monsterCnt);
+                GameObject moskito_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
+                moskito_.GetComponentInChildren<Animator>().SetTrigger("Moskito");
+                SetMonsterPosition(moskito_, monsterCnt);
             }
         }
     }

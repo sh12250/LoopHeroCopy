@@ -22,8 +22,6 @@ public class TileManager : MonoBehaviour
     public Sprite safe;
     public Sprite grass;
 
-    private string scriptNames;
-
     private void Awake()
     {
         if (instance == null || instance == default)
@@ -34,16 +32,6 @@ public class TileManager : MonoBehaviour
         {
             Debug.LogWarning("TileManager가 너무 많습니다");
         }
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
     }
 
     public void ChangeTile(GameObject card_, GameObject tile_)
@@ -100,19 +88,52 @@ public class TileManager : MonoBehaviour
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = swamp[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
                     tile_.GetComponent<RoadTile>().enabled = false;
+                    tile_.AddComponent<SwampTile>();
                 }
 
                 break;
             case "COCOON":
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = cocoon;
+                    RememberTile(tile_, card_.name);
+                }
+
+                break;
             case "MANSION":
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = mansion;
+                    RememberTile(tile_, card_.name);
+                }
+
+                break;
             case "BATTLEFIELD":
-            case "LIGHTHOUSE":
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = battlefield;
+                    RememberTile(tile_, card_.name);
+                }
+
+                break;
             case "LAMP":
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = lamp;
+                    RememberTile(tile_, card_.name);
+                }
+
+                break;
             case "BLOODYBUSH":
-                // "SideTile"
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = bloodybush;
+                    RememberTile(tile_, card_.name);
+                }
+
                 break;
             case "ROCK":
-                if (tile_.name == "VoidTile")
+                if (tile_.tag.Equals("EtcTile"))
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = rock;
                     RememberTile(tile_, card_.name);
@@ -120,7 +141,7 @@ public class TileManager : MonoBehaviour
 
                 break;
             case "MOUNT":
-                if (tile_.name == "VoidTile")
+                if (tile_.tag.Equals("EtcTile"))
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = mount;
                     RememberTile(tile_, card_.name);
@@ -128,7 +149,7 @@ public class TileManager : MonoBehaviour
 
                 break;
             case "SAFE":
-                if (tile_.name == "VoidTile")
+                if (tile_.tag.Equals("EtcTile"))
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = safe;
                     RememberTile(tile_, card_.name);
@@ -136,9 +157,17 @@ public class TileManager : MonoBehaviour
 
                 break;
             case "GRASS":
-                if (tile_.name == "VoidTile")
+                if (tile_.tag.Equals("EtcTile"))
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = grass;
+                    RememberTile(tile_, card_.name);
+                }
+
+                break;
+            case "LIGHTHOUSE":
+                if (tile_.tag.Equals("SideTile"))
+                {
+                    tile_.GetComponentInChildren<SpriteRenderer>().sprite = lighthouse;
                     RememberTile(tile_, card_.name);
                 }
 

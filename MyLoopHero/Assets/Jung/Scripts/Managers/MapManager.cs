@@ -70,11 +70,6 @@ public class MapManager : MonoBehaviour
         CreateMap();
     }
 
-    void Update()
-    {
-
-    }
-
     private void CreateMap()
     {
         voidTiles = new List<GameObject>();
@@ -157,6 +152,93 @@ public class MapManager : MonoBehaviour
 
         playerInMap.transform.localPosition = passPoints[0].transform.localPosition;
         playerInMap.GetComponent<PlayerInMap>().enabled = true;
+
+        SetSideTiles();
+    }
+
+    // RoadTile Tag이 아닌 타일의 8방위로 인접한 타일이 하나라도 RoadTile Tag라면 SideTile로 변경
+    private void SetSideTiles()
+    {
+        for (int i = 0; i < voidTiles.Count; i++)
+        {
+            int y_ = i / MAP_WIDTH;
+            int x_ = i % MAP_WIDTH;
+
+            if (!voidTiles[i].CompareTag("RoadTile") && !voidTiles[i].CompareTag("SideTile"))
+            {
+                if (y_ - 1 >= 0)
+                {
+                    if (x_ - 1 >= 0)
+                    {
+                        if (voidTiles[(y_ - 1) * MAP_WIDTH + x_ - 1].CompareTag("RoadTile"))
+                        {
+                            voidTiles[i].tag = "SideTile";
+                            continue;
+                        }
+                    }
+
+                    if (voidTiles[(y_ - 1) * MAP_WIDTH + x_].CompareTag("RoadTile"))
+                    {
+                        voidTiles[i].tag = "SideTile";
+                        continue;
+                    }
+
+                    if (x_ + 1 < MAP_WIDTH)
+                    {
+                        if (voidTiles[(y_ - 1) * MAP_WIDTH + x_ + 1].CompareTag("RoadTile"))
+                        {
+                            voidTiles[i].tag = "SideTile";
+                            continue;
+                        }
+                    }
+                }
+
+                if (x_ - 1 >= 0)
+                {
+                    if (voidTiles[y_ * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile"))
+                    {
+                        voidTiles[i].tag = "SideTile";
+                        continue;
+                    }
+                }
+
+                if (x_ + 1 < MAP_WIDTH)
+                {
+                    if (voidTiles[y_ * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile"))
+                    {
+                        voidTiles[i].tag = "SideTile";
+                        continue;
+                    }
+                }
+
+                if (y_ + 1 < MAP_LENGTH)
+                {
+                    if (x_ - 1 >= 0)
+                    {
+                        if (voidTiles[(y_ + 1) * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile"))
+                        {
+                            voidTiles[i].tag = "SideTile";
+                            continue;
+                        }
+                    }
+
+                    if (voidTiles[(y_ + 1) * MAP_WIDTH + x_].tag.Equals("RoadTile"))
+                    {
+                        voidTiles[i].tag = "SideTile";
+                        continue;
+                    }
+
+                    if (x_ + 1 < MAP_WIDTH)
+                    {
+                        if (voidTiles[(y_ + 1) * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile"))
+                        {
+                            voidTiles[i].tag = "SideTile";
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // 수평길

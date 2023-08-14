@@ -11,10 +11,10 @@ public class PlayerInMap : MonoBehaviour
     int startIdx_;
     int targetIdx_;
 
-    [Header("For Test")]
-    [Space(2)]
+    //[Header("For Test")]
+    //[Space(2)]
     [SerializeField]
-    float moveSpeed;
+    private float moveSpeed;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class PlayerInMap : MonoBehaviour
         startIdx_ = 0;
         targetIdx_ = 1;
 
-        moveSpeed = 0.5f;
+        moveSpeed = 1f;
     }
 
     // Update is called once per frame

@@ -2,24 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadTile : MonoBehaviour
+public class RoadTile : Monster
 {
-    [SerializeField]
-    private Sprite slime;
-
     public int spawnRate;
-    public int spawnCycle;
-    public int currDay;
-
-    public int monsterCnt;
 
     private void Start()
     {
         spawnRate = 5;
-        spawnCycle = 1;
-        currDay = GameManager.instance.dayCnt;
-
-        monsterCnt = 0;
+        Init(1, GameManager.instance.dayCnt, 0);
     }
 
     private void Update()
@@ -28,11 +18,12 @@ public class RoadTile : MonoBehaviour
         {
             currDay = GameManager.instance.dayCnt;
 
-            if (Random.Range(0, 100) <= spawnRate && monsterCnt <= 4)
+            if (Random.Range(0, 100) <= spawnRate && monsterCnt < 4)
             {
-                GameObject slime_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
-
                 monsterCnt += 1;
+
+                GameObject slime_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
+                SetMonsterPosition(slime_, monsterCnt);
             }
         }
     }
