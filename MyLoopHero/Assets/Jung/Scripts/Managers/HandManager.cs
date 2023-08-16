@@ -63,7 +63,6 @@ public class HandManager : MonoBehaviour
                     case "COCOON":
                     case "MANSION":
                     case "BATTLEFIELD":
-                    case "LIGHTHOUSE":
                     case "LAMP":
                     case "BLOODYBUSH":
                         BuildOnMap(myCard, "SideTile");
@@ -72,6 +71,7 @@ public class HandManager : MonoBehaviour
                     case "MOUNT":
                     case "SAFE":
                     case "GRASS":
+                    case "LIGHTHOUSE":
                         BuildOnMap(myCard, "EtcTile");
                         break;
                 }

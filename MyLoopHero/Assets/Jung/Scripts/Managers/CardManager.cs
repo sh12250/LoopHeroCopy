@@ -107,63 +107,63 @@ public class CardManager : MonoBehaviour
 
         #region °¢ Ä«µå »ý¼º È®·ü
         if (randNum >= 0 && randNum < 4)
-        {   // ¸Á°¢ 4
+        {   // ¸Á°¢ 2
             theTile_ = Instantiate(mightCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[0];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[0];
             theTile_.name = CardName.OBLIVION.ToString();
         }
         else if (randNum >= 4 && randNum < 14)
-        {   // ¹¦Áö 10
+        {   // ¹¦Áö 6
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[1];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[1];
             theTile_.name = CardName.CEMETARY.ToString();
         }
         else if (randNum >= 14 && randNum < 24)
-        {   // ¸¶À» 10
+        {   // ¸¶À» 6
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[2];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[2];
             theTile_.name = CardName.VILLAGE.ToString();
         }
         else if (randNum >= 24 && randNum < 34)
-        {   // ¼öÇ® 10
+        {   // ¼öÇ® 6
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[3];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[3];
             theTile_.name = CardName.BUSH.ToString();
         }
         else if (randNum >= 34 && randNum < 44)
-        {   // ¹Ð¹ç 10
+        {   // ¹Ð¹ç 6
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[4];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[4];
             theTile_.name = CardName.CORNFIELD.ToString();
         }
-        //else if (randNum >= 42 && randNum < 52)
-        //{   // °Å¹Ì °íÄ¡ 10
-        //    theTile_ = Instantiate(sideCardBase, parent_);
-        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[5];
-        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[5];
-        //    theTile_.name = CardName.COCOON.ToString();
-        //}
-        //else if (randNum >= 52 && randNum < 60)
-        //{   // ÈíÇ÷±Í ÀúÅÃ 8
-        //    theTile_ = Instantiate(sideCardBase, parent_);
-        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[6];
-        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[6];
-        //    theTile_.name = CardName.MANSION.ToString();
-        //}
-        //else if (randNum >= 60 && randNum < 70)
-        //{   // ÀüÀå 10
-        //    theTile_ = Instantiate(sideCardBase, parent_);
-        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[7];
-        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[7];
-        //    theTile_.name = CardName.BATTLEFIELD.ToString();
-        //}
+        else if (randNum >= 42 && randNum < 52)
+        {   // °Å¹Ì °íÄ¡ 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[5];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[5];
+            theTile_.name = CardName.COCOON.ToString();
+        }
+        else if (randNum >= 52 && randNum < 60)
+        {   // ÈíÇ÷±Í ÀúÅÃ 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[6];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[6];
+            theTile_.name = CardName.MANSION.ToString();
+        }
+        else if (randNum >= 60 && randNum < 70)
+        {   // ÀüÀå 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[7];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[7];
+            theTile_.name = CardName.BATTLEFIELD.ToString();
+        }
         else if (randNum >= 44 && randNum < 54)
-        {   // µî´ë 10
+        {   // µî´ë 4
             theTile_ = Instantiate(etcCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[8];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[8];
@@ -183,29 +183,29 @@ public class CardManager : MonoBehaviour
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[10];
             theTile_.name = CardName.MOUNT.ToString();
         }
-        //else if (randNum >= 92 && randNum < 100)
-        //{   // ÇÇÅõ¼ºÀÌ ¼öÇ® 8
-        //    theTile_ = Instantiate(sideCardBase, parent_);
-        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[11];
-        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[11];
-        //    theTile_.name = CardName.BLOODYBUSH.ToString();
-        //}
-        //else if (randNum >= 92 && randNum < 100)
-        //{   // °¡·Îµî 8
-        //    theTile_ = Instantiate(sideCardBase, parent_);
-        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[12];
-        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[12];
-        //    theTile_.name = CardName.LAMP.ToString();
-        //}
+        else if (randNum >= 92 && randNum < 100)
+        {   // ÇÇÅõ¼ºÀÌ ¼öÇ® 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[11];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[11];
+            theTile_.name = CardName.BLOODYBUSH.ToString();
+        }
+        else if (randNum >= 92 && randNum < 100)
+        {   // °¡·Îµî 6
+            theTile_ = Instantiate(sideCardBase, parent_);
+            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[12];
+            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[12];
+            theTile_.name = CardName.LAMP.ToString();
+        }
         else if (randNum >= 74 && randNum < 84)
-        {   // ´Ë 10
+        {   // ´Ë 6
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[13];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[13];
             theTile_.name = CardName.SWAMP.ToString();
         }
         else if (randNum >= 84 && randNum < 90)
-        {   // ±Ý°í 6
+        {   // ±Ý°í 4
             theTile_ = Instantiate(etcCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[14];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[14];

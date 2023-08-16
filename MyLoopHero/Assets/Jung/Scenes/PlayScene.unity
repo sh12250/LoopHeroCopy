@@ -2803,7 +2803,6 @@ GameObject:
   - component: {fileID: 236397316}
   - component: {fileID: 236397319}
   - component: {fileID: 236397318}
-  - component: {fileID: 236397317}
   m_Layer: 0
   m_Name: PlayerInMap
   m_TagString: Untagged
@@ -2832,33 +2831,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.5, y: 10.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &236397317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236397315}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!222 &236397318
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2881,6 +2853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: []
   moveSpeed: 1
+  moveDist: 0
 --- !u!4 &240596951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -7428,7 +7401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.90884393, y: 0.5401697}
   m_AnchorMax: {x: 0.90884393, y: 0.5401697}
-  m_AnchoredPosition: {x: 97, y: -1}
+  m_AnchoredPosition: {x: 96.999985, y: -1}
   m_SizeDelta: {x: 194, y: 146}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &649984503
@@ -16644,7 +16617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.90884393, y: 0.81777984}
   m_AnchorMax: {x: 0.90884393, y: 0.81777984}
-  m_AnchoredPosition: {x: 105, y: -1}
+  m_AnchoredPosition: {x: 104.999985, y: -1}
   m_SizeDelta: {x: 210, y: 156}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1534078316
@@ -17195,6 +17168,7 @@ MonoBehaviour:
   dayGauge: {fileID: 2016034400}
   globalTime: 0
   dayCnt: 0
+  loopCnt: 0
 --- !u!4 &1601267795
 Transform:
   m_ObjectHideFlags: 0

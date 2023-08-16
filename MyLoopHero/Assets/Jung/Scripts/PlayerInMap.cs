@@ -16,6 +16,10 @@ public class PlayerInMap : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
 
+    private Vector2 currPos;
+    [SerializeField]
+    private float moveDist;
+
     private void Start()
     {
         path = new List<GameObject>();
@@ -25,12 +29,43 @@ public class PlayerInMap : MonoBehaviour
         targetIdx_ = 1;
 
         moveSpeed = 1f;
+
+        currPos = transform.localPosition;
+        moveDist = 0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Patrolling();
+
+        moveDist = ((Vector2)transform.localPosition - currPos).magnitude;
+
+        if (moveDist >= 1f)
+        {
+            RaycastHit2D hit_Tiles = GameManager.instance.GetHit(transform.position, "Tiles");
+
+            if (hit_Tiles.collider != null)
+            {
+                currPos = hit_Tiles.collider.gameObject.transform.localPosition;
+
+                Debug.Log(hit_Tiles.collider.gameObject.transform.localPosition.x);
+                Debug.Log(hit_Tiles.collider.gameObject.transform.localPosition.y);
+
+                if (hit_Tiles.collider.GetComponent<RoadTile>() != null)
+                {
+                    if (hit_Tiles.collider.GetComponent<RoadTile>().GetMonsterCnt() > 0)
+                    {
+                        // 전투창 열람
+                        // Time.timeScale = 0;
+                    }
+                }
+
+                if (hit_Tiles.collider.name == "CampsiteTile")
+                {
+                    GameManager.instance.loopCnt += 1;
+                }
+            }
+        }
     }
 
     // 목적지를 향해 Y축 이동 후 X축 이동하는 함수

@@ -34,6 +34,43 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    // 인접한 로드 타일 체크해서 리스트로 반환하는 함수들
+    // 십자 체크
+    public List<GameObject> FindRoadTiles(GameObject currTile_)
+    {
+        List<GameObject> allTiles_ = MapManager.instance.GetVoidTiles();
+        int idx_ = allTiles_.IndexOf(currTile_);
+        int y_ = idx_ / 21;
+        int x_ = idx_ % 21;
+
+        List<GameObject> roadTiles_ = new List<GameObject>();
+
+        if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
+        {
+            roadTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+        }
+        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+        {
+            roadTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+        }
+        if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+        {
+            roadTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+        }
+        if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
+        {
+            roadTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+        }
+
+        if (currTile_.CompareTag("RoadTile"))
+        {
+            roadTiles_.Add(currTile_);
+        }
+
+        return roadTiles_;
+    }
+    // 인접한 로드 타일 체크해서 리스트로 반환하는 함수들
+
     public void ChangeTile(GameObject card_, GameObject tile_)
     {
         if (tile_ == null || card_ == null) { return; }
@@ -49,8 +86,6 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = cemetary[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
-                    tile_.GetComponent<RoadTile>().enabled = false;
-                    tile_.AddComponent<CemetaryTile>();
                 }
 
                 break;
@@ -59,7 +94,6 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = village[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
-                    tile_.GetComponent<RoadTile>().enabled = false;
                 }
 
                 break;
@@ -68,8 +102,6 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = bush[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
-                    tile_.GetComponent<RoadTile>().enabled = false;
-                    tile_.AddComponent<BushTile>();
                 }
 
                 break;
@@ -78,7 +110,6 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = cornfield[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
-                    tile_.GetComponent<RoadTile>().enabled = false;
                 }
 
                 break;
@@ -87,8 +118,6 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = swamp[SelectSprite(tile_)];
                     RememberTile(tile_, card_.name);
-                    tile_.GetComponent<RoadTile>().enabled = false;
-                    tile_.AddComponent<SwampTile>();
                 }
 
                 break;

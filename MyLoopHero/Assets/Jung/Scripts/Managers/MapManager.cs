@@ -585,4 +585,14 @@ public class MapManager : MonoBehaviour
         return temp_;
         // 임시 List 반환
     }       // SortTiles(List<GameObject> tiles_)
+
+    public List<GameObject> GetVoidTiles()
+    {
+        if (voidTiles == null || voidTiles == default)
+        {
+            return default;
+        }
+
+        return voidTiles;
+    }
 }
