@@ -35,39 +35,74 @@ public class TileManager : MonoBehaviour
     }
 
     // 인접한 로드 타일 체크해서 리스트로 반환하는 함수들
-    // 십자 체크
-    public List<GameObject> FindRoadTiles(GameObject currTile_)
+    // 3x3 체크
+    public void FindRoadTiles_Around(List<GameObject> targetTiles_, GameObject currTile_)
     {
         List<GameObject> allTiles_ = MapManager.instance.GetVoidTiles();
         int idx_ = allTiles_.IndexOf(currTile_);
         int y_ = idx_ / 21;
         int x_ = idx_ % 21;
 
-        List<GameObject> roadTiles_ = new List<GameObject>();
-
+        if (allTiles_[(y_ - 1) * 21 + x_ - 1].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ - 1]);
+        }
         if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
         {
-            roadTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
         }
-        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+        if (allTiles_[(y_ - 1) * 21 + x_ + 1].CompareTag("RoadTile"))
         {
-            roadTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ + 1]);
         }
+
         if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
         {
-            roadTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+            targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
         }
         if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
         {
-            roadTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+            targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
         }
 
-        if (currTile_.CompareTag("RoadTile"))
+        if (allTiles_[(y_ + 1) * 21 + x_ - 1].CompareTag("RoadTile"))
         {
-            roadTiles_.Add(currTile_);
+            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ - 1]);
         }
+        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+        }
+        if (allTiles_[(y_ + 1) * 21 + x_ + 1].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ + 1]);
+        }
+    }
 
-        return roadTiles_;
+    // 십자 체크
+    public void FindRoadTiles_Cross(List<GameObject> targetTiles_, GameObject currTile_)
+    {
+        List<GameObject> allTiles_ = MapManager.instance.GetVoidTiles();
+        int idx_ = allTiles_.IndexOf(currTile_);
+        int y_ = idx_ / 21;
+        int x_ = idx_ % 21;
+
+        if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+        }
+        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+        }
+        if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+        }
+        if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
+        {
+            targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+        }
     }
     // 인접한 로드 타일 체크해서 리스트로 반환하는 함수들
 

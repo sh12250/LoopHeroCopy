@@ -8,11 +8,16 @@ public class RoadTile : MonoBehaviour
     private string nameSave;
 
     private int spawnRate;
-    private int spawnCycle;
-    private int currDay;
+    public int spawnCycle;
+    public int currDay;
 
     private string monsterName;
-    private int monsterCnt;
+    public int monsterCnt_Max;
+    public int monsterCnt;
+
+    public int lampCnt;
+
+    private List<GameObject> targetTiles;
 
     private void Start()
     {
@@ -20,7 +25,13 @@ public class RoadTile : MonoBehaviour
 
         spawnRate = 5;
         Init(1, GameManager.instance.dayCnt, "Slime");
+        monsterCnt_Max = 4;
         monsterCnt = 0;
+
+        lampCnt = 0;
+
+        targetTiles = new List<GameObject>();
+        targetTiles.Add(gameObject);
     }
 
     private void Update()
@@ -40,6 +51,7 @@ public class RoadTile : MonoBehaviour
                     break;
                 case "BUSH":
                     Init(2, GameManager.instance.dayCnt, "RedWolf");
+                    TileManager.instance.FindRoadTiles_Cross(targetTiles, gameObject);
                     break;
                 case "CEMETARY":
                     Init(3, GameManager.instance.dayCnt, "Skeleton");
@@ -47,7 +59,7 @@ public class RoadTile : MonoBehaviour
                 case "SWAMP":
                     Init(3, GameManager.instance.dayCnt, "Moskito");
                     break;
-                default:
+                default:    // 이름에 Road가 들어간 타일
                     Init(1, GameManager.instance.dayCnt, "Slime");
                     break;
             }
@@ -65,7 +77,7 @@ public class RoadTile : MonoBehaviour
             switch (monsterName)
             {
                 case "Slime":
-                    if (Random.Range(0, 100) <= spawnRate && monsterCnt < 4)
+                    if (Random.Range(0, 100) <= spawnRate && monsterCnt + lampCnt < monsterCnt_Max)
                     {
                         monsterCnt += 1;
 
@@ -73,8 +85,20 @@ public class RoadTile : MonoBehaviour
                         SetMonsterPosition(slime_);
                     }
                     break;
+                case "RedWolf":
+                    GameObject targetTile_ = targetTiles[Random.Range(0, targetTiles.Count)];
+
+                    if (targetTile_.GetComponent<RoadTile>().monsterCnt + targetTile_.GetComponent<RoadTile>().lampCnt < monsterCnt_Max)
+                    {
+                        targetTile_.GetComponent<RoadTile>().monsterCnt += 1;
+
+                        GameObject monster_ = MonsterManager.instance.SpawnMonster(targetTile_.transform);
+                        monster_.GetComponentInChildren<Animator>().SetTrigger(monsterName_);
+                        targetTile_.GetComponent<RoadTile>().SetMonsterPosition(monster_);
+                    }
+                    break;
                 default:
-                    if (monsterCnt < 4)
+                    if (monsterCnt + lampCnt < monsterCnt_Max)
                     {
                         monsterCnt += 1;
 
@@ -87,7 +111,7 @@ public class RoadTile : MonoBehaviour
         }
     }
 
-    private void SetMonsterPosition(GameObject monster_)
+    public void SetMonsterPosition(GameObject monster_)
     {
         switch (monsterCnt)
         {

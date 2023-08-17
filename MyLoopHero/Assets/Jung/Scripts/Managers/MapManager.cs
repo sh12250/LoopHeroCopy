@@ -168,28 +168,11 @@ public class MapManager : MonoBehaviour
             {
                 if (y_ - 1 >= 0)
                 {
-                    if (x_ - 1 >= 0)
-                    {
-                        if (voidTiles[(y_ - 1) * MAP_WIDTH + x_ - 1].CompareTag("RoadTile"))
-                        {
-                            voidTiles[i].tag = "SideTile";
-                            continue;
-                        }
-                    }
-
                     if (voidTiles[(y_ - 1) * MAP_WIDTH + x_].CompareTag("RoadTile"))
                     {
                         voidTiles[i].tag = "SideTile";
+                        voidTiles[i].AddComponent<SideTile>();
                         continue;
-                    }
-
-                    if (x_ + 1 < MAP_WIDTH)
-                    {
-                        if (voidTiles[(y_ - 1) * MAP_WIDTH + x_ + 1].CompareTag("RoadTile"))
-                        {
-                            voidTiles[i].tag = "SideTile";
-                            continue;
-                        }
                     }
                 }
 
@@ -198,6 +181,7 @@ public class MapManager : MonoBehaviour
                     if (voidTiles[y_ * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile"))
                     {
                         voidTiles[i].tag = "SideTile";
+                        voidTiles[i].AddComponent<SideTile>();
                         continue;
                     }
                 }
@@ -207,34 +191,18 @@ public class MapManager : MonoBehaviour
                     if (voidTiles[y_ * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile"))
                     {
                         voidTiles[i].tag = "SideTile";
+                        voidTiles[i].AddComponent<SideTile>();
                         continue;
                     }
                 }
 
                 if (y_ + 1 < MAP_LENGTH)
                 {
-                    if (x_ - 1 >= 0)
-                    {
-                        if (voidTiles[(y_ + 1) * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile"))
-                        {
-                            voidTiles[i].tag = "SideTile";
-                            continue;
-                        }
-                    }
-
                     if (voidTiles[(y_ + 1) * MAP_WIDTH + x_].tag.Equals("RoadTile"))
                     {
                         voidTiles[i].tag = "SideTile";
+                        voidTiles[i].AddComponent<SideTile>();
                         continue;
-                    }
-
-                    if (x_ + 1 < MAP_WIDTH)
-                    {
-                        if (voidTiles[(y_ + 1) * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile"))
-                        {
-                            voidTiles[i].tag = "SideTile";
-                            continue;
-                        }
                     }
                 }
             }
