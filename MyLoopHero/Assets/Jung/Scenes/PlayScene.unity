@@ -4151,9 +4151,10 @@ GameObject:
   - component: {fileID: 341586263}
   - component: {fileID: 341586266}
   - component: {fileID: 341586265}
+  - component: {fileID: 341586267}
   m_Layer: 18
   m_Name: Equip_Slot_Weapon
-  m_TagString: Effect
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4265,6 +4266,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &341586267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341586261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &347970059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -7401,7 +7414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.90884393, y: 0.5401697}
   m_AnchorMax: {x: 0.90884393, y: 0.5401697}
-  m_AnchoredPosition: {x: 96.999985, y: -1}
+  m_AnchoredPosition: {x: 97, y: -1}
   m_SizeDelta: {x: 194, y: 146}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &649984503
@@ -12685,9 +12698,10 @@ GameObject:
   - component: {fileID: 1171482234}
   - component: {fileID: 1171482237}
   - component: {fileID: 1171482236}
+  - component: {fileID: 1171482238}
   m_Layer: 18
   m_Name: Equip_Slot_Ring
-  m_TagString: Effect
+  m_TagString: Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12799,6 +12813,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &1171482238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171482232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1172404126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13620,9 +13646,10 @@ GameObject:
   - component: {fileID: 1227192386}
   - component: {fileID: 1227192389}
   - component: {fileID: 1227192388}
+  - component: {fileID: 1227192390}
   m_Layer: 18
   m_Name: Equip_Slot_Shield
-  m_TagString: Effect
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13734,6 +13761,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &1227192390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227192384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1232216786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -16617,7 +16656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.90884393, y: 0.81777984}
   m_AnchorMax: {x: 0.90884393, y: 0.81777984}
-  m_AnchoredPosition: {x: 104.999985, y: -1}
+  m_AnchoredPosition: {x: 105, y: -1}
   m_SizeDelta: {x: 210, y: 156}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1534078316
@@ -23633,9 +23672,10 @@ GameObject:
   - component: {fileID: 2147413354}
   - component: {fileID: 2147413357}
   - component: {fileID: 2147413356}
+  - component: {fileID: 2147413358}
   m_Layer: 18
   m_Name: Equip_Slot_Armor
-  m_TagString: Effect
+  m_TagString: Armor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23747,6 +23787,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &2147413358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147413352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2952146616349034094
 PrefabInstance:
   m_ObjectHideFlags: 0
