@@ -210,10 +210,10 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     Debug.Log("여기 있니? 4");
                     UI_DragZone_Equip.equipSlots[3].GetComponent<Image>().sprite =
                             rectHolding.GetComponentsInChildren<Image>()[1].sprite;
-                    rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
+                    rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     rectHolding.anchoredPosition = itemDefaultLocation;
                     isDragging = false;

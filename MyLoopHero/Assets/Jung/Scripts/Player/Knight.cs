@@ -19,7 +19,7 @@ public class Knight : MonoBehaviour
     // 전체피해
     public float heroDamageAll;
     // 방어
-    public float heroDefence;
+    public float heroDefense;
     // 공속
     public float heroAttackSpeed;
     // 회피
@@ -45,7 +45,7 @@ public class Knight : MonoBehaviour
         heroEXP = 0;
         heroDamageMagic = 0;
         heroDamageAll = 0;
-        heroDefence = 0;
+        heroDefense = 0;
         heroAttackSpeed = 0;
         heroEvade = 0;
         heroCounter = 0;
