@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
         {
             globalTime = 0f;
             dayCnt += 1;
+
+            HandManager.instance.DrawCard();
+            HandManager.instance.DrawCard();
         }
 
         dayGauge.fillAmount = globalTime / DAYCYCLE;

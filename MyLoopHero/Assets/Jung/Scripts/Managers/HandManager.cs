@@ -46,7 +46,7 @@ public class HandManager : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            if (hit_Tiles.collider != null)
+            if (hit_Tiles.collider != null && myCard != null)
             {
                 switch (myCard.name)
                 {
@@ -81,7 +81,23 @@ public class HandManager : MonoBehaviour
         {
             if (hit_Tiles.collider != null)
             {
-                TileManager.instance.ChangeTile(hit_Cards.collider.gameObject, hit_Tiles.collider.gameObject);
+                string tileName = hit_Tiles.collider.name;
+                TileManager.instance.ChangeTile(myCard, hit_Tiles.collider.gameObject);
+                
+                if (tileName != hit_Tiles.collider.name)
+                {
+                    // 플레이된 카드 제거
+                    myHands.Remove(myCard);
+                    Destroy(myCard);
+                    myCard = null;
+                }
+
+                // 카드 제거시 실행
+                for (int i = 0; i < myHands.Count; i++)
+                {
+                    myHands[i].transform.localPosition = new Vector3(-451 + (i * 2 * 41), 0, 0);
+                    myHands[i].GetComponent<CardController>().OnHand();
+                }
             }
 
             if (myCard != null)
@@ -92,18 +108,15 @@ public class HandManager : MonoBehaviour
                 myHands[idx].transform.localPosition = new Vector3(-451 + (idx * 2 * 41), 0, 0);
                 myHands[idx].GetComponent<CardController>().OnHand();
             }
-            // 카드 제거시 실행
-            //for (int i = 0; i < myHands.Count; i++)
-            //{
-            //    myHands[i].transform.localPosition = new Vector3(-451 + (i * 2 * 41), 0, 0);
-            //    myHands[i].GetComponent<CardController>().OnHand();
-            //}
+
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            DrawCard();
-        }
+        // 디버그용
+        // 우클릭시 카드 생성
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    DrawCard();
+        //}
 
         /*
         OBLIVION = 0,
@@ -126,29 +139,23 @@ public class HandManager : MonoBehaviour
 
     }
 
-    private void DrawCard()
+    public void DrawCard()
     {
-        RaycastHit2D hit_Hands = GameManager.instance.GetHit("Hands");
+        GameObject obj = CardManager.instance.MakeCard();
+        myHands.Add(obj);
 
-        if (hit_Hands.collider != null)
+        if (myHands.Count >= 13)
         {
-            Debug.Log("hit 검출됨");
-            GameObject obj = CardManager.instance.MakeCard();
-            myHands.Add(obj);
+            Destroy(myHands[0]);
+            myHands.Remove(myHands[0]);
 
-            if (myHands.Count >= 13)
+            for (int i = 0; i < myHands.Count; i++)
             {
-                Destroy(myHands[0]);
-                myHands.Remove(myHands[0]);
-
-                for (int i = 0; i < myHands.Count; i++)
-                {
-                    myHands[i].transform.localPosition = new Vector3(-451 + (i * 2 * 41), 0, 0);
-                }
+                myHands[i].transform.localPosition = new Vector3(-451 + (i * 2 * 41), 0, 0);
             }
-
-            obj.transform.localPosition = new Vector3(-451 + (myHands.IndexOf(obj) * 2 * 41), 0, 0);
         }
+
+        obj.transform.localPosition = new Vector3(-451 + (myHands.IndexOf(obj) * 2 * 41), 0, 0);
     }
 
     private void BuildOnMap(GameObject card_)
