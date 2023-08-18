@@ -103,7 +103,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         if (Input.GetMouseButtonDown(0))
         {
             // 1. 만약 레이가 검출한 콜라이더가 있을 경우
-            if (hit_.collider.tag != null)
+            if (hit_.collider != null)
             {
                 // 지금 검출한 아이콘의 transform 값을 RectHolding에 저장한다.
                 rectHolding = (RectTransform)hit_.transform;
@@ -166,7 +166,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
             else if (hit_.collider != null)
             {
                 Debug.Log("여기 있니? 0");
-                if (hit_.collider.name == "Equip_Slot_Weapon")
+                if (hit_.collider.name == "Equip_Slot_Weapon" && rectHolding.CompareTag("Weapon"))
                 {
                     Debug.Log("여기 있니? 1");
                     UI_DragZone_Equip.equipSlots[0].GetComponent<Image>().sprite =
@@ -179,7 +179,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.anchoredPosition = itemDefaultLocation;
                     isDragging = false;
                 }
-                else if (hit_.collider.name == "Equip_Slot_Ring")
+                else if (hit_.collider.name == "Equip_Slot_Ring" && rectHolding.CompareTag("Ring"))
                 {
                     Debug.Log("여기 있니? 2");
                     UI_DragZone_Equip.equipSlots[1].GetComponent<Image>().sprite =
@@ -192,7 +192,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.anchoredPosition = itemDefaultLocation;
                     isDragging = false;
                 }
-                else if (hit_.collider.name == "Equip_Slot_Shield")
+                else if (hit_.collider.name == "Equip_Slot_Shield" && rectHolding.CompareTag("Shield"))
                 {
                     Debug.Log("여기 있니? 3");
                     UI_DragZone_Equip.equipSlots[2].GetComponent<Image>().sprite =
@@ -205,7 +205,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.anchoredPosition = itemDefaultLocation;
                     isDragging = false;
                 }
-                else if (hit_.collider.name == "Equip_Slot_Armor")
+                else if (hit_.collider.name == "Equip_Slot_Armor" && rectHolding.CompareTag("Armor"))
                 {
                     Debug.Log("여기 있니? 4");
                     UI_DragZone_Equip.equipSlots[3].GetComponent<Image>().sprite =
@@ -215,6 +215,11 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.tag = "Inven";
                     rectHolding.GetComponentsInChildren<Image>()[1].sprite = null;
 
+                    rectHolding.anchoredPosition = itemDefaultLocation;
+                    isDragging = false;
+                }
+                else
+                {
                     rectHolding.anchoredPosition = itemDefaultLocation;
                     isDragging = false;
                 }
