@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class ItemBuilder : MonoBehaviour
 {
@@ -99,7 +92,7 @@ public class ItemBuilder : MonoBehaviour
             // itemType은 폴더명과 똑같이 만들면 편하다.
             if (items[i].itemType == "Weapon")
             {
-                items[i].tag = "Sword";
+                items[i].tag = "Weapon";
             }
             else if (items[i].itemType == "Ring")
             {
@@ -131,8 +124,8 @@ public class ItemBuilder : MonoBehaviour
         // csv 파일을 준비할 때 Resources.LoadAll로 불러오는 순서를 고려해야함
         for (int i = 0; i < itemSprites.Length; i++)
         {
-            Debug.LogFormat("저장소 : {0}", itemSprites[i].name);
-            Debug.LogFormat("CSV : {0}", csvConverter.itemSprite[i]);
+            //Debug.LogFormat("저장소 : {0}", itemSprites[i].name);
+            //Debug.LogFormat("CSV : {0}", csvConverter.itemSprite[i]);
 
             if (itemSprites[i].name == csvConverter.itemSprite[i])
             {

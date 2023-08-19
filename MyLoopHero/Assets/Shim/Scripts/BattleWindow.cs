@@ -5,14 +5,21 @@ using UnityEngine;
 public class BattleWindow : MonoBehaviour
 {
     private GameObject battleWindow;
-    private GameObject[] battleWindwowChild;
-    private GameObject playerSprite;
 
+    private GameObject[] battleWindwowChild;
+    private List<GameObject> monsterCheck;
+
+    private GameObject playerSprite;
+    private GameObject monsterSprite1;
+    private GameObject monsterSprite2;
+    private GameObject monsterSprite3;
+    private GameObject monsterSprite4;
+    private GameObject monsterSprite5;
 
 
     private void Awake()
     {
-        
+        MakeEquipSlotArray();
     }
 
     #region FindingEquipSlot
@@ -25,14 +32,29 @@ public class BattleWindow : MonoBehaviour
         {
             battleWindwowChild[i] = gameObject.transform.GetChild(i).gameObject;
         }
+
+        playerSprite = gameObject.transform.Find("PlayerSprite").gameObject;
+        monsterSprite1 = gameObject.transform.Find("Monster1").gameObject;
+        monsterSprite2 = gameObject.transform.Find("Monster2").gameObject;
+        monsterSprite3 = gameObject.transform.Find("Monster3").gameObject;
+        monsterSprite4 = gameObject.transform.Find("Monster4").gameObject;
+        monsterSprite5 = gameObject.transform.Find("Monster5").gameObject;
     }
     #endregion
 
-    private void ShowBattleScreen() 
+    private void ShowBattleScreen()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) 
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            
+
         }
     }
+
+    private void CheckMonsterSprite() 
+    {
+
+
+
+    }
+
 }
