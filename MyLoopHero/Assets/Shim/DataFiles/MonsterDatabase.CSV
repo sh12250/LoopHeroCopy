@@ -1,0 +1,14 @@
+Monster_ID,Monster_Name,Monster_Sprite_Idle,Monster_Sprite_Charge,Monster_Sprite_Attack,Monster_Sprite_Hurt_0,Monster_Sprite_Hurt_1,Monster_Sprite_Death,Monster_HP,Monster_DMG,Monster_DEF,Monster_Speed,Monster_Evade,Monster_Regen,Monster_Itemchance,Monster_Itemtier
+100,slime,100_slime_idle,100_slime_charge,100_slime_attack,100_slime_hurt_0,100_slime_hurt_1,100_slime_death,13,3.3,0,0.6,0,0,35,1
+101,ratwolf,101_ratwolf_idle,101_ratwolf_charge,101_ratwolf_attack,101_ratwolf_hurt_0,101_ratwolf_hurt_1,101_ratwolf_death,16,3.6,0.2,0.75,10,0.5,40,1
+102,spider,102_spider_idle,102_spider_charge,102_spider_attack,102_spider_hurt_0,102_spider_hurt_1,102_spider_death,8,3.1,0.4,0.91,10,0,45,1
+103,skeleton,103_skeleton_idle,103_skeleton_charge,103_skeleton_attack,103_skeleton_hurt_0,103_skeleton_hurt_1,103_skeleton_death,12,9,3.5,0.3,5,0,85,3
+104,mimic,104_mimic_idle,104_mimic_charge,104_mimic_attack,104_mimic_hurt_0,104_mimic_hurt_1,104_mimic_death,26,7,0.5,0.7,5,0.3,40,5
+105,ghost,105_ghost_idle,105_ghost_charge,105_ghost_attack,105_ghost_hurt_0,105_ghost_hurt_1,105_ghost_death,3,3,3.5,0.85,30,0,0,2
+106,vampire,106_vampire_idle,106_vampire_charge,106_vampire_attack,106_vampire_hurt_0,106_vampire_hurt_1,106_vampire_death,18,5.8,0.5,0.5,10,0,45,3
+107,ghoul,107_ghoul_idle,107_ghoul_charge,107_ghoul_attack,107_ghoul_hurt_0,107_ghoul_hurt_1,107_ghoul_death,30,5,0,0.32,0,0,50,1
+108,harpy,108_harpy_idle,108_harpy_charge,108_harpy_attack,108_harpy_hurt_0,108_harpy_hurt_1,108_harpy_death,14,5.5,0.5,0.8,5,0.5,60,2
+109,gargoyle,109_gargoyle_idle,109_gargoyle_charge,109_gargoyle_attack,109_gargoyle_hurt_0,109_gargoyle_hurt_1,109_gargoyle_death,5,8,3.5,0.3,5,0,80,2
+110,fleshgolem,110_fleshgolem_idle,110_fleshgolem_charge,110_fleshgolem_attack,110_fleshgolem_hurt_0,110_fleshgolem_hurt_1,110_fleshgolem_death,36,13,0,0.3,0,0,65,5
+111,mosquito,111_mosquito_idle,111_mosquito_charge,111_mosquito_attack,111_mosquito_hurt_0,111_mosquito_hurt_1,111_mosquito_death,9,3,0,1.1,50,0.3,25,3
+112,scarecrow,112_scarecrow_idle,112_scarecrow_charge,112_scarecrow_attack,112_scarecrow_hurt_0,112_scarecrow_hurt_1,112_scarecrow_death,18,8.25,0.4,0.45,0,0,100,3
