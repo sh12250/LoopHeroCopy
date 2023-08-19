@@ -229,7 +229,7 @@ public class TileManager : MonoBehaviour
 
                 break;
             case "LIGHTHOUSE":
-                if (tile_.tag.Equals("SideTile") && tile_.name == "VoidTile")
+                if (tile_.tag.Equals("EtcTile") && tile_.name == "VoidTile")
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = lighthouse;
                     RememberTile(tile_, card_.name);

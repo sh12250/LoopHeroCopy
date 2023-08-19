@@ -11,6 +11,7 @@ public class TitleScene : MonoBehaviour
 
     private void Awake()
     {
+
         MakeTitleSceneArray();
         InitializeColorAndLocation();
 

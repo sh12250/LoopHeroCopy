@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class UIButton_Start : UIButton
 {
     private GameObject title;
-    private GameObject travelScene;
+    private GameObject travel;
     private Vector2 titleSceneMovePosition;
     private Vector2 travelSceneMovePosition;
 
@@ -21,7 +21,7 @@ public class UIButton_Start : UIButton
         // title
         title = button.transform.root.GetChild(0).gameObject;
         // campsite
-        travelScene = button.transform.root.GetChild(2).gameObject;
+        travel = button.transform.root.GetChild(2).gameObject;
         // 버튼을 눌렀을 때, title 장면이 움직일 위치
         titleSceneMovePosition = new Vector2(0f, 2000f);
         // 버튼을 눌렀을 때, campsite 장면이 움직일 위치
@@ -49,6 +49,6 @@ public class UIButton_Start : UIButton
 
         title.GetComponent<RectTransform>().anchoredPosition = titleSceneMovePosition;
         title.SetActive(false);
-        travelScene.GetComponent<RectTransform>().anchoredPosition = travelSceneMovePosition;
+        travel.GetComponent<RectTransform>().anchoredPosition = travelSceneMovePosition;
     }
 }

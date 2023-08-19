@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemBuilder : MonoBehaviour
@@ -51,7 +49,7 @@ public class ItemBuilder : MonoBehaviour
     {
         for (int i = 0; i < csvConverter.csvRowCount - 1; i++)
         {
-            items[i] = Instantiate(itemPrefab, new Vector3(20f, 0f, 0f), Quaternion.identity, this.transform).GetComponent<Item>();
+            items[i] = Instantiate(itemPrefab, new Vector3(0f, 50f, 0f), Quaternion.identity, this.transform).GetComponent<Item>();
         }
     }
 
