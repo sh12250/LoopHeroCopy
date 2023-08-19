@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 using System.Collections;
 using System.Collections.Generic;
-=======
->>>>>>> origin/Shim
 using UnityEngine;
 
 public class ItemBuilder : MonoBehaviour
