@@ -83,6 +83,8 @@ public class RoadTile : MonoBehaviour
 
                         GameObject slime_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
                         SetMonsterPosition(slime_);
+
+                        slime_.name = monsterName_;
                     }
                     break;
                 case "RedWolf":
@@ -95,6 +97,8 @@ public class RoadTile : MonoBehaviour
                         GameObject monster_ = MonsterManager.instance.SpawnMonster(targetTile_.transform);
                         monster_.GetComponentInChildren<Animator>().SetTrigger(monsterName_);
                         targetTile_.GetComponent<RoadTile>().SetMonsterPosition(monster_);
+
+                        monster_.name = monsterName_;
                     }
                     break;
                 default:
@@ -105,6 +109,8 @@ public class RoadTile : MonoBehaviour
                         GameObject monster_ = MonsterManager.instance.SpawnMonster(gameObject.transform);
                         monster_.GetComponentInChildren<Animator>().SetTrigger(monsterName_);
                         SetMonsterPosition(monster_);
+
+                        monster_.name = monsterName_;
                     }
                     break;
             }

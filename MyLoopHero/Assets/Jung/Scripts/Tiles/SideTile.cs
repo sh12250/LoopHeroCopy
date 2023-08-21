@@ -114,16 +114,9 @@ public class SideTile : MonoBehaviour
     {
         for (int i = 0; i < targetTiles_effect.Count; i++)
         {
-            targetTiles_effect[i].GetComponent<RoadTile>().lampCnt += 1;
-
-            if(targetTiles_effect == null)
+            if (targetTiles_effect[i].GetComponent<RoadTile>() != null)
             {
-                Debug.Log("이건가");
-            }
-
-            if (targetTiles_effect[i].GetComponent<RoadTile>() == null)
-            {
-                Debug.Log("이거네");
+                targetTiles_effect[i].GetComponent<RoadTile>().lampCnt += 1;
             }
         }
     }
