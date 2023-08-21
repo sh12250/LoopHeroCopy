@@ -73,8 +73,8 @@ public class ItemBuilder : MonoBehaviour
             items[i].itemLevel = csvConverter.itemLevel[i];
             items[i].itemMinDamage = csvConverter.itemMinDamage[i];
             items[i].itemMaxDamage = csvConverter.itemMaxDamage[i];
-            items[i].itemHP = csvConverter.itemHP[i];
             items[i].itemDefense = csvConverter.itemDefense[i];
+            items[i].itemHP = csvConverter.itemHP[i];
             items[i].itemMagicDamage = csvConverter.itemMagicDamage[i];
             items[i].itemAttackSpeed = csvConverter.itemAttackSpeed[i];
             items[i].itemDamageAll = csvConverter.itemDamageAll[i];

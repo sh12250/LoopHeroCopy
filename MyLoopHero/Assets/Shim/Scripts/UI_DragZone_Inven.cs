@@ -45,7 +45,7 @@ public class UI_DragZone_Inven : MonoBehaviour
     }
 
 
-    private void MakeInvenSlotArray() 
+    private void MakeInvenSlotArray()
     {
         dragZone_Inven = this.gameObject;
         invenSlots = new GameObject[dragZone_Inven.transform.childCount];
@@ -58,7 +58,7 @@ public class UI_DragZone_Inven : MonoBehaviour
         //Debug.LogFormat("[MakeInvenSlotArray] 여기에 비어있나?? {0}", invenSlots.Length);
     }
 
-    private void MakeSlotImageArray() 
+    private void MakeSlotImageArray()
     {
         slotImages = new GameObject[(invenSlots.Length) * (invenSlots[0].transform.childCount)];
 
@@ -71,7 +71,7 @@ public class UI_DragZone_Inven : MonoBehaviour
         }
     }
 
-    private void TurnAllInvenSlotDefault() 
+    private void TurnAllInvenSlotDefault()
     {
         for (int i = 0; i < invenSlots.Length; i++)
         {
@@ -87,25 +87,27 @@ public class UI_DragZone_Inven : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             // 인벤 비어있을 때
-            if (invenSlots[0].tag == "Inven") 
+            if (invenSlots[0].tag == "Inven")
             {
                 invenSlots[0].tag = itemBuilder.items[randomIdx_].tag;
                 invenSlots[0].name = itemBuilder.items[randomIdx_].itemName;
+                invenSlots[0].GetComponent<Item>().SetItem(itemBuilder.items[randomIdx_]);
+
                 slotImages[0].GetComponent<Image>().color = Color.white;
                 slotImages[0].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
             }
             // 인벤 꽉 찼을 때
-            else if (invenSlots[0].tag != "Inven" 
-                && invenSlots[invenSlots.Length - 1].tag != "Inven") 
+            else if (invenSlots[0].tag != "Inven"
+                && invenSlots[invenSlots.Length - 1].tag != "Inven")
             {
-                
-                
+
+
             }
             // 인벤 적당히 차 있을 때
             else if (invenSlots[0].tag != "Inven"
                 && invenSlots[invenSlots.Length - 1].tag == "Inven")
             {
-                
+
 
             }
         }
@@ -125,18 +127,10 @@ public class UI_DragZone_Inven : MonoBehaviour
                 }
             }
 
-
-
-
             // 인벤 비어있을 때
-            if (invenSlots[0].tag == "Inven") 
+            if (invenSlots[0].tag == "Inven")
             {
                 /*Do Nothing*/
-            }
-
-            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven") 
-            {
-            
             }
 
             else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven")
@@ -144,11 +138,14 @@ public class UI_DragZone_Inven : MonoBehaviour
 
             }
 
+            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven")
+            {
 
+            }
         }
     }
 
-    private void SwapItem(GameObject obj1_, GameObject obj2_) 
+    private void SwapItem(GameObject obj1_, GameObject obj2_)
     {
         GameObject tempObj_;
         tempObj_ = obj1_;

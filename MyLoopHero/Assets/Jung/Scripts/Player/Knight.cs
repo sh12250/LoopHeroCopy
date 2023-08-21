@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Knight : MonoBehaviour
 {
+    public int level;
     // 최대 체력 1렙 253
     public float heroHealthMax;
     // 체력
@@ -52,10 +53,54 @@ public class Knight : MonoBehaviour
         heroVamp = 0;
         heroRegen = 0;
         heroRecovery = 0;
+        // 나머지는 0
     }
 
-    public void AddStat(Item equip_)
+    public void AddStat(Item itemStat_)
     {
+        // 최대체력 더하기
+        heroHealthMax += itemStat_.itemHP;
+        // 체력도 같은 량 증가
+        heroHealth += itemStat_.itemHP;
 
+        // 해당하는 스탯 더하기
+        heroDamageMin += itemStat_.itemMinDamage;
+        heroDamageMax += itemStat_.itemMaxDamage;
+
+        heroDefense += itemStat_.itemDefense;
+        heroDefense += itemStat_.itemSubDefense;
+
+        heroDamageMagic += itemStat_.itemMagicDamage;
+        heroDamageAll += itemStat_.itemDamageAll;
+        heroAttackSpeed += itemStat_.itemAttackSpeed;
+        heroEvade += itemStat_.itemEvade;
+        heroCounter += itemStat_.itemCounter;
+        heroVamp += itemStat_.itemVamp;
+        heroRegen += itemStat_.itemRegen;
+        // 해당하는 스탯 더하기
+    }
+
+    public void RemoveStat(Item itemStat_)
+    {
+        // 최대체력 빼기
+        heroHealthMax -= itemStat_.itemHP;
+        // 체력도 같은 량 감소
+        heroHealth -= itemStat_.itemHP;
+
+        // 해당하는 스탯 빼기
+        heroDamageMin -= itemStat_.itemMinDamage;
+        heroDamageMax -= itemStat_.itemMaxDamage;
+
+        heroDefense -= itemStat_.itemDefense;
+        heroDefense -= itemStat_.itemSubDefense;
+
+        heroDamageMagic -= itemStat_.itemMagicDamage;
+        heroDamageAll -= itemStat_.itemDamageAll;
+        heroAttackSpeed -= itemStat_.itemAttackSpeed;
+        heroEvade -= itemStat_.itemEvade;
+        heroCounter -= itemStat_.itemCounter;
+        heroVamp -= itemStat_.itemVamp;
+        heroRegen -= itemStat_.itemRegen;
+        // 해당하는 스탯 더하기
     }
 }
