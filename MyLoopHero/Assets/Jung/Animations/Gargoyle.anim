@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dummy
+  m_Name: Gargoyle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: b83a437281a286746aa234b35d731ee1, type: 3}
+      value: {fileID: 21300000, guid: 66dadcc490703c440ab26f8350af11c7, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 700e52431e9725c4bb6bd10d4edf0598, type: 3}
+      value: {fileID: 21300000, guid: 537d146fc0b81694ab8407d5492acb59, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: b83a437281a286746aa234b35d731ee1, type: 3}
-    - {fileID: 21300000, guid: 700e52431e9725c4bb6bd10d4edf0598, type: 3}
+    - {fileID: 21300000, guid: 66dadcc490703c440ab26f8350af11c7, type: 3}
+    - {fileID: 21300000, guid: 537d146fc0b81694ab8407d5492acb59, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

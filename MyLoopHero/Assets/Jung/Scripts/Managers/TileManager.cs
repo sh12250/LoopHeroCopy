@@ -201,6 +201,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = rock;
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<EtcTile>();
                 }
 
                 break;
@@ -209,6 +210,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = mount;
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<EtcTile>();
                 }
 
                 break;
@@ -217,6 +219,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = safe;
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<EtcTile>();
                 }
 
                 break;
@@ -225,6 +228,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = grass;
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<EtcTile>();
                 }
 
                 break;
@@ -233,6 +237,7 @@ public class TileManager : MonoBehaviour
                 {
                     tile_.GetComponentInChildren<SpriteRenderer>().sprite = lighthouse;
                     RememberTile(tile_, card_.name);
+                    tile_.AddComponent<EtcTile>();
                 }
 
                 break;
