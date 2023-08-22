@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,4 +23,28 @@ public class Enemy : MonoBehaviour
     public float enemyItemChance = default;
     public float enemyItemTier = default;
     // } 몬스터 능력치
+
+    public Enemy CopyEnemyInfo() 
+    {
+        #region Legacy
+        //enemyIdle = enemyInfoBase_.enemyIdle;
+        //enemyCharge = enemyInfoBase_.enemyCharge;
+        //enemyAttack = enemyInfoBase_.enemyAttack;
+        //enemyHurt_0 = enemyInfoBase_.enemyHurt_0;
+        //enemyHurt_1 = enemyInfoBase_.enemyHurt_1;
+        //enemyDeath = enemyInfoBase_.enemyDeath;
+
+        //enemyID = enemyInfoBase_.enemyID;
+        //enemyName = enemyInfoBase_.enemyName;
+        //enemyHP = enemyInfoBase_.enemyHP;
+        //enemyDMG = enemyInfoBase_.enemyDMG;
+        //enemyDEF = enemyInfoBase_.enemyDEF;
+        //enemySpeed = enemyInfoBase_.enemySpeed;
+        //enemyEvade = enemyInfoBase_.enemyEvade;
+        //enemyRegen = enemyInfoBase_.enemyRegen;
+        //enemyItemChance = enemyInfoBase_.enemyItemChance;
+        //enemyItemTier = enemyInfoBase_.enemyItemTier;
+        #endregion
+        return (Enemy)this.MemberwiseClone();
+    }
 }

@@ -36,7 +36,7 @@ public class TitleScene : MonoBehaviour
         }
     }
 
-    #region FindingTitleSceneChildren
+    #region Title 하위의 오브젝트 찾는 함수
     private void MakeTitleSceneArray()
     {
         // titleScene 은 이 스크립트를 들고 있는 게임 오브젝트이다.
@@ -61,7 +61,7 @@ public class TitleScene : MonoBehaviour
     #endregion
 
 
-    #region InitializeColorAndLocation
+    #region Title 배경과 로고의 투명도, 색상 초기화
     private void InitializeColorAndLocation()
     {
         // titleScene 에서 Image 컴포넌트의 색상을 검정(0,0,0,1)으로 바꾼다.
@@ -80,7 +80,7 @@ public class TitleScene : MonoBehaviour
     #endregion
 
 
-    #region CoroutineSequence for TitleScene
+    #region 타이틀 씬의 CoroutineSequence 
     IEnumerator CoroutineSequence()
     {
         // FadeinBackground coroutine 을 1번으로 실행한다.
@@ -94,7 +94,7 @@ public class TitleScene : MonoBehaviour
     #endregion
 
 
-    #region FadeInBackground
+    #region 배경 FadeIn
     IEnumerator FadeinBackground(float startColorValue_)    // 초기 색상 값을 매개변수로 받는다.
     {
         // { 루프

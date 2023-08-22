@@ -22,7 +22,7 @@ public class UIButton_Continue : UIButton
         // campMenu
         menu = button.transform.parent.gameObject;
         // campLogo
-        logo = button.transform.parent.parent.GetChild(6).gameObject;
+        logo = button.transform.parent.parent.Find("Travel_Logo").gameObject;
     }
 
     protected override void DoPointerEnter(PointerEventData eventData)

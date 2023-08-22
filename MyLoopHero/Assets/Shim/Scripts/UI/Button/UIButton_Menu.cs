@@ -20,9 +20,9 @@ public class UIButton_Menu : UIButton
         buttonText = button.GetComponentInChildren<TMP_Text>();
 
         // campMenu
-        menu = button.transform.parent.GetChild(5).gameObject;
+        menu = button.transform.parent.Find("Travel_Menu").gameObject;
         // campLogo
-        logo = button.transform.parent.GetChild(6).gameObject;
+        logo = button.transform.parent.Find("Travel_Logo").gameObject;
     }
 
     public void MakeBaseState() 
