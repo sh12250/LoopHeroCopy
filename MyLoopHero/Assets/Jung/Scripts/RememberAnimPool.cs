@@ -19,7 +19,7 @@ public class RememberAnimPool : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("GameManager가 너무 많습니다");
+            Debug.LogWarning("RememberAnimPool이 너무 많습니다");
         }
 
         Initialize(20);

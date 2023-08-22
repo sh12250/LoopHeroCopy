@@ -68,7 +68,7 @@ public class RoadTile : MonoBehaviour
         MakeMonster(monsterName);
     }
 
-    public void MakeMonster(string monsterName_)
+    private void MakeMonster(string monsterName_)
     {
         if (GameManager.instance.dayCnt == currDay + spawnCycle)
         {

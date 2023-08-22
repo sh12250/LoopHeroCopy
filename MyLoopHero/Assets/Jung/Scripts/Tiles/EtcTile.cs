@@ -25,13 +25,13 @@ public class EtcTile : MonoBehaviour
 
     private void Start()
     {
-        nameSave = name;
+        nameSave = "VoidTile";
 
         spawnRate = default;
         spawnCycle = default;
         currDay = default;
 
-        targetTiles = default;
+        targetTiles = new List<GameObject>();
         targetCnt_Curr = default;
         targetCnt = default;
     }
@@ -47,6 +47,7 @@ public class EtcTile : MonoBehaviour
                 case "ROCK": // HP 2, 인접한 바위/산마다 HP 2++
                     targetCnt_Curr = 0;
                     FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax += STAT_ROCK;
+                    FindObjectOfType<Knight>().GetComponent<Knight>().heroHealth += STAT_ROCK;
 
                     break;
                 case "MOUNT": // 인접한 바위/산마다 HP 6++, 2일마다 하피 소환
@@ -55,6 +56,7 @@ public class EtcTile : MonoBehaviour
                     break;
                 case "GRASS": // 하루 회복 2, 인접한 타일 존재시 하루 회복 3
                     targetCnt_Curr = 0;
+                    FindObjectOfType<Knight>().GetComponent<Knight>().heroRecovery += STAT_ROCK;
 
                     break;
                 case "SAFE": // 1일마다 10% 확률로 가고일 소환
@@ -71,7 +73,6 @@ public class EtcTile : MonoBehaviour
                     currDay = GameManager.instance.dayCnt;
 
                     monsterName = "Harpy";
-
 
                     break;
             }
@@ -94,6 +95,9 @@ public class EtcTile : MonoBehaviour
             case "LIGHTHOUSE":
                 LightHouse();
                 break;
+            default:
+                // VoidTile일 때, 아무것도 안함
+                break;
         }
     }
 
@@ -104,8 +108,10 @@ public class EtcTile : MonoBehaviour
         if (targetCnt_Curr != targetCnt)
         {
             FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax -= targetCnt_Curr * STAT_ROCK;
+            FindObjectOfType<Knight>().GetComponent<Knight>().heroHealth -= targetCnt_Curr * STAT_ROCK;
             targetCnt_Curr = targetCnt;
             FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax += targetCnt_Curr * STAT_ROCK;
+            FindObjectOfType<Knight>().GetComponent<Knight>().heroHealth += targetCnt_Curr * STAT_ROCK;
         }
 
         targetCnt = 0;
@@ -118,8 +124,10 @@ public class EtcTile : MonoBehaviour
         if (targetCnt_Curr != targetCnt)
         {
             FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax -= targetCnt_Curr * STAT_MOUNT;
+            FindObjectOfType<Knight>().GetComponent<Knight>().heroHealth -= targetCnt_Curr * STAT_MOUNT;
             targetCnt_Curr = targetCnt;
             FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax += targetCnt_Curr * STAT_MOUNT;
+            FindObjectOfType<Knight>().GetComponent<Knight>().heroHealth += targetCnt_Curr * STAT_MOUNT;
         }
 
         targetCnt = 0;
@@ -129,19 +137,30 @@ public class EtcTile : MonoBehaviour
     {
         CheckTile();
 
-        if (targetCnt_Curr != targetCnt)
+        if (targetCnt != 0)
         {
             if (targetCnt_Curr == 0)
             {
-                FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax -= STAT_GRASS;
+                FindObjectOfType<Knight>().GetComponent<Knight>().heroRecovery -= STAT_GRASS;
                 targetCnt_Curr = targetCnt;
-                FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax += STAT_BLOOMGRASS;
+                FindObjectOfType<Knight>().GetComponent<Knight>().heroRecovery += STAT_BLOOMGRASS;
             }
             else if (targetCnt_Curr != 0)
             {
-                FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax -= STAT_BLOOMGRASS;
+                /* DoNothing */
+            }
+        }
+        else if (targetCnt == 0)
+        {
+            if (targetCnt_Curr == 0)
+            {
+                /* DoNothing */
+            }
+            else if (targetCnt_Curr != 0)
+            {
+                FindObjectOfType<Knight>().GetComponent<Knight>().heroRecovery -= STAT_BLOOMGRASS;
                 targetCnt_Curr = targetCnt;
-                FindObjectOfType<Knight>().GetComponent<Knight>().heroHealthMax += STAT_GRASS;
+                FindObjectOfType<Knight>().GetComponent<Knight>().heroRecovery += STAT_GRASS;
             }
         }
 

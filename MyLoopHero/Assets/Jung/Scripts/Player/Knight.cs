@@ -47,7 +47,7 @@ public class Knight : MonoBehaviour
         heroDamageMagic = 0;
         heroDamageAll = 0;
         heroDefense = 0;
-        heroAttackSpeed = 0;
+        heroAttackSpeed = 1;
         heroEvade = 0;
         heroCounter = 0;
         heroVamp = 0;
