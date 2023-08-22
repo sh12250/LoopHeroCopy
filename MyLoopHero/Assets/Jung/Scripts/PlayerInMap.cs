@@ -52,18 +52,39 @@ public class PlayerInMap : MonoBehaviour
                 {
                     if (hit_Tiles.collider.GetComponent<RoadTile>().GetMonsterCnt() > 0)
                     {
+<<<<<<< HEAD
                         // 전투창 열람
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
                         Time.timeScale = 0;
                         BattleManager.instance.FindHitTarget();
                         BattleManager.instance.OpenWindow();
+=======
+
+
+
+
+
+
+>>>>>>> origin/Jung
                     }
                 }
 
                 if (hit_Tiles.collider.name == "CampsiteTile")
                 {
                     GameManager.instance.loopCnt += 1;
+                    float healAmount = GetComponent<Knight>().heroHealthMax / 5f;
+                    GetComponent<Knight>().heroHealth += healAmount;
+
+                    AudioManager.instance.PlaySound_HeroCampHeal();
+                }
+
+                if (hit_Tiles.collider.name == "VILLAGE")
+                {
+                    float healAmount = 15 + 5 * GameManager.instance.loopCnt;
+                    GetComponent<Knight>().heroHealth += healAmount;
+
+                    AudioManager.instance.PlaySound_HeroVillageHeal();
                 }
             }
         }

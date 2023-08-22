@@ -138,8 +138,8 @@ public class CSVConverter : MonoBehaviour
         itemLevel = new int[csvRowCount];
         itemMinDamage = new float[csvRowCount];
         itemMaxDamage = new float[csvRowCount];
-        itemHP = new float[csvRowCount];
         itemDefense = new float[csvRowCount];
+        itemHP = new float[csvRowCount];
         itemMagicDamage = new float[csvRowCount];
         itemAttackSpeed = new float[csvRowCount];
         itemDamageAll = new float[csvRowCount];
@@ -165,8 +165,8 @@ public class CSVConverter : MonoBehaviour
             itemLevel[i] = int.Parse(itemDataList[(csvColumnCount * (i + 1)) + 6]);
             itemMinDamage[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 7]);
             itemMaxDamage[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 8]);
-            itemHP[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 9]);
-            itemDefense[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 10]);
+            itemDefense[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 9]);
+            itemHP[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 10]);
             itemMagicDamage[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 11]);
             itemAttackSpeed[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 12]);
             itemDamageAll[i] = float.Parse(itemDataList[(csvColumnCount * (i + 1)) + 13]);

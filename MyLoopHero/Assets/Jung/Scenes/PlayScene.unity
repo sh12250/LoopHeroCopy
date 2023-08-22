@@ -228,7 +228,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5489623
 PrefabInstance:
@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 41463029}
   - component: {fileID: 41463028}
   - component: {fileID: 41463027}
+  - component: {fileID: 41463030}
   m_Layer: 17
   m_Name: Inven_Slot12
   m_TagString: Inven
@@ -743,6 +744,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41463025}
   m_CullTransparentMesh: 1
+--- !u!114 &41463030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41463025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &46265222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -2071,7 +2103,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &137752607
 PrefabInstance:
@@ -2130,6 +2162,147 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+--- !u!1 &137852228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137852230}
+  - component: {fileID: 137852229}
+  - component: {fileID: 137852231}
+  m_Layer: 0
+  m_Name: MusicPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &137852229
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137852228}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f67062ad9bd8fd44ba016a36e80a3a63, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &137852230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137852228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137852231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137852228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0899a1832915410428829050108bedb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &142878662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -3517,6 +3690,7 @@ GameObject:
   - component: {fileID: 236397316}
   - component: {fileID: 236397319}
   - component: {fileID: 236397318}
+  - component: {fileID: 236397320}
   m_Layer: 0
   m_Name: PlayerInMap
   m_TagString: Untagged
@@ -3568,6 +3742,33 @@ MonoBehaviour:
   path: []
   moveSpeed: 1
   moveDist: 0
+--- !u!114 &236397320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236397315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0033d52e15bb944a527380d38819b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  heroHealthMax: 0
+  heroHealth: 0
+  heroEXP: 0
+  heroDamageMin: 0
+  heroDamageMax: 0
+  heroDamageMagic: 0
+  heroDamageAll: 0
+  heroDefense: 0
+  heroAttackSpeed: 0
+  heroEvade: 0
+  heroCounter: 0
+  heroVamp: 0
+  heroRegen: 0
+  heroRecovery: 0
 --- !u!4 &240596951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -3842,6 +4043,7 @@ GameObject:
   - component: {fileID: 274943940}
   - component: {fileID: 274943939}
   - component: {fileID: 274943941}
+  - component: {fileID: 274943942}
   m_Layer: 17
   m_Name: Inven_Slot1
   m_TagString: Inven
@@ -3934,6 +4136,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 45, y: 45}
   m_EdgeRadius: 0
+--- !u!114 &274943942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274943937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &275113349 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -4276,7 +4509,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &289164483 stripped
 Transform:
@@ -5316,7 +5549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.124000005, y: 0.83317953}
   m_AnchorMax: {x: 0.124000005, y: 0.83317953}
-  m_AnchoredPosition: {x: 0.19998169, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50.8, y: 50.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341586263
@@ -5413,9 +5646,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 341586261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &347970059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -7916,6 +8168,7 @@ GameObject:
   - component: {fileID: 544509137}
   - component: {fileID: 544509136}
   - component: {fileID: 544509135}
+  - component: {fileID: 544509138}
   m_Layer: 17
   m_Name: Inven_Slot4
   m_TagString: Inven
@@ -8008,6 +8261,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544509133}
   m_CullTransparentMesh: 1
+--- !u!114 &544509138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544509133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &548538635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8669,6 +8953,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
+--- !u!1 &586004326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586004328}
+  - component: {fileID: 586004327}
+  m_Layer: 0
+  m_Name: SoundPlayerPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &586004327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586004326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fab137d8c031c42b7ffb99cc33d230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPlayerPrefab: {fileID: 2309310855723867828, guid: dbf65b13023834b4eae0d9ec65a02d8d, type: 3}
+--- !u!4 &586004328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586004326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593033923
 GameObject:
   m_ObjectHideFlags: 0
@@ -9901,6 +10230,7 @@ GameObject:
   - component: {fileID: 654485284}
   - component: {fileID: 654485283}
   - component: {fileID: 654485282}
+  - component: {fileID: 654485285}
   m_Layer: 17
   m_Name: Inven_Slot8
   m_TagString: Inven
@@ -9993,6 +10323,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654485280}
   m_CullTransparentMesh: 1
+--- !u!114 &654485285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654485280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &655700349 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -10627,7 +10988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.00024414062, y: -415}
+  m_AnchoredPosition: {x: -0.00024414062, y: -415.00003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &690284966
@@ -10746,7 +11107,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &703410210 stripped
 Transform:
@@ -12658,7 +13019,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &813618152
 MonoBehaviour:
@@ -15433,6 +15794,7 @@ GameObject:
   - component: {fileID: 1019727889}
   - component: {fileID: 1019727888}
   - component: {fileID: 1019727887}
+  - component: {fileID: 1019727890}
   m_Layer: 17
   m_Name: Inven_Slot6
   m_TagString: Inven
@@ -15525,6 +15887,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019727885}
   m_CullTransparentMesh: 1
+--- !u!114 &1019727890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019727885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &1026158673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -16253,6 +16646,7 @@ GameObject:
   - component: {fileID: 1071910513}
   - component: {fileID: 1071910512}
   - component: {fileID: 1071910511}
+  - component: {fileID: 1071910514}
   m_Layer: 17
   m_Name: Inven_Slot10
   m_TagString: Inven
@@ -16345,6 +16739,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071910509}
   m_CullTransparentMesh: 1
+--- !u!114 &1071910514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071910509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &1078128555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17732,7 +18157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.124000005, y: 0.5}
   m_AnchorMax: {x: 0.124000005, y: 0.5}
-  m_AnchoredPosition: {x: 0.19998169, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50.8, y: 50.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1171482234
@@ -17829,9 +18254,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1171482232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &1172404126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18266,7 +18710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.00024414062, y: -415}
+  m_AnchoredPosition: {x: -0.00024414062, y: -415.00003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1187539305
@@ -18390,7 +18834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19210,7 +19654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.124000005, y: 0.16682053}
   m_AnchorMax: {x: 0.124000005, y: 0.16682053}
-  m_AnchoredPosition: {x: 0.19998169, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50.8, y: 50.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1227192386
@@ -19307,9 +19751,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227192384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &1232216786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -19774,6 +20237,7 @@ GameObject:
   - component: {fileID: 1263077446}
   - component: {fileID: 1263077445}
   - component: {fileID: 1263077444}
+  - component: {fileID: 1263077447}
   m_Layer: 17
   m_Name: Inven_Slot11
   m_TagString: Inven
@@ -19866,6 +20330,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263077442}
   m_CullTransparentMesh: 1
+--- !u!114 &1263077447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263077442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &1264783105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -20343,6 +20838,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305058092}
   m_CullTransparentMesh: 1
+--- !u!1 &1307893181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307893183}
+  - component: {fileID: 1307893182}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1307893182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307893181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d384e19787304b64f8c6476c459415f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicPlayer: {fileID: 137852229}
+  musics:
+  - {fileID: 8300000, guid: f67062ad9bd8fd44ba016a36e80a3a63, type: 3}
+  - {fileID: 8300000, guid: b03913485d5ba544496eae80f890e0b2, type: 3}
+  - {fileID: 8300000, guid: d46119d5469dd9e469e3269197002fe8, type: 3}
+  - {fileID: 8300000, guid: 2b81989dde8e7b243b4478bdcbcd311c, type: 3}
+  - {fileID: 8300000, guid: 25f077d804d59914698ad4b0f3ef982c, type: 3}
+  - {fileID: 8300000, guid: e258505d0ad1b5144b5682b956184822, type: 3}
+  sounds_Hero:
+  - {fileID: 8300000, guid: 03585e45eaf0728478f0fabcf2027c11, type: 3}
+  - {fileID: 8300000, guid: 7304f12e53d7d6345aaf459440457e76, type: 3}
+  - {fileID: 8300000, guid: 9b159cc49f74f094db635288f5812c6d, type: 3}
+  - {fileID: 8300000, guid: 23fc616a6912d894f8781ad147c88f96, type: 3}
+  - {fileID: 8300000, guid: 93857715adf7644428062f93efacf1cc, type: 3}
+  - {fileID: 8300000, guid: 4afc5619aabf7884ba72894df566625d, type: 3}
+  sounds_Enemy:
+  - {fileID: 8300000, guid: a5b2795516eea4b41a71360e2eddb237, type: 3}
+  - {fileID: 8300000, guid: b6caa29f44d93244b8afc0a395c04ea6, type: 3}
+  - {fileID: 8300000, guid: c5261b0ce4022664eb22f1a60d6ef835, type: 3}
+  - {fileID: 8300000, guid: bb8e745f7fdc3524ea0d9f5072153b22, type: 3}
+  - {fileID: 8300000, guid: 2034a30fefad36b4cbb2e90c34cbc07b, type: 3}
+  sounds_Etc:
+  - {fileID: 8300000, guid: 6f207b6a6d81e324bad5131f2dd0b0d8, type: 3}
+  - {fileID: 8300000, guid: 8a8f68373056b0946b837d817db13250, type: 3}
+  - {fileID: 8300000, guid: 0ec793600a27be94abc1765674e90258, type: 3}
+--- !u!4 &1307893183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307893181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308783840
 GameObject:
   m_ObjectHideFlags: 0
@@ -20355,6 +20919,7 @@ GameObject:
   - component: {fileID: 1308783844}
   - component: {fileID: 1308783843}
   - component: {fileID: 1308783842}
+  - component: {fileID: 1308783845}
   m_Layer: 17
   m_Name: Inven_Slot3
   m_TagString: Inven
@@ -20447,6 +21012,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308783840}
   m_CullTransparentMesh: 1
+--- !u!114 &1308783845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308783840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1 &1313432132
 GameObject:
   m_ObjectHideFlags: 0
@@ -23401,7 +23997,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1507155531
 PrefabInstance:
@@ -25068,6 +25664,7 @@ GameObject:
   - component: {fileID: 1583975801}
   - component: {fileID: 1583975800}
   - component: {fileID: 1583975799}
+  - component: {fileID: 1583975802}
   m_Layer: 17
   m_Name: Inven_Slot5
   m_TagString: Inven
@@ -25160,6 +25757,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583975797}
   m_CullTransparentMesh: 1
+--- !u!114 &1583975802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583975797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &1584100905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25460,7 +26088,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601764770
 GameObject:
@@ -26292,7 +26920,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1645171320
 MonoBehaviour:
@@ -26451,6 +27079,7 @@ GameObject:
   - component: {fileID: 1672845528}
   - component: {fileID: 1672845527}
   - component: {fileID: 1672845526}
+  - component: {fileID: 1672845529}
   m_Layer: 17
   m_Name: Inven_Slot2
   m_TagString: Inven
@@ -26543,6 +27172,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672845524}
   m_CullTransparentMesh: 1
+--- !u!114 &1672845529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672845524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &1674687745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -27026,6 +27686,7 @@ GameObject:
   - component: {fileID: 1688716160}
   - component: {fileID: 1688716159}
   - component: {fileID: 1688716158}
+  - component: {fileID: 1688716161}
   m_Layer: 17
   m_Name: Inven_Slot7
   m_TagString: Inven
@@ -27118,6 +27779,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688716156}
   m_CullTransparentMesh: 1
+--- !u!114 &1688716161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688716156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!4 &1689362277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -32001,12 +32693,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985262993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.035729, y: 1.1869203, z: 228.59648}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1986878215 stripped
 Transform:
@@ -32047,7 +32739,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1993651023 stripped
 Transform:
@@ -32123,6 +32815,7 @@ GameObject:
   - component: {fileID: 2001279401}
   - component: {fileID: 2001279400}
   - component: {fileID: 2001279399}
+  - component: {fileID: 2001279402}
   m_Layer: 17
   m_Name: Inven_Slot9
   m_TagString: Inven
@@ -32215,6 +32908,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001279397}
   m_CullTransparentMesh: 1
+--- !u!114 &2001279402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001279397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &2005414605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34764,9 +35488,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2147413352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b710ce5818c0946ae3e5edba6bcc50, type: 3}
+  m_Script: {fileID: 11500000, guid: c17fa4d836f225c46a9405be803a02b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 
+  itemSprite: {fileID: 0}
+  itemAbilityRatio: 0
+  itemAbilityCount: 0
+  itemName: 
+  itemLevel: 0
+  itemMinDamage: 0
+  itemMaxDamage: 0
+  itemHP: 0
+  itemDefense: 0
+  itemMagicDamage: 0
+  itemAttackSpeed: 0
+  itemDamageAll: 0
+  itemCounter: 0
+  itemRegen: 0
+  itemEvade: 0
+  itemVamp: 0
+  itemSubDefense: 0
 --- !u!1001 &2952146616349034094
 PrefabInstance:
   m_ObjectHideFlags: 0
