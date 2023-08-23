@@ -4,28 +4,23 @@ using UnityEngine.EventSystems;
 
 public class UIButton_Start : UIButton
 {
-    private GameObject title;
-    private GameObject travel;
-    private Vector2 titleSceneMovePosition;
-    private Vector2 travelSceneMovePosition;
+    private GameObject titleWindow;
+    private Vector2 titleWindowMovePosition;
 
 
     protected override void Awake()
     {
         // button 이라는 GameObject는 이 스크립트를 상속할 스크립트를 가진 오브젝트이다.
         button = this.gameObject;
-
         // buttonText 에 button 하위의 TMP_Text 컴포넌트를 가진 오브젝트를 담는다.
         buttonText = button.GetComponentInChildren<TMP_Text>();
 
-        // title
-        title = button.transform.root.GetChild(0).gameObject;
-        // campsite
-        travel = button.transform.root.GetChild(2).gameObject;
-        // 버튼을 눌렀을 때, title 장면이 움직일 위치
-        titleSceneMovePosition = new Vector2(0f, 2000f);
-        // 버튼을 눌렀을 때, campsite 장면이 움직일 위치
-        travelSceneMovePosition = new Vector2(0f, 0f);
+
+        // titleWindow
+        titleWindow = GameObject.Find("TravelWindow").gameObject;
+
+        // start 버튼을 눌렀을 때, titleWindow 가 움직일 위치
+        titleWindowMovePosition = new Vector2(0f, 0f);
     }
 
     protected override void DoPointerEnter(PointerEventData eventData)
@@ -47,8 +42,6 @@ public class UIButton_Start : UIButton
     {
         base.DoPointerUp(eventData);
 
-        title.GetComponent<RectTransform>().anchoredPosition = titleSceneMovePosition;
-        title.SetActive(false);
-        travel.GetComponent<RectTransform>().anchoredPosition = travelSceneMovePosition;
+        titleWindow.GetComponent<RectTransform>().anchoredPosition = titleWindowMovePosition;
     }
 }

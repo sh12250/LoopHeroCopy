@@ -11,9 +11,18 @@ public class GameManager : MonoBehaviour
     // 여러스크립트에 뿌려줄 예정
 
     [SerializeField]
+    private List<GameObject> monsters;
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
     private Image dayGauge;
 
+    [SerializeField]
+    private Image loop;
+
     public const float DAYCYCLE = 24f;
+    public const float LOOPLIMIT = 10f;
     public float globalTime;
     public int dayCnt;
     public int loopCnt;
@@ -28,6 +37,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("GameManager가 너무 많습니다");
         }
+
+        MapTime.MapTimeScale(0);
     }
 
     void Start()
@@ -38,7 +49,39 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        globalTime += Time.deltaTime * 4;
+        DayGauge();
+        LoopGauge();
+
+        if (monsters.Count > 0)
+        {
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                if (monsters[i].GetComponentInChildren<Animator>().GetFloat("MapTimeScale") != MapTime.mapTimeScale)
+                {
+                    monsters[i].GetComponentInChildren<Animator>().SetFloat("MapTimeScale", MapTime.mapTimeScale);
+                }
+            }
+        }
+
+        if (player.GetComponentInChildren<Animator>().GetFloat("MapTimeScale") != MapTime.mapTimeScale)
+        {
+            player.GetComponentInChildren<Animator>().SetFloat("MapTimeScale", MapTime.mapTimeScale);
+        }
+    }
+
+    public void AddToMonsters(GameObject monster_)
+    {
+        monsters.Add(monster_);
+    }
+
+    private void LoopGauge()
+    {
+        loop.fillAmount = loopCnt / LOOPLIMIT;
+    }
+
+    private void DayGauge()
+    {
+        globalTime += MapTime.MapDeltaTime() * 4;
 
         if (globalTime >= DAYCYCLE)
         {

@@ -135,7 +135,7 @@ public class BattleManager : MonoBehaviour
 
     public void OpenWindow()
     {
-        StartCoroutine(CycleBattle());
+        // StartCoroutine(CycleBattle());
     }
 
     #region 몬스터의 숫자에 따라서 전투싸이클 수를 조절하는 Coroutine
@@ -281,7 +281,7 @@ public class BattleManager : MonoBehaviour
     public void FindHitTarget()
     {
         int targetIdx_ = Random.Range(0, monsterCount);
-        Debug.LogFormat("타겟은 {0}, Hp: {1}", targetIdx_, monstersInBattle[targetIdx_].enemyHP);
+        //Debug.LogFormat("타겟은 {0}, Hp: {1}", targetIdx_, monstersInBattle[targetIdx_].enemyHP);
 
         for (int i = 0; i < monsterCount; i++) 
         {

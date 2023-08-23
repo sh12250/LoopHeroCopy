@@ -12,7 +12,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 {
     #region 인벤토리 UI 필드 선언
     // UI Canvas의 Scale을 가져오기 위한 변수
-    private Canvas ui_Inventory;
+    private GameObject ui_Inventory;
 
     // 현재 드래그 중인 아이콘의 RectTransform.transform 값을 알아오기 위한 변수
     private RectTransform rectHolding;
@@ -42,7 +42,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     private void Awake()
     {
         // ui_Inventory와 RectHolding의 컴포넌트를 불러온다.
-        ui_Inventory = GetComponent<Canvas>();
+        ui_Inventory = this.gameObject;
         rectHolding = GetComponent<RectTransform>();
 
         #region 로그 확인용 코드
@@ -135,7 +135,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         {
             // RectHolding의 anchoredPosition 값에 마우스의 움직이는 변화량만큼 더해준다.
             // UI의 scaleFactor 만큼 나누어서 오차가 나지 않도록 한다.
-            rectHolding.anchoredPosition += (eventData.delta / ui_Inventory.scaleFactor);
+            rectHolding.anchoredPosition += (eventData.delta / ui_Inventory.GetComponent<Canvas>().scaleFactor);
             //Debug.LogFormat("드래그 {0}", rectHolding.position);
         }
         // 조건문 } 만약 드래그 상태일 경우

@@ -24,6 +24,7 @@ public class MonsterManager : MonoBehaviour
     public GameObject SpawnMonster(Transform parent_)
     {
         GameObject monster_ = Instantiate(monsterPrefab, parent_);
+        GameManager.instance.AddToMonsters(monster_);
         return monster_;
     }
 }

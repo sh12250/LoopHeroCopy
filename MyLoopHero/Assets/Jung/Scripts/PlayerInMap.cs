@@ -36,7 +36,10 @@ public class PlayerInMap : MonoBehaviour
 
     private void Update()
     {
-        Patrolling();
+        if (GetComponentInChildren<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "WarriorWalk")
+        {
+            Patrolling();
+        }
 
         moveDist = ((Vector2)transform.localPosition - currPos).magnitude;
 
@@ -55,7 +58,8 @@ public class PlayerInMap : MonoBehaviour
                         // 전투창 열람
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
-                        Time.timeScale = 0;
+                        //MapTime.MapTimeScale(0);
+                        //Time.timeScale = 0;
                         BattleManager.instance.FindHitTarget();
                         BattleManager.instance.OpenWindow();
                     }
@@ -96,7 +100,8 @@ public class PlayerInMap : MonoBehaviour
         float targetY_ = path[targetIdx_].transform.localPosition.y;
         float targetX_ = path[targetIdx_].transform.localPosition.x;
 
-        float distanceToMove = moveSpeed * Time.deltaTime;
+        float distanceToMove = moveSpeed * MapTime.MapDeltaTime();
+        //float distanceToMove = moveSpeed * Time.deltaTime;
 
         if (startY_ > targetY_)
         {

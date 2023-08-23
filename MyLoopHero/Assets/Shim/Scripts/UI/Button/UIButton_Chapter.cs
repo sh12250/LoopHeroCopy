@@ -1,12 +1,13 @@
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIButton_Class : UIButton
+public class UIButton_Chapter : UIButton
 {
     private GameObject travelWindow;
-    private GameObject heroPortraitOff;
-    private GameObject heroPortraitOn;
+    private GameObject bossPortraitOff;
+    private GameObject bossPortraitOn;
 
     protected override void Awake()
     {
@@ -19,8 +20,8 @@ public class UIButton_Class : UIButton
         isPress = false;
 
         travelWindow = GameObject.Find("TravelWindow").gameObject;
-        heroPortraitOff = button.transform.GetChild(1).gameObject;
-        heroPortraitOn = button.transform.GetChild(2).gameObject;
+        bossPortraitOff = button.transform.GetChild(1).gameObject;
+        bossPortraitOn = button.transform.GetChild(2).gameObject;
     }
 
     protected override void DoPointerEnter(PointerEventData eventData)
@@ -42,21 +43,21 @@ public class UIButton_Class : UIButton
     {
         base.DoPointerUp(eventData);
 
-        if (isPress == false)
+        if (isPress == false) 
         {
             isPress = true;
-            travelWindow.GetComponent<TravelWindow>().isClassPress = true;
+            travelWindow.GetComponent<TravelWindow>().isBossPress = true;
 
-            heroPortraitOff.SetActive(false);
-            heroPortraitOn.SetActive(true);
+            bossPortraitOff.SetActive(false);
+            bossPortraitOn.SetActive(true);
         }
-        else if (isPress == true)
+        else if (isPress == true) 
         {
             isPress = false;
-            travelWindow.GetComponent<TravelWindow>().isClassPress = false;
+            travelWindow.GetComponent<TravelWindow>().isBossPress = false;
 
-            heroPortraitOff.SetActive(true);
-            heroPortraitOn.SetActive(false);
+            bossPortraitOff.SetActive(true);
+            bossPortraitOn.SetActive(false);
         }
     }
 }
