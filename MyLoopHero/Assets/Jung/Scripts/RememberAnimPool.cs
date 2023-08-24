@@ -10,7 +10,7 @@ public class RememberAnimPool : MonoBehaviour
     private GameObject remAnimPrefab;
 
     Queue<RememberAnim> animQueue = new Queue<RememberAnim>();
-    
+
     private void Awake()
     {
         if (instance == null || instance == default)
@@ -63,6 +63,7 @@ public class RememberAnimPool : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(instance.transform);
+        obj.transform.localPosition = instance.transform.localPosition;
         instance.animQueue.Enqueue(obj);
     }
 }

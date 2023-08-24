@@ -106,15 +106,16 @@ public class CardManager : MonoBehaviour
         Transform parent_ = HandManager.instance.GetHandTransform();
 
         #region °¢ Ä«µå »ý¼º È®·ü
-        if (randNum >= 0 && randNum < 2)
-        {   // ¸Á°¢ 2
-            theTile_ = Instantiate(mightCardBase, parent_);
-            theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[0];
-            theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[0];
-            theTile_.name = CardName.OBLIVION.ToString();
-        }
-        else if (randNum >= 2 && randNum < 8)
-        {   // ¹¦Áö 6
+        //if (randNum >= 0 && randNum < 2)
+        //{   // ¸Á°¢ 2
+        //    theTile_ = Instantiate(mightCardBase, parent_);
+        //    theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[0];
+        //    theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[0];
+        //    theTile_.name = CardName.OBLIVION.ToString();
+        //}
+        //else
+        if (randNum >= 0 && randNum < 8)
+        {   // ¹¦Áö 8
             theTile_ = Instantiate(roadCardBase, parent_);
             theTile_.GetComponentsInChildren<Image>()[1].sprite = faceSprites[1];
             theTile_.GetComponentsInChildren<SpriteRenderer>()[0].sprite = buildSprites[1];

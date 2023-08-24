@@ -62,8 +62,8 @@ public class Knight : MonoBehaviour
 
     public void LevelUp()
     {
-        //if (heroEXP >= heroEXPMax)
-        //{
+        if (heroEXP >= heroEXPMax)
+        {
             level += 1;
             heroEXP -= heroEXPMax;
             heroEXPMax *= 1.5f;
@@ -72,7 +72,7 @@ public class Knight : MonoBehaviour
 
             AudioManager.instance.PlaySound_LevelUp();
             AudioManager.instance.PlaySound_PerkAlarm();
-        //}
+        }
     }
 
     public void AddStat(Item itemStat_)
