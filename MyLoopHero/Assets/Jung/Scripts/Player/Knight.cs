@@ -36,6 +36,8 @@ public class Knight : MonoBehaviour
 
     private void Awake()
     {
+        level = 1;
+
         // 기본 제공 수치
         heroHealthMax = 253;
         heroHealth = heroHealthMax;
@@ -47,7 +49,7 @@ public class Knight : MonoBehaviour
         heroDamageMagic = 0;
         heroDamageAll = 0;
         heroDefense = 0;
-        heroAttackSpeed = 1;
+        heroAttackSpeed = 0;
         heroEvade = 0;
         heroCounter = 0;
         heroVamp = 0;

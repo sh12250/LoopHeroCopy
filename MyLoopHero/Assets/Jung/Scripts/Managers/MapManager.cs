@@ -100,6 +100,7 @@ public class MapManager : MonoBehaviour
         // 지정된 타일의 태그를 RoadTile 로 바꿔준다
         voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].name = "CampsiteTile";
         GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
+        obj.name = "BOSS";
         obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
         obj.SetActive(false);
 
