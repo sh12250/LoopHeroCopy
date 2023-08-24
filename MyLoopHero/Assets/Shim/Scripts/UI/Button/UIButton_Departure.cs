@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class UIButton_Departure : UIButton
 {
     private GameObject title;
+    private GameObject background;
     private GameObject map;
     private GameObject travelUI;
     private Vector2 titleSceneMovePosition;
+    private Vector2 backgroundMovePosition;
     private Vector2 mapMovePosition;
     private Vector2 travelUIMovePosition;
 
@@ -21,6 +24,8 @@ public class UIButton_Departure : UIButton
 
         // title
         title = GameObject.Find("Title").gameObject;
+        // background
+        background = GameObject.Find("Background").gameObject;
         // map
         map = GameObject.Find("MainObject").gameObject;
         // travelUI
@@ -29,6 +34,8 @@ public class UIButton_Departure : UIButton
 
         // 버튼을 눌렀을 때, title 장면이 움직일 위치
         titleSceneMovePosition = new Vector2(0f, 2000f);
+        // 버튼을 눌렀을 때, background 이 움직일 위치
+        backgroundMovePosition = new Vector2(0f,0f);
         // 버튼을 눌렀을 때, map 이 움직일 위치
         mapMovePosition = new Vector2(0f, 0f);
         // 버튼을 눌렀을 때, travelUI 장면이 움직일 위치
@@ -56,6 +63,8 @@ public class UIButton_Departure : UIButton
 
         title.GetComponent<RectTransform>().anchoredPosition = titleSceneMovePosition;
         title.SetActive(false);
+        background.GetComponent<RectTransform>().anchoredPosition =
+            backgroundMovePosition;
         map.GetComponent<RectTransform>().anchoredPosition =
             mapMovePosition;
         travelUI.GetComponent<RectTransform>().anchoredPosition = travelUIMovePosition;
