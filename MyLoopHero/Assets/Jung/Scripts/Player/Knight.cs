@@ -10,6 +10,7 @@ public class Knight : MonoBehaviour
     // 체력
     public float heroHealth;
     // 경험치
+    public float heroEXPMax;
     public float heroEXP;
     // 최소 피해 1렙 4
     public float heroDamageMin;
@@ -45,6 +46,7 @@ public class Knight : MonoBehaviour
         heroDamageMax = 6;
 
         // 나머지는 0
+        heroEXPMax = 200;
         heroEXP = 0;
         heroDamageMagic = 0;
         heroDamageAll = 0;
@@ -56,6 +58,21 @@ public class Knight : MonoBehaviour
         heroRegen = 0;
         heroRecovery = 0;
         // 나머지는 0
+    }
+
+    public void LevelUp()
+    {
+        //if (heroEXP >= heroEXPMax)
+        //{
+            level += 1;
+            heroEXP -= heroEXPMax;
+            heroEXPMax *= 1.5f;
+
+            GameManager.instance.isPlayerLevelUp = true;
+
+            AudioManager.instance.PlaySound_LevelUp();
+            AudioManager.instance.PlaySound_PerkAlarm();
+        //}
     }
 
     public void AddStat(Item itemStat_)

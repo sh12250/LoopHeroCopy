@@ -102,7 +102,8 @@ public class MapManager : MonoBehaviour
         GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
         obj.name = "BOSS";
         obj.GetComponent<RectTransform>().localPosition = new Vector3(0, -0.5f, 0);
-        obj.SetActive(false);
+        obj.GetComponent<SpriteRenderer>().enabled = false;
+        obj.GetComponent<Animator>().enabled = false;
 
         passPoints.Add(voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_]);
         // 지나갈 타일에 추가 1

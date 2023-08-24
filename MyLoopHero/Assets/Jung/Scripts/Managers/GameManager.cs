@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     public int dayCnt;
     public int loopCnt;
 
+    public PerkWindow perkWindow;
+
+    public bool isPlayerLevelUp;
+
     private void Awake()
     {
         if (instance == null || instance == default)
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameManager가 너무 많습니다");
         }
 
+        isPlayerLevelUp = false;
         MapTime.MapTimeScale(0);
     }
 
@@ -67,6 +72,32 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponentInChildren<Animator>().SetFloat("MapTimeScale", MapTime.mapTimeScale);
         }
+
+        if (loopCnt == 1)
+        {
+            List<GameObject> alltiles_ = MapManager.instance.GetVoidTiles();
+
+            foreach (GameObject tile_ in alltiles_)
+            {
+                if (tile_.name == "CampsiteTile")
+                {
+                    tile_.GetComponentsInChildren<SpriteRenderer>()[0].enabled = false;
+                    tile_.GetComponentsInChildren<SpriteRenderer>()[1].enabled = true;
+                    tile_.GetComponentInChildren<Animator>().enabled = true;
+
+                    AudioManager.instance.PlayMusic_LichPortal();
+
+                    break;
+                }
+            }
+        }
+
+        if (isPlayerLevelUp)
+        {
+            isPlayerLevelUp = false;
+
+            perkWindow.perkCnt += 1;
+        }
     }
 
     public void AddToMonsters(GameObject monster_)
@@ -90,6 +121,8 @@ public class GameManager : MonoBehaviour
 
             HandManager.instance.DrawCard();
             HandManager.instance.DrawCard();
+
+            AudioManager.instance.PlaySound_DayStart();
         }
 
         dayGauge.fillAmount = globalTime / DAYCYCLE;

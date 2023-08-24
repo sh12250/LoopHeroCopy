@@ -48,5 +48,7 @@ public class Perk : MonoBehaviour
             default:
                 break;
         }
+
+        GetComponentInParent<PerkWindow>().CloseWindow();
     }
 }

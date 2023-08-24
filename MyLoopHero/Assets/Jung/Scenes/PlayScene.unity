@@ -3072,6 +3072,7 @@ MonoBehaviour:
   - {fileID: 1545568813}
   perkImgs: []
   perkImgs_br: []
+  isLevelUp: 0
 --- !u!4 &206591077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206988513072316921, guid: 9024bf2f0a8ee214ab2b9af6d40970f5, type: 3}
@@ -3440,6 +3441,7 @@ MonoBehaviour:
   level: 0
   heroHealthMax: 0
   heroHealth: 0
+  heroEXPMax: 0
   heroEXP: 0
   heroDamageMin: 0
   heroDamageMax: 0
@@ -15403,8 +15405,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: 4}
-  m_SizeDelta: {x: 72, y: 44}
+  m_AnchoredPosition: {x: -41, y: 0.9}
+  m_SizeDelta: {x: 72, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1099238541
 MonoBehaviour:
@@ -22469,8 +22471,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 4}
-  m_SizeDelta: {x: 72, y: 44}
+  m_AnchoredPosition: {x: 89.9, y: 0.89999783}
+  m_SizeDelta: {x: 72, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1533929362
 MonoBehaviour:

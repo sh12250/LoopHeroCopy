@@ -19,6 +19,34 @@ public class PerkWindow : MonoBehaviour
     [SerializeField]
     private Sprite[] perkImgs_br;
 
+    public int perkCnt;
+
+    private void Awake()
+    {
+        perkCnt = 0;
+
+        transform.localScale = Vector3.zero;
+    }
+
+    public void OpenWindow()
+    {
+        if (perkCnt > 0)
+        {
+            SetPerks();
+            transform.localScale = Vector3.one;
+
+            MapTime.MapTimeScale(0);
+        }
+    }
+
+    public void CloseWindow()
+    {
+        transform.localScale = Vector3.zero;
+        perkCnt -= 1;
+
+        MapTime.MapTimeScale(1);
+    }
+
     public void SetPerks()
     {
         int randIdx_0 = Random.Range(0, perkImgs.Length);
@@ -54,13 +82,13 @@ public class PerkWindow : MonoBehaviour
             }
         }
 
-        perks[0].GetComponentInChildren<Image>().sprite = perkImgs[randIdx_0];
+        perks[0].GetComponentsInChildren<Image>()[1].sprite = perkImgs[randIdx_0];
         perks[0].name = ReturnStatName(randIdx_0);
 
-        perks[1].GetComponentInChildren<Image>().sprite = perkImgs[randIdx_1];
+        perks[1].GetComponentsInChildren<Image>()[1].sprite = perkImgs[randIdx_1];
         perks[1].name = ReturnStatName(randIdx_1);
 
-        perks[2].GetComponentInChildren<Image>().sprite = perkImgs[randIdx_2];
+        perks[2].GetComponentsInChildren<Image>()[1].sprite = perkImgs[randIdx_2];
         perks[2].name = ReturnStatName(randIdx_2);
 
         perks[0].GetComponentInChildren<TMP_Text>().text = string.Copy(ReturnDescription(randIdx_0));
@@ -79,7 +107,7 @@ public class PerkWindow : MonoBehaviour
             case 1:
                 return string.Format("Defense {0} Up", 5);
             case 2:
-                return string.Format("Damage {0} Up",5);
+                return string.Format("Damage {0} Up", 5);
             case 3:
                 return string.Format("DamageMagic {0} Up", 2);
             case 4:
