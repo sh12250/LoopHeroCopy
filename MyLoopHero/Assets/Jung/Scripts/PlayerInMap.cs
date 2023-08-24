@@ -58,10 +58,10 @@ public class PlayerInMap : MonoBehaviour
                         // 전투창 열람
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
+                        BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
                         //MapTime.MapTimeScale(0);
-                        //Time.timeScale = 0;
-                        BattleManager.instance.FindHitTarget();
-                        BattleManager.instance.OpenWindow();
+                        Time.timeScale = 0;
+                        BattleManager.instance.StartBattle();
                     }
                 }
 

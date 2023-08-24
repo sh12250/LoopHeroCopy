@@ -667,7 +667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 39952477}
-  - component: {fileID: 39952476}
+  - component: {fileID: 39952478}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -675,18 +675,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &39952476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39952475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19bfae91f8a7e7c4981a74d816d35c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &39952477
 Transform:
   m_ObjectHideFlags: 0
@@ -702,6 +690,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &39952478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39952475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bfae91f8a7e7c4981a74d816d35c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerKnight: {fileID: 0}
+  monstersInBattle: []
+  monsterCount: 0
+  isPlayerDie: 0
+  hitChance: 0
+  playerDMG: 0
+  target: {fileID: 0}
 --- !u!1001 &40745433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5008,7 +5015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &335209819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8576,7 +8583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &605986552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10179,7 +10186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &725732764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14324,15 +14331,14 @@ GameObject:
   - component: {fileID: 1038455776}
   - component: {fileID: 1038455778}
   - component: {fileID: 1038455777}
-  - component: {fileID: 1038455779}
-  - component: {fileID: 1038455780}
+  - component: {fileID: 1038455781}
   m_Layer: 5
   m_Name: BattleWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1038455776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14399,7 +14405,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038455775}
   m_CullTransparentMesh: 1
---- !u!114 &1038455779
+--- !u!114 &1038455781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14411,20 +14417,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb66bef3091f7b24697b9a320d498330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1038455780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038455775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd27fc4fb5835cd449e6f2f0e29db61b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sortingLayerName: UI
-  sortingOrder: 2
+  battleWindow: {fileID: 0}
+  playerSpace: {fileID: 0}
+  playerStatus: {fileID: 0}
+  playerPlus: {fileID: 0}
+  playerMinus: {fileID: 0}
+  idleSprite: {fileID: 0}
+  chargeSprite: {fileID: 0}
+  attackSprite: {fileID: 0}
+  hurt0Sprite: {fileID: 0}
+  hurt1Sprite: {fileID: 0}
+  deathSprite: {fileID: 0}
+  monsterSpaces: []
+  monsterStatus: []
+  monsterPlus: []
+  monsterMinus: []
 --- !u!1001 &1039719252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21116,7 +21123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1444263896
 RectTransform:
   m_ObjectHideFlags: 0
