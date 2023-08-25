@@ -91,19 +91,19 @@ public class ItemBuilder : MonoBehaviour
         for (int i = 0; i < csvConverter.csvRowCount - 1; i++)
         {
             // itemType은 폴더명과 똑같이 만들면 편하다.
-            if (items[i].itemType == "Weapon")
+            if (items[i].itemType == "weapon")
             {
                 items[i].tag = "Weapon";
             }
-            else if (items[i].itemType == "Ring")
+            else if (items[i].itemType == "ring")
             {
                 items[i].tag = "Ring";
             }
-            else if (items[i].itemType == "Shield")
+            else if (items[i].itemType == "shield")
             {
                 items[i].tag = "Shield";
             }
-            else if (items[i].itemType == "Armor")
+            else if (items[i].itemType == "armor")
             {
                 items[i].tag = "Armor";
             }
@@ -120,7 +120,7 @@ public class ItemBuilder : MonoBehaviour
         // ! 스프라이트 배열의 수를 맞추기 위해서 Equiptest 폴더 새로 생성
         // ! LoadAll은 모든 파일을 불러오므로, sprite 파일을 감싸는 texture도 같이 불러옴
         // ! 이 문제 때문에 배열이 2배로 커짐 -> 받아올 데이터의 자료형을 명시해야함
-        itemSprites = Resources.LoadAll<Sprite>("Sprites/Equiptest");
+        itemSprites = Resources.LoadAll<Sprite>("Sprites/Equipment");
 
         // csv 파일을 준비할 때 Resources.LoadAll로 불러오는 순서를 고려해야함
         for (int i = 0; i < itemSprites.Length; i++)

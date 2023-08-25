@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     public float enemyEvade = default;
     public float enemyRegen = default;
     public float enemyItemChance = default;
-    public float enemyItemTier = default;
+    //public float enemyItemTier = default;
     // } 몬스터 능력치
 
     public Enemy CopyEnemyInfo() 

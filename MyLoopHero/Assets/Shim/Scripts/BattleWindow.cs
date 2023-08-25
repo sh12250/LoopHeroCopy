@@ -1,22 +1,11 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class BattleWindow : MonoBehaviour
 {
-    //private static BattleWindow battleWindow_Instance;
-    //public static BattleWindow instance
-    //{
-    //    get
-    //    {
-    //        if (battleWindow_Instance == null)
-    //        {
-    //            battleWindow_Instance = FindObjectOfType<BattleWindow>();
-    //        }
-    //        return battleWindow_Instance;
-    //    }
-    //}
-
     public GameObject battleWindow;
 
     public GameObject playerSpace;
@@ -35,6 +24,8 @@ public class BattleWindow : MonoBehaviour
     public TMP_Text[] monsterStatus;
     public TMP_Text[] monsterPlus;
     public TMP_Text[] monsterMinus;
+
+    private string monsterMaxHP;
 
 
     private void Awake()
@@ -85,6 +76,43 @@ public class BattleWindow : MonoBehaviour
         deathSprite = Resources.Load<Sprite>("Sprites/BattleSprite/Hero/hero_death");
     }
     #endregion
+
+    //#region 플레이어의 TMP 텍스트를 설정해주는 함수
+    //public void ShowPlayerHPText(Knight knight_) 
+    //{
+    //    BattleManager.instance.GetPlayerInfo();
+    //    playerStatus.text = knight_.heroHealth.ToString("F0") +
+    //        "/" + knight_.heroHealthMax.ToString("F0");
+    //}
+    //#endregion
+
+    //#region 플레이어 Plus TMP 텍스트를 설정해주는 함수
+    //public void ShowPlayerPlusText(Knight knight_) 
+    //{
+    //    BattleManager.instance.GetPlayerInfo();
+    //    playerPlus.text = knight_.
+    //}
+    //#endregion
+
+    //#region 플레이어 Minus TMP 텍스트를 설정해주는 함수
+    //public void ShowPlayerMinusText(Knight knight_)
+    //{
+    //    BattleManager.instance.GetPlayerInfo();
+
+    //}
+    //#endregion
+
+    //#region 몬스터의 TMP 텍스트를 설정해주는 함수
+    //public void ShowEnemyHPText(List<Enemy> enemies_)
+    //{
+    //    for (int i = 0; i < enemies_.Count - 1; i++) 
+    //    {
+    //        monsterMaxHP = enemies_[i].enemyHP.ToString("F0");
+    //        monsterStatus[i].text = enemies_[i].enemyHP.ToString("F0") +
+    //            "/" + monsterMaxHP;
+    //    }
+    //}
+    //#endregion
 
     #region 플레이어 스프라이트를 idle 로 변경
     public void ChangePlayerIdle() 
@@ -202,6 +230,7 @@ public class BattleWindow : MonoBehaviour
             {
                 
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyIdle;
+
             }
             else 
             {

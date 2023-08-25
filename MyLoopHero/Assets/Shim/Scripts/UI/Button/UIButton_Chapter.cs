@@ -8,6 +8,7 @@ public class UIButton_Chapter : UIButton
     private GameObject travelWindow;
     private GameObject bossPortraitOff;
     private GameObject bossPortraitOn;
+    private GameObject hide;
 
     protected override void Awake()
     {
@@ -22,6 +23,7 @@ public class UIButton_Chapter : UIButton
         travelWindow = GameObject.Find("TravelWindow").gameObject;
         bossPortraitOff = button.transform.GetChild(1).gameObject;
         bossPortraitOn = button.transform.GetChild(2).gameObject;
+        //hide = button.
     }
 
     protected override void DoPointerEnter(PointerEventData eventData)

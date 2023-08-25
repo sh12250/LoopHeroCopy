@@ -55,6 +55,7 @@ public class PlayerInMap : MonoBehaviour
                 {
                     if (hit_Tiles.collider.GetComponent<RoadTile>().GetMonsterCnt() > 0)
                     {
+                        #region 검출 및 전투 로직
                         // 전투창 열람
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
@@ -62,6 +63,8 @@ public class PlayerInMap : MonoBehaviour
                         //MapTime.MapTimeScale(0);
                         Time.timeScale = 0;
                         BattleManager.instance.StartBattle();
+
+                        #endregion
                     }
                 }
 
@@ -71,9 +74,21 @@ public class PlayerInMap : MonoBehaviour
                     float healAmount = GetComponent<Knight>().heroHealthMax / 5f;
                     GetComponent<Knight>().heroHealth += healAmount;
 
+
+                    #region 검출 및 전투 로직
+                    // 전투창 열람
+                    BattleManager.instance.GetPlayerInfo();
+                    BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
+                    BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
+                    //MapTime.MapTimeScale(0);
+                    Time.timeScale = 0;
+                    BattleManager.instance.StartBattle();
+                    #endregion
+
+
                     AudioManager.instance.PlaySound_HeroCampHeal();
 
-                    if (GameManager.instance.loopCnt == 10)
+                    if (GameManager.instance.loopCnt == 1)
                     {
                         GameManager.instance.LichAppear(hit_Tiles.collider.gameObject);
                     }

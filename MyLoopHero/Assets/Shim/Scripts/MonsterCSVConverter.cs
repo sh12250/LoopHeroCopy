@@ -49,7 +49,7 @@ public class MonsterCSVConverter : MonoBehaviour
     public float[] enemyEvade { get; private set; }
     public float[] enemyRegen { get; private set; }
     public float[] enemyItemChance { get; private set; }
-    public float[] enemyItemTier { get; private set; }
+    //public float[] enemyItemTier { get; private set; }
     // } 몬스터 능력치
 
 
@@ -135,7 +135,7 @@ public class MonsterCSVConverter : MonoBehaviour
         enemyEvade = new float[csvRowCount];
         enemyRegen = new float[csvRowCount];
         enemyItemChance = new float[csvRowCount];
-        enemyItemTier = new float[csvRowCount];
+        //enemyItemTier = new float[csvRowCount];
     }
     // } 몬스터 배열 초기화
 
@@ -161,7 +161,7 @@ public class MonsterCSVConverter : MonoBehaviour
             enemyEvade[i] = float.Parse(monsterDataList[(csvColumnCount * (i + 1)) + 12]);
             enemyRegen[i] = float.Parse(monsterDataList[(csvColumnCount * (i + 1)) + 13]);
             enemyItemChance[i] = float.Parse(monsterDataList[(csvColumnCount * (i + 1)) + 14]);
-            enemyItemTier[i] = float.Parse(monsterDataList[(csvColumnCount * (i + 1)) + 15]);
+            //enemyItemTier[i] = float.Parse(monsterDataList[(csvColumnCount * (i + 1)) + 15]);
         }
     }
 }

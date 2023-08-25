@@ -32,7 +32,8 @@ public class TravelWindow : MonoBehaviour
         }
         else 
         {
-            /*Do Nothing*/
+            departureButton.SetActive(false);
+            hide.SetActive(true);
         }
     }
 }

@@ -38,6 +38,9 @@ public class BattleManager : MonoBehaviour
     // rayCastHit_.collider 의 child 수를 담을 변수
     public int monsterCount;
 
+    // rayCastHit_.collider 에서 받아온 child 를 담을 리스트
+    public List<GameObject> monstersInField;
+
     // 몬스터들의 공격속도를 WaitForSecondsRealtime 에 캐싱할 배열
     public WaitForSecondsRealtime[] monsterSpeedArray;
 
@@ -58,17 +61,17 @@ public class BattleManager : MonoBehaviour
 
 
     #region 몬스터 공격 속드 WaitForSecondsRealtime 에 캐싱
-    public WaitForSecondsRealtime slimeBossSpeed = new WaitForSecondsRealtime(0.6f);
-    public WaitForSecondsRealtime ratwolfAttackSpeed = new WaitForSecondsRealtime(0.75f);
-    public WaitForSecondsRealtime spiderAttackSpeed = new WaitForSecondsRealtime(0.91f);
-    public WaitForSecondsRealtime skelGargoFlesh = new WaitForSecondsRealtime(0.3f);
-    public WaitForSecondsRealtime chestAttackSpeed = new WaitForSecondsRealtime(0.7f);
-    public WaitForSecondsRealtime ghostAttackSpeed = new WaitForSecondsRealtime(0.85f);
-    public WaitForSecondsRealtime vampireAttackSpeed = new WaitForSecondsRealtime(0.5f);
-    public WaitForSecondsRealtime ghoulAttackSpeed = new WaitForSecondsRealtime(0.32f);
-    public WaitForSecondsRealtime harpyAttackSpeed = new WaitForSecondsRealtime(0.8f);
-    public WaitForSecondsRealtime mosquitoAttackSpeed = new WaitForSecondsRealtime(1.1f);
-    public WaitForSecondsRealtime scarecrowAttackSpeed = new WaitForSecondsRealtime(0.45f);
+    //public WaitForSecondsRealtime slimeBossSpeed = new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
+    //public WaitForSecondsRealtime ratwolfAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.75f, 0.95f));
+    //public WaitForSecondsRealtime spiderAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.91f, 1.11f));
+    //public WaitForSecondsRealtime skelGargoFlesh = new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
+    //public WaitForSecondsRealtime chestAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.7f, 0.9f));
+    //public WaitForSecondsRealtime ghostAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.85f, 1.05f));
+    //public WaitForSecondsRealtime vampireAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.5f, 07f));
+    //public WaitForSecondsRealtime ghoulAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.32f, 0.52f));
+    //public WaitForSecondsRealtime harpyAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.8f, 1f));
+    //public WaitForSecondsRealtime mosquitoAttackSpeed = new WaitForSecondsRealtime(Random.Range(1.1f, 1.3f));
+    //public WaitForSecondsRealtime scarecrowAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.45f, 0.65f));
     #endregion
 
 
@@ -116,6 +119,7 @@ public class BattleManager : MonoBehaviour
     public void MakeMonsterList()
     {
         monstersInBattle = new List<Enemy>();
+        monstersInField = new List<GameObject>();
     }
     #endregion
 
@@ -152,6 +156,8 @@ public class BattleManager : MonoBehaviour
         // for 문을 통해 몬스터의 정보를 순서대로 monstersInBattle 리스트에 넣는다. (타일의 첫번째 자식은 타일 이미지이므로 1번부터 돌린다.)
         for (int i = 1; i < monsterCount + 1; i++)
         {
+            monstersInField.Add(raycasthit_.collider.transform.GetChild(i).gameObject);
+
             #region 이름에 맞추어 알맞은 몬스터 정보값을 복사해 리스트에 넣는다.
             //Debug.LogFormat("리스트 길이 {0}, i 값: {1}, 어떤걸 들고 오지?: {2}", monstersInBattle.Count, i, raycasthit_.collider.transform.GetChild(i).name);
             if (raycasthit_.collider.transform.GetChild(i).name == "Slime")
@@ -160,7 +166,7 @@ public class BattleManager : MonoBehaviour
                 Debug.LogFormat("리스트 길이 {0}, i 값: {1}", monstersInBattle.Count, i);
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Redwolf")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "RedWolf")
             {
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[1].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
@@ -227,8 +233,9 @@ public class BattleManager : MonoBehaviour
             }
             // ! 보스 생성시 이름 잘 보고 주석 풀 것
 
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Boss")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "BOSS")
             {
+                Debug.Log(raycasthit_.collider.transform.GetChild(i).name);
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[13].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
@@ -363,6 +370,9 @@ public class BattleManager : MonoBehaviour
     #region 플레이어의 전투 코루틴
     public IEnumerator PlayerCycle(Knight playerKnight_, Enemy enemy_, List<Enemy> enemies_)
     {
+        battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
+        ShowPlayerHPText(playerKnight_);
+
         while (true)
         {
             yield return new WaitForSecondsRealtime(1 - (playerKnight.heroAttackSpeed * 0.01f));
@@ -392,6 +402,12 @@ public class BattleManager : MonoBehaviour
                     {
                         battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
                         Debug.Log("루프 탈출");
+
+                        //for (int i = 0; i < monstersInField.Count - 1; i++) 
+                        //{
+                        //    Destroy(monstersInField[i]);
+                        //}
+
                         EndBattle();
                         yield break;
                     }
@@ -411,56 +427,59 @@ public class BattleManager : MonoBehaviour
     {
         // enemies_가 빈 상태로 함수를 실행하는 경우 종료
         if (enemies_ == default || enemies_.Count < 1) { yield break; }
+        
+        battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
 
         while (true)
         {
             switch (enemy_.enemyID)
             {
                 case 100:
-                    yield return slimeBossSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
                     break;
                 case 101:
-                    yield return ratwolfAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.75f, 0.95f));
                     break;
                 case 102:
-                    yield return spiderAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.91f, 1.11f));
                     break;
                 case 103:
-                    yield return skelGargoFlesh;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
                     break;
                 case 104:
-                    yield return chestAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.7f, 0.9f));
                     break;
                 case 105:
-                    yield return ghostAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.85f, 1.05f));
                     break;
                 case 106:
-                    yield return vampireAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.5f, 07f));
                     break;
                 case 107:
-                    yield return ghoulAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.32f, 0.52f));
                     break;
                 case 108:
-                    yield return harpyAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.8f, 1f));
                     break;
                 case 109:
-                    yield return skelGargoFlesh;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
                     break;
                 case 110:
-                    yield return skelGargoFlesh;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
                     break;
                 case 111:
-                    yield return mosquitoAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(1.1f, 1.3f));
                     break;
                 case 112:
-                    yield return scarecrowAttackSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.45f, 0.65f));
                     break;
                 case 113:
-                    yield return slimeBossSpeed;
+                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
                     break;
             }
 
             battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
+            //battleWindow.GetComponent<BattleWindow>().ShowEnemyHPText(enemies_);
 
             if (enemy_.enemyHP <= 0)
             {
@@ -523,20 +542,40 @@ public class BattleManager : MonoBehaviour
     #region 플레이어가 몬스터를 공격하는 함수 (몬스터의 방어력에 따라 데미지 감소)
     public void AttackTarget(Knight playerKnight_, Enemy targetEnemy_)
     {
+        battleWindow.GetComponent<BattleWindow>().ChangePlayerAttack();
+
         // 플레이어의 데미지는 최소공격력과 최대 공격력 사이에서 결정된다.
         playerDMG = Random.Range(playerKnight_.heroDamageMin, playerKnight_.heroDamageMax);
 
-        battleWindow.GetComponent<BattleWindow>().ChangePlayerAttack();
+        ShowPlayerHPText(playerKnight_);
         AudioManager.instance.PlaySound_HeroAttack();
 
         // 만약 적의 방어력이 플레이어 데미지보다 높다면,
         if (targetEnemy_.enemyDEF >= playerDMG)
         {
-            Debug.LogFormat("[AttackTarget]: 플레이어의 공격이 가로막혔다\n몬스터 방어력: {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            targetEnemy_.enemyHP -= playerKnight_.heroDamageMagic;
-            Debug.LogFormat("[AttackTarget]: 플레이어의 마법데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic, targetEnemy_.enemyHP);
-            playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic);
-            Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic, playerKnight_.heroHealth);
+            //Debug.LogFormat("[AttackTarget]: 플레이어의 공격이 가로막혔다\n몬스터 방어력: {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
+            if (targetEnemy_.enemyHP - playerKnight_.heroDamageMagic <= 0f) 
+            {
+                targetEnemy_.enemyHP = 0f;
+            }
+            else 
+            {
+                targetEnemy_.enemyHP -= playerKnight_.heroDamageMagic;
+            }
+            //Debug.LogFormat("[AttackTarget]: 플레이어의 마법데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic, targetEnemy_.enemyHP);
+            if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic)) 
+            {
+                playerKnight_.heroHealth = playerKnight_.heroHealthMax;
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+            }
+            else 
+            {
+                playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic);
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+            }
+            //Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic, playerKnight_.heroHealth);
 
             battleWindow.GetComponent<BattleWindow>().ChangeEnemyCharge(targetEnemy_);
         }
@@ -544,7 +583,14 @@ public class BattleManager : MonoBehaviour
         else
         {
             Debug.LogFormat("[AttackTarget]: 플레이어의 공격\n몬스터 방어력 : {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            targetEnemy_.enemyHP -= (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF));
+            if (targetEnemy_.enemyHP - (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)) <= 0f) 
+            {
+                targetEnemy_.enemyHP = 0f;
+            }
+            else 
+            {
+                targetEnemy_.enemyHP -= (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF));
+            }
             Debug.LogFormat("[AttackTarget]: 플레이어의 가한데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF), targetEnemy_.enemyHP);
 
             battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt1(targetEnemy_);
@@ -552,11 +598,15 @@ public class BattleManager : MonoBehaviour
             if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF))))
             {
                 playerKnight_.heroHealth = playerKnight_.heroHealthMax;
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerPlusText(playerKnight_, targetEnemy_);
                 Debug.LogFormat("[AttackTarget]: 현재 플레이어의 체력은 최대치이다. {0}", playerKnight_.heroHealth);
             }
             else
             {
                 playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)));
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerPlusText(playerKnight_, targetEnemy_);
                 Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)), playerKnight_.heroHealth);
             }
         }
@@ -566,10 +616,12 @@ public class BattleManager : MonoBehaviour
     #region 플레이어가 전체 공격을 가하는 함수
     public void AttackAll(Knight playerKnight_, List<Enemy> enemies_)
     {
+        battleWindow.GetComponent<BattleWindow>().ChangePlayerAttack();
+
         for (int i = 0; i < enemies_.Count; i++)
         {
             enemies_[i].enemyHP -= playerKnight_.heroDamageAll;
-            Debug.LogFormat("[AttackAll]: 플레이어의 전체공격 데미지 : {0}", playerKnight_.heroDamageAll);
+            //Debug.LogFormat("[AttackAll]: 플레이어의 전체공격 데미지 : {0}", playerKnight_.heroDamageAll);
         }
         AudioManager.instance.PlaySound_HeroAttack();
     }
@@ -579,6 +631,7 @@ public class BattleManager : MonoBehaviour
     public void AttackPlayer(Knight playerKnight_, Enemy enemy_)
     {
         battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
+
         if (enemy_.enemyID == 113) 
         {
             AudioManager.instance.PlaySound_LichAttack();
@@ -592,16 +645,67 @@ public class BattleManager : MonoBehaviour
         if (playerKnight_.heroDefense >= enemy_.enemyDMG)
         {
             /*Do Nothing*/
-            Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격이 가로막혔다\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
+            //Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격이 가로막혔다\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
             battleWindow.GetComponent<BattleWindow>().ChangePlayerCharge();
         }
         // 그 외 상황에서는,
         else
         {
+            if (playerKnight_.heroHealth - enemy_.enemyDMG - playerKnight_.heroDefense <= 0f)
+            {
+                playerKnight_.heroHealth = 0f;
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerMinusText(playerKnight_, enemy_);
+            }
+            else
+            {
+                playerKnight_.heroHealth -= enemy_.enemyDMG - playerKnight_.heroDefense;
+                ShowPlayerHPText(playerKnight_);
+                ShowPlayerMinusText(playerKnight_, enemy_);
+            }
             // 데미지(몬스터 공격력 - 플레이어 방어력)를 플레이어 체력에서 뺀다.
-            playerKnight_.heroHealth -= enemy_.enemyDMG - playerKnight_.heroDefense;
-            Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
+            //Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
             battleWindow.GetComponent<BattleWindow>().ChangePlayerHurt1();
+        }
+    }
+    #endregion
+
+    #region 플레이어의 TMP 텍스트를 설정해주는 함수
+    public void ShowPlayerHPText(Knight playerKnight_)
+    {
+        battleWindow.GetComponent<BattleWindow>().playerStatus.text =
+            playerKnight_.heroHealth.ToString("F0") + " / " + playerKnight_.heroHealthMax.ToString("F0");
+    }
+    #endregion
+
+    #region 플레이어 Plus TMP 텍스트를 설정해주는 함수
+    public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
+    {
+        if (enemy_.enemyDEF >= playerDMG) 
+        {
+            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+                (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
+        }
+        else 
+        {
+            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+                (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
+        }
+    }
+    #endregion
+
+    #region 플레이어 Minus TMP 텍스트를 설정해주는 함수
+    public void ShowPlayerMinusText(Knight playerKnight_, Enemy enemy_)
+    {
+        if (playerKnight_.heroDefense >= enemy_.enemyDMG)
+        {
+            /*Do Nothing*/
+            battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
+        }
+        else 
+        {
+            battleWindow.GetComponent<BattleWindow>().playerMinus.text =
+                   (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
         }
     }
     #endregion

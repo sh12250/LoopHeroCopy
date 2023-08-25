@@ -70,7 +70,7 @@ public class MonsterSpawner : MonoBehaviour
             enemies[i].enemyEvade = monsterCSVConverter.enemyEvade[i];
             enemies[i].enemyRegen = monsterCSVConverter.enemyRegen[i];
             enemies[i].enemyItemChance = monsterCSVConverter.enemyItemChance[i];
-            enemies[i].enemyItemTier = monsterCSVConverter.enemyItemTier[i];
+            //enemies[i].enemyItemTier = monsterCSVConverter.enemyItemTier[i];
         }
     }
 

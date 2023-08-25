@@ -7,6 +7,7 @@ public class UIButton_Class : UIButton
     private GameObject travelWindow;
     private GameObject heroPortraitOff;
     private GameObject heroPortraitOn;
+    private GameObject hide;
 
     protected override void Awake()
     {
