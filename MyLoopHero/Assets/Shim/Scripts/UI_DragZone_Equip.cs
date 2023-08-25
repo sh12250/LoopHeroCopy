@@ -174,10 +174,4 @@ public class UI_DragZone_Equip : MonoBehaviour
 
     //=========================================================================================
 
-    private void ChangeEquipSlotSprite() 
-    {
-    }
-
-
-
 }

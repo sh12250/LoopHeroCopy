@@ -73,31 +73,21 @@ public class GameManager : MonoBehaviour
             player.GetComponentInChildren<Animator>().SetFloat("MapTimeScale", MapTime.mapTimeScale);
         }
 
-        if (loopCnt == 1)
-        {
-            List<GameObject> alltiles_ = MapManager.instance.GetVoidTiles();
-
-            foreach (GameObject tile_ in alltiles_)
-            {
-                if (tile_.name == "CampsiteTile")
-                {
-                    tile_.GetComponentsInChildren<SpriteRenderer>()[0].enabled = false;
-                    tile_.GetComponentsInChildren<SpriteRenderer>()[1].enabled = true;
-                    tile_.GetComponentInChildren<Animator>().enabled = true;
-
-                    AudioManager.instance.PlayMusic_LichPortal();
-
-                    break;
-                }
-            }
-        }
-
         if (isPlayerLevelUp)
         {
             isPlayerLevelUp = false;
 
             perkWindow.perkCnt += 1;
         }
+    }
+
+    public void LichAppear(GameObject campsiteTile_)
+    {
+        campsiteTile_.GetComponentsInChildren<SpriteRenderer>()[0].enabled = false;
+        campsiteTile_.GetComponentsInChildren<SpriteRenderer>()[1].enabled = true;
+        campsiteTile_.GetComponentInChildren<Animator>().enabled = true;
+
+        AudioManager.instance.PlayMusic_LichPortal();
     }
 
     public void AddToMonsters(GameObject monster_)
@@ -121,6 +111,9 @@ public class GameManager : MonoBehaviour
 
             HandManager.instance.DrawCard();
             HandManager.instance.DrawCard();
+
+            UI_DragZone_Inven.instance.MakeItem();
+            UI_DragZone_Inven.instance.MakeItem();
 
             AudioManager.instance.PlaySound_DayStart();
         }

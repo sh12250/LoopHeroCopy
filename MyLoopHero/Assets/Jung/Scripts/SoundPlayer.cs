@@ -32,6 +32,7 @@ public class SoundPlayer : MonoBehaviour
         else
         {
             isPlaying = false;
+            ReturnSelf();
         }
     }
 

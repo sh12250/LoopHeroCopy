@@ -72,6 +72,11 @@ public class PlayerInMap : MonoBehaviour
                     GetComponent<Knight>().heroHealth += healAmount;
 
                     AudioManager.instance.PlaySound_HeroCampHeal();
+
+                    if (GameManager.instance.loopCnt == 10)
+                    {
+                        GameManager.instance.LichAppear(hit_Tiles.collider.gameObject);
+                    }
                 }
 
                 if (hit_Tiles.collider.name == "VILLAGE")
