@@ -47,9 +47,9 @@ public class BattleWindow : MonoBehaviour
     private void InitMonsterArrays()
     {
         monsterSpaces = new GameObject[battleWindow.transform.childCount - 3];
-        //monsterStatus = new TMP_Text[battleWindow.transform.childCount - 3];
-        //monsterPlus = new TMP_Text[battleWindow.transform.childCount - 3];
-        //monsterMinus = new TMP_Text[battleWindow.transform.childCount - 3];
+        monsterStatus = new TMP_Text[battleWindow.transform.childCount - 3];
+        monsterPlus = new TMP_Text[battleWindow.transform.childCount - 3];
+        monsterMinus = new TMP_Text[battleWindow.transform.childCount - 3];
     }
 
     #region 이 스크립트를 들고 있는 오브젝트(배틀 윈도우) 하위의 게임 오브젝트들을 설정
@@ -58,18 +58,18 @@ public class BattleWindow : MonoBehaviour
         battleWindow = this.gameObject;
 
         playerSpace = battleWindow.transform.Find("PlayerSprite").gameObject;
-        //playerStatus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[0];
-        //playerPlus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[1];
-        //playerMinus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[2];
+        playerStatus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[0];
+        playerPlus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[1];
+        playerMinus = playerSpace.transform.GetComponentsInChildren<TMP_Text>()[2];
 
         InitMonsterArrays();
 
         for (int i = 0; i < battleWindow.transform.childCount - 3; i++)
         {
             monsterSpaces[i] = gameObject.transform.GetChild(i + 3).gameObject;
-            //monsterStatus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[0];
-            //monsterPlus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[1];
-            //monsterMinus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[2];
+            monsterStatus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[0];
+            monsterPlus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[1];
+            monsterMinus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[2];
         }
     }
     #endregion
@@ -135,72 +135,72 @@ public class BattleWindow : MonoBehaviour
         {
             if (enemy_.enemyID == 100)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[0].enemyIdle;
             }
             else if (enemy_.enemyID == 101)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[1].enemyIdle;
             }
             else if (enemy_.enemyID == 102)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[2].enemyIdle;
             }
             else if (enemy_.enemyID == 103)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[3].enemyIdle;
             }
             else if (enemy_.enemyID == 104)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[4].enemyIdle;
             }
             else if (enemy_.enemyID == 105)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[5].enemyIdle;
             }
             else if (enemy_.enemyID == 106)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[6].enemyIdle;
             }
             else if (enemy_.enemyID == 107)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[7].enemyIdle;
             }
             else if (enemy_.enemyID == 108)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[8].enemyIdle;
             }
             else if (enemy_.enemyID == 109)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[9].enemyIdle;
             }
             else if (enemy_.enemyID == 110)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[10].enemyIdle;
             }
             else if (enemy_.enemyID == 111)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[11].enemyIdle;
             }
             else if (enemy_.enemyID == 112)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[12].enemyIdle;
             }
             else if (enemy_.enemyID == 113)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyIdle;
             }
             else 
@@ -218,72 +218,72 @@ public class BattleWindow : MonoBehaviour
         {
             if (enemy_.enemyID == 100)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[0].enemyCharge;
             }
             else if (enemy_.enemyID == 101)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[1].enemyCharge;
             }
             else if (enemy_.enemyID == 102)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[2].enemyCharge;
             }
             else if (enemy_.enemyID == 103)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[3].enemyCharge;
             }
             else if (enemy_.enemyID == 104)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[4].enemyCharge;
             }
             else if (enemy_.enemyID == 105)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[5].enemyCharge;
             }
             else if (enemy_.enemyID == 106)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[6].enemyCharge;
             }
             else if (enemy_.enemyID == 107)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[7].enemyCharge;
             }
             else if (enemy_.enemyID == 108)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[8].enemyCharge;
             }
             else if (enemy_.enemyID == 109)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[9].enemyCharge;
             }
             else if (enemy_.enemyID == 110)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[10].enemyCharge;
             }
             else if (enemy_.enemyID == 111)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[11].enemyCharge;
             }
             else if (enemy_.enemyID == 112)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[12].enemyCharge;
             }
             else if (enemy_.enemyID == 113)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyCharge;
             }
             else
@@ -301,72 +301,72 @@ public class BattleWindow : MonoBehaviour
         {
             if (enemy_.enemyID == 100)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[0].enemyAttack;
             }
             else if (enemy_.enemyID == 101)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[1].enemyAttack;
             }
             else if (enemy_.enemyID == 102)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[2].enemyAttack;
             }
             else if (enemy_.enemyID == 103)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[3].enemyAttack;
             }
             else if (enemy_.enemyID == 104)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[4].enemyAttack;
             }
             else if (enemy_.enemyID == 105)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[5].enemyAttack;
             }
             else if (enemy_.enemyID == 106)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[6].enemyAttack;
             }
             else if (enemy_.enemyID == 107)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[7].enemyAttack;
             }
             else if (enemy_.enemyID == 108)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[8].enemyAttack;
             }
             else if (enemy_.enemyID == 109)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[9].enemyAttack;
             }
             else if (enemy_.enemyID == 110)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[10].enemyAttack;
             }
             else if (enemy_.enemyID == 111)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[11].enemyAttack;
             }
             else if (enemy_.enemyID == 112)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[12].enemyAttack;
             }
             else if (enemy_.enemyID == 113)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyAttack;
             }
             else
@@ -384,72 +384,72 @@ public class BattleWindow : MonoBehaviour
         {
             if (enemy_.enemyID == 100)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[0].enemyHurt_0;
             }
             else if (enemy_.enemyID == 101)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[1].enemyHurt_0;
             }
             else if (enemy_.enemyID == 102)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[2].enemyHurt_0;
             }
             else if (enemy_.enemyID == 103)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[3].enemyHurt_0;
             }
             else if (enemy_.enemyID == 104)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[4].enemyHurt_0;
             }
             else if (enemy_.enemyID == 105)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[5].enemyHurt_0;
             }
             else if (enemy_.enemyID == 106)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[6].enemyHurt_0;
             }
             else if (enemy_.enemyID == 107)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[7].enemyHurt_0;
             }
             else if (enemy_.enemyID == 108)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[8].enemyHurt_0;
             }
             else if (enemy_.enemyID == 109)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[9].enemyHurt_0;
             }
             else if (enemy_.enemyID == 110)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[10].enemyHurt_0;
             }
             else if (enemy_.enemyID == 111)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[11].enemyHurt_0;
             }
             else if (enemy_.enemyID == 112)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[12].enemyHurt_0;
             }
             else if (enemy_.enemyID == 113)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyHurt_0;
             }
             else
@@ -467,72 +467,72 @@ public class BattleWindow : MonoBehaviour
         {
             if (enemy_.enemyID == 100)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[0].enemyHurt_1;
             }
             else if (enemy_.enemyID == 101)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[1].enemyHurt_1;
             }
             else if (enemy_.enemyID == 102)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[2].enemyHurt_1;
             }
             else if (enemy_.enemyID == 103)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[3].enemyHurt_1;
             }
             else if (enemy_.enemyID == 104)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[4].enemyHurt_1;
             }
             else if (enemy_.enemyID == 105)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[5].enemyHurt_1;
             }
             else if (enemy_.enemyID == 106)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[6].enemyHurt_1;
             }
             else if (enemy_.enemyID == 107)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[7].enemyHurt_1;
             }
             else if (enemy_.enemyID == 108)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[8].enemyHurt_1;
             }
             else if (enemy_.enemyID == 109)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[9].enemyHurt_1;
             }
             else if (enemy_.enemyID == 110)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[10].enemyHurt_1;
             }
             else if (enemy_.enemyID == 111)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[11].enemyHurt_1;
             }
             else if (enemy_.enemyID == 112)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[12].enemyHurt_1;
             }
             else if (enemy_.enemyID == 113)
             {
-                monsterSpaces[i].transform.GetComponent<Image>().color = Color.white;
+                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyHurt_1;
             }
             else
@@ -612,13 +612,13 @@ public class BattleWindow : MonoBehaviour
     }
     #endregion
 
-    #region 적 스프라이트를 Null 로 변경
-    public void ChangeEnemyNull()
-    {
-        for (int i = 0; i < BattleManager.instance.monsterCount; i++)
-        {
-            monsterSpaces[i].transform.GetComponent<Image>().color = Color.black;
-        }
-    }
-    #endregion
+    //#region 적 스프라이트를 Null 로 변경
+    //public void ChangeEnemyNull()
+    //{
+    //    for (int i = 0; i < BattleManager.instance.monsterCount; i++)
+    //    {
+    //        monsterSpaces[i].transform.GetComponent<Image>().color = Color.black;
+    //    }
+    //}
+    //#endregion
 }

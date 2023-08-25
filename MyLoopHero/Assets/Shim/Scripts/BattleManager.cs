@@ -74,11 +74,11 @@ public class BattleManager : MonoBehaviour
 
     private void Awake()
     {
+        isPlayerDie = false;
         MakeMonsterList();
         GetPlayerInfo();
         CheckBattleWindow();
         CheckDeadWindow();
-        CheckPlayerDeath(playerKnight);
     }
 
     private void FixedUpdate()
@@ -122,7 +122,7 @@ public class BattleManager : MonoBehaviour
     #region 몬스터 리스트 리셋하는 함수
     private void ResetMonsterArray()
     {
-        battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
+        //battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
         monstersInBattle.Clear();
     }
     #endregion
@@ -265,11 +265,11 @@ public class BattleManager : MonoBehaviour
 
     //전투 시작 종료 함수//////////////////////////////////////////////////////////////////////////////////////
 
-    #region BattleWindow 를 찾고 SetActive(false) 하는 함수
+    #region BattleWindow 를 찾고 사이즈를 줄이는 함수
     public void CheckBattleWindow() 
     {
         battleWindow = GameObject.Find("BattleWindow").gameObject;
-        battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
+        //battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
         battleWindow.transform.localScale = Vector3.zero;
     }
     #endregion
@@ -291,6 +291,12 @@ public class BattleManager : MonoBehaviour
     #region 전투 시작 함수
     public void StartBattle()
     {
+        battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
+        for (int i = 0; i < monsterCount; i++) 
+        {
+            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[i]);
+        }
+
         OpenBattleWindow();
         StartCoroutine(BattleCycle());
     }
@@ -366,6 +372,7 @@ public class BattleManager : MonoBehaviour
             {
                 OpenDeadWindow();
                 battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
+                AudioManager.instance.PlaySound_HeroDeath();
                 yield break;
             }
             else if (playerKnight_.heroHealth > 0)
@@ -461,6 +468,15 @@ public class BattleManager : MonoBehaviour
                 //enemies_.Remove(enemy_);
                 //Debug.Log("루프 탈출");
                 battleWindow.GetComponent<BattleWindow>().ChangeEnemyDeath(enemy_);
+                if (enemy_.enemyID == 113)
+                {
+                    AudioManager.instance.PlaySound_LichDeath();
+                }
+                else
+                {
+                    /*Do Nothing*/
+                }
+
                 StopCoroutine(EnemyCycle(playerKnight_, enemy_, enemies_));
                 yield break;
             }
@@ -470,6 +486,7 @@ public class BattleManager : MonoBehaviour
                 {
                     OpenDeadWindow();
                     battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
+                    AudioManager.instance.PlaySound_HeroDeath();
                     yield break;
                 }
                 else if (playerKnight_.heroHealth > 0)
@@ -510,6 +527,7 @@ public class BattleManager : MonoBehaviour
         playerDMG = Random.Range(playerKnight_.heroDamageMin, playerKnight_.heroDamageMax);
 
         battleWindow.GetComponent<BattleWindow>().ChangePlayerAttack();
+        AudioManager.instance.PlaySound_HeroAttack();
 
         // 만약 적의 방어력이 플레이어 데미지보다 높다면,
         if (targetEnemy_.enemyDEF >= playerDMG)
@@ -529,7 +547,7 @@ public class BattleManager : MonoBehaviour
             targetEnemy_.enemyHP -= (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF));
             Debug.LogFormat("[AttackTarget]: 플레이어의 가한데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF), targetEnemy_.enemyHP);
 
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt0(targetEnemy_);
+            battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt1(targetEnemy_);
 
             if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF))))
             {
@@ -553,6 +571,7 @@ public class BattleManager : MonoBehaviour
             enemies_[i].enemyHP -= playerKnight_.heroDamageAll;
             Debug.LogFormat("[AttackAll]: 플레이어의 전체공격 데미지 : {0}", playerKnight_.heroDamageAll);
         }
+        AudioManager.instance.PlaySound_HeroAttack();
     }
     #endregion
 
@@ -560,7 +579,15 @@ public class BattleManager : MonoBehaviour
     public void AttackPlayer(Knight playerKnight_, Enemy enemy_)
     {
         battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
-       
+        if (enemy_.enemyID == 113) 
+        {
+            AudioManager.instance.PlaySound_LichAttack();
+        }
+        else 
+        {
+            AudioManager.instance.PlaySound_EnemyAttack();
+        }
+
         // 만약 플레이어의 방어력이 몬스터의 공격력보다 높다면,
         if (playerKnight_.heroDefense >= enemy_.enemyDMG)
         {
@@ -574,7 +601,7 @@ public class BattleManager : MonoBehaviour
             // 데미지(몬스터 공격력 - 플레이어 방어력)를 플레이어 체력에서 뺀다.
             playerKnight_.heroHealth -= enemy_.enemyDMG - playerKnight_.heroDefense;
             Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
-            battleWindow.GetComponent<BattleWindow>().ChangePlayerHurt0();
+            battleWindow.GetComponent<BattleWindow>().ChangePlayerHurt1();
         }
     }
     #endregion
