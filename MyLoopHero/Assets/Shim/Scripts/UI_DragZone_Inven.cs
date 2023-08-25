@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 //using System.Collections.Generic;
 //using Unity.VisualScripting;
@@ -9,10 +10,18 @@ using UnityEngine.UI;
 
 public class UI_DragZone_Inven : MonoBehaviour
 {
+    public static UI_DragZone_Inven instance;
+
     private ItemBuilder itemBuilder;
     private GameObject dragZone_Inven;
     static public GameObject[] invenSlots { get; private set; }
+
+    public List<GameObject> invenSlots2;
+
     static public GameObject[] slotImages { get; private set; }
+
+    public int itemInInvenCnt;
+
 
     //enum ChildrenOfDragZone_Inven
     //{
@@ -32,7 +41,18 @@ public class UI_DragZone_Inven : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null || instance == default)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("UI_DragZone_Inven가 너무 많습니다");
+        }
+
         itemBuilder = transform.parent.GetComponentInChildren<ItemBuilder>();
+
+        itemInInvenCnt = 0;
 
         MakeInvenSlotArray();
         MakeSlotImageArray();
@@ -41,9 +61,8 @@ public class UI_DragZone_Inven : MonoBehaviour
 
     void Update()
     {
-        MakeItemAndRemove();
-    }
 
+    }
 
     private void MakeInvenSlotArray()
     {
@@ -54,8 +73,6 @@ public class UI_DragZone_Inven : MonoBehaviour
         {
             invenSlots[i] = gameObject.transform.GetChild(i).gameObject;
         }
-
-        //Debug.LogFormat("[MakeInvenSlotArray] 여기에 비어있나?? {0}", invenSlots.Length);
     }
 
     private void MakeSlotImageArray()
@@ -80,6 +97,31 @@ public class UI_DragZone_Inven : MonoBehaviour
         }
     }
 
+    public void MakeItem()
+    {
+        int randomIdx_ = Random.Range(0, itemBuilder.csvConverter.csvRowCount - 1);
+
+        if (itemInInvenCnt < 12)
+        {
+            for (int i = 0; i < invenSlots.Length; i++)
+            {
+                if (slotImages[i].GetComponent<Image>().sprite == null)
+                {
+                    invenSlots[i].tag = itemBuilder.items[randomIdx_].tag;
+                    invenSlots[i].name = itemBuilder.items[randomIdx_].itemName;
+                    invenSlots[i].GetComponent<Item>().SetItem(itemBuilder.items[randomIdx_]);
+                    invenSlots[i].SetActive(true);
+                    slotImages[i].GetComponent<Image>().color = Color.white;
+                    slotImages[i].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
+
+                    break;
+                }
+            }
+
+            itemInInvenCnt += 1;
+        }
+    }
+
     private void MakeItemAndRemove()
     {
         int randomIdx_ = Random.Range(0, itemBuilder.csvConverter.csvRowCount - 1);
@@ -96,60 +138,6 @@ public class UI_DragZone_Inven : MonoBehaviour
                 slotImages[0].GetComponent<Image>().color = Color.white;
                 slotImages[0].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
             }
-            // 인벤 꽉 찼을 때
-            else if (invenSlots[0].tag != "Inven"
-                && invenSlots[invenSlots.Length - 1].tag != "Inven")
-            {
-
-
-            }
-            // 인벤 적당히 차 있을 때
-            else if (invenSlots[0].tag != "Inven"
-                && invenSlots[invenSlots.Length - 1].tag == "Inven")
-            {
-
-
-            }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            // for 문을 돌려서 현재 아이템이 있는 제일 마지막 슬롯을 찾는다.
-            for (int i = invenSlots.Length - 1; i >= 0; i--)
-            {
-                if (invenSlots[i].tag != "Inven")
-                {
-                    GameObject lastItem = invenSlots[i];
-                    break;
-                }
-                else
-                {
-                    /* Do Nothing*/
-                }
-            }
-
-            // 인벤 비어있을 때
-            if (invenSlots[0].tag == "Inven")
-            {
-                /*Do Nothing*/
-            }
-
-            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven")
-            {
-
-            }
-
-            else if (invenSlots[0].tag != "Inven" && invenSlots[0].tag != "Inven")
-            {
-
-            }
-        }
-    }
-
-    private void SwapItem(GameObject obj1_, GameObject obj2_)
-    {
-        GameObject tempObj_;
-        tempObj_ = obj1_;
-        obj1_ = obj2_;
-        obj2_ = tempObj_;
     }
 }
