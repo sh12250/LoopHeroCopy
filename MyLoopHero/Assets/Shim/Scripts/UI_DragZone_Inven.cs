@@ -121,23 +121,4 @@ public class UI_DragZone_Inven : MonoBehaviour
             itemInInvenCnt += 1;
         }
     }
-
-    private void MakeItemAndRemove()
-    {
-        int randomIdx_ = Random.Range(0, itemBuilder.csvConverter.csvRowCount - 1);
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            // 인벤 비어있을 때
-            if (invenSlots[0].tag == "Inven")
-            {
-                invenSlots[0].tag = itemBuilder.items[randomIdx_].tag;
-                invenSlots[0].name = itemBuilder.items[randomIdx_].itemName;
-                invenSlots[0].GetComponent<Item>().SetItem(itemBuilder.items[randomIdx_]);
-
-                slotImages[0].GetComponent<Image>().color = Color.white;
-                slotImages[0].GetComponent<Image>().sprite = itemBuilder.items[randomIdx_].itemSprite;
-            }
-        }
-    }
 }

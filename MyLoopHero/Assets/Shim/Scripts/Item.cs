@@ -69,16 +69,14 @@ public class Item : MonoBehaviour
     public void SubsItemStats(Item target_)
     {
         itemType = target_.itemType;
-        itemLevel = target_.itemLevel;
+        itemLevel = target_.itemLevel + GameManager.instance.loopCnt;
         itemAbilityCount = target_.itemAbilityCount;
         itemAbilityRatio = target_.itemAbilityRatio;
 
         itemMinDamage = target_.itemMinDamage;
         itemMaxDamage = target_.itemMaxDamage;
 
-        Debug.LogFormat("받아온 값: {0}", target_.itemHP);
         itemHP = target_.itemHP;
-        Debug.LogFormat("받아온 후: {0}", itemHP);
 
         itemDefense = target_.itemDefense;
 
@@ -98,7 +96,6 @@ public class Item : MonoBehaviour
         SubsItemStats(target_);
         SetItemInfo();
         SetSubOptionList();
-
     }
 
     // 레벨, 레어도에 비례한 아이템 스탯 설정하는 함수
@@ -106,14 +103,14 @@ public class Item : MonoBehaviour
     {
         switch (itemType)
         {
-            case "Weapon":
+            case "weapon":
                 itemMinDamage *= itemLevel * itemAbilityRatio;
                 itemMaxDamage *= itemLevel * itemAbilityRatio;
                 itemHP = 0;
                 itemDefense = 0;
 
                 break;
-            case "Ring":
+            case "ring":
                 itemMinDamage = 0;
                 itemMaxDamage = 0;
                 itemHP = 0;
@@ -122,14 +119,14 @@ public class Item : MonoBehaviour
                 itemAbilityCount += 1;
 
                 break;
-            case "Shield":
+            case "shield":
                 itemDefense *= itemLevel * itemAbilityRatio;
                 itemMinDamage = 0;
                 itemMaxDamage = 0;
                 itemHP = 0;
 
                 break;
-            case "Armor":
+            case "armor":
                 itemHP *= itemLevel * itemAbilityRatio;
                 itemMinDamage = 0;
                 itemMaxDamage = 0;

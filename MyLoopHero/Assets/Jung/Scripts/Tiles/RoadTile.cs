@@ -25,7 +25,7 @@ public class RoadTile : MonoBehaviour
 
         spawnRate = 5;
         Init(1, GameManager.instance.dayCnt, "Slime");
-        monsterCnt_Max = 4;
+        monsterCnt_Max = 1;
         monsterCnt = 0;
 
         lampCnt = 0;

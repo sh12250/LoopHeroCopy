@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Image loop;
 
+    [SerializeField]
+    private Image healthPoint;
+
+    [SerializeField]
+    private Image exp;
+
     public const float DAYCYCLE = 24f;
     public const float LOOPLIMIT = 10f;
     public float globalTime;
@@ -56,6 +62,8 @@ public class GameManager : MonoBehaviour
     {
         DayGauge();
         LoopGauge();
+        HPGauge();
+        EXPGauge();
 
         if (monsters.Count > 0)
         {
@@ -93,6 +101,21 @@ public class GameManager : MonoBehaviour
     public void AddToMonsters(GameObject monster_)
     {
         monsters.Add(monster_);
+    }
+
+    public void RemoveMonster(GameObject monster_)
+    {
+        monsters.Remove(monster_);
+    }
+
+    private void EXPGauge()
+    {
+        exp.fillAmount = player.GetComponent<Knight>().heroEXP / player.GetComponent<Knight>().heroEXPMax;
+    }
+
+    private void HPGauge()
+    {
+        healthPoint.fillAmount = player.GetComponent<Knight>().heroHealth / player.GetComponent<Knight>().heroHealthMax;
     }
 
     private void LoopGauge()

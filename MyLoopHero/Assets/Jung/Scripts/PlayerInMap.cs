@@ -63,7 +63,6 @@ public class PlayerInMap : MonoBehaviour
                         //MapTime.MapTimeScale(0);
                         Time.timeScale = 0;
                         BattleManager.instance.StartBattle();
-
                         #endregion
                     }
                 }
@@ -74,30 +73,41 @@ public class PlayerInMap : MonoBehaviour
                     float healAmount = GetComponent<Knight>().heroHealthMax / 5f;
                     GetComponent<Knight>().heroHealth += healAmount;
 
-
-                    #region 검출 및 전투 로직
-                    // 전투창 열람
-                    BattleManager.instance.GetPlayerInfo();
-                    BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
-                    BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
-                    //MapTime.MapTimeScale(0);
-                    Time.timeScale = 0;
-                    BattleManager.instance.StartBattle();
-                    #endregion
-
+                    if (GetComponent<Knight>().heroHealth >= GetComponent<Knight>().heroHealthMax)
+                    {
+                        GetComponent<Knight>().heroHealth = GetComponent<Knight>().heroHealthMax;
+                    }
 
                     AudioManager.instance.PlaySound_HeroCampHeal();
 
-                    if (GameManager.instance.loopCnt == 1)
+                    if (GameManager.instance.loopCnt == GameManager.LOOPLIMIT)
                     {
                         GameManager.instance.LichAppear(hit_Tiles.collider.gameObject);
                     }
+
+                    #region 검출 및 전투 로직
+                    if (GameManager.instance.loopCnt == GameManager.LOOPLIMIT + 1)
+                    {
+                        // 전투창 열람
+                        BattleManager.instance.GetPlayerInfo();
+                        BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
+                        BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
+                        //MapTime.MapTimeScale(0);
+                        Time.timeScale = 0;
+                        BattleManager.instance.StartBattle();
+                    }
+                    #endregion
                 }
 
                 if (hit_Tiles.collider.name == "VILLAGE")
                 {
                     float healAmount = 15 + 5 * GameManager.instance.loopCnt;
                     GetComponent<Knight>().heroHealth += healAmount;
+
+                    if (GetComponent<Knight>().heroHealth >= GetComponent<Knight>().heroHealthMax)
+                    {
+                        GetComponent<Knight>().heroHealth = GetComponent<Knight>().heroHealthMax;
+                    }
 
                     AudioManager.instance.PlaySound_HeroVillageHeal();
                 }

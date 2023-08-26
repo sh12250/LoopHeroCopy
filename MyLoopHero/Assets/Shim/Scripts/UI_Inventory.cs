@@ -257,7 +257,6 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         Item currStat_ = rectHolding.GetComponent<Item>();
         Knight player_ = FindObjectOfType<Knight>();
 
-
         player_.RemoveStat(prevStat_);
         prevStat_.CopyItemValues(currStat_);
         player_.AddStat(currStat_);

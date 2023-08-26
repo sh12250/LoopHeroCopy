@@ -49,8 +49,8 @@ public class MapManager : MonoBehaviour
     public List<GameObject> passPoints;
     public GameObject richPrefab;
 
-    private static int MAP_LENGTH = 12;
-    private static int MAP_WIDTH = 21;
+    public static int MAP_LENGTH = 12;
+    public static int MAP_WIDTH = 21;
     // 크기는 12 X 21
 
     private void Awake()
@@ -96,8 +96,6 @@ public class MapManager : MonoBehaviour
 
         voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].GetComponentInChildren<SpriteRenderer>().sprite = campsiteSprite;
         // 지정된 타일의 하위 오브젝트가 가진 SpriteRenderer의 sprite를 campsiteSprite로 바꿔준다
-        voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.tag = "RoadTile";
-        // 지정된 타일의 태그를 RoadTile 로 바꿔준다
         voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].name = "CampsiteTile";
         GameObject obj = Instantiate(richPrefab, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform.position, Quaternion.identity, voidTiles[randIdxY_ * MAP_WIDTH + randIdxX_].transform);
         obj.name = "BOSS";
@@ -166,11 +164,12 @@ public class MapManager : MonoBehaviour
             int y_ = i / MAP_WIDTH;
             int x_ = i % MAP_WIDTH;
 
-            if (!voidTiles[i].CompareTag("RoadTile") && !voidTiles[i].CompareTag("SideTile"))
+            if (!voidTiles[i].CompareTag("RoadTile") && !voidTiles[i].CompareTag("SideTile") && voidTiles[i].name != "CampsiteTile")
             {
                 if (y_ - 1 >= 0)
                 {
-                    if (voidTiles[(y_ - 1) * MAP_WIDTH + x_].CompareTag("RoadTile"))
+                    if (voidTiles[(y_ - 1) * MAP_WIDTH + x_].CompareTag("RoadTile") 
+                        || voidTiles[(y_ - 1) * MAP_WIDTH + x_].name == "CampsiteTile")
                     {
                         voidTiles[i].tag = "SideTile";
                         voidTiles[i].AddComponent<SideTile>();
@@ -180,7 +179,8 @@ public class MapManager : MonoBehaviour
 
                 if (x_ - 1 >= 0)
                 {
-                    if (voidTiles[y_ * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile"))
+                    if (voidTiles[y_ * MAP_WIDTH + x_ - 1].tag.Equals("RoadTile") 
+                        || voidTiles[y_ * MAP_WIDTH + x_ - 1].name == "CampsiteTile")
                     {
                         voidTiles[i].tag = "SideTile";
                         voidTiles[i].AddComponent<SideTile>();
@@ -190,7 +190,8 @@ public class MapManager : MonoBehaviour
 
                 if (x_ + 1 < MAP_WIDTH)
                 {
-                    if (voidTiles[y_ * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile"))
+                    if (voidTiles[y_ * MAP_WIDTH + x_ + 1].tag.Equals("RoadTile") 
+                        || voidTiles[y_ * MAP_WIDTH + x_ + 1].name == "CampsiteTile")
                     {
                         voidTiles[i].tag = "SideTile";
                         voidTiles[i].AddComponent<SideTile>();
@@ -200,7 +201,8 @@ public class MapManager : MonoBehaviour
 
                 if (y_ + 1 < MAP_LENGTH)
                 {
-                    if (voidTiles[(y_ + 1) * MAP_WIDTH + x_].tag.Equals("RoadTile"))
+                    if (voidTiles[(y_ + 1) * MAP_WIDTH + x_].tag.Equals("RoadTile") 
+                        || voidTiles[(y_ + 1) * MAP_WIDTH + x_].name == "CampsiteTile")
                     {
                         voidTiles[i].tag = "SideTile";
                         voidTiles[i].AddComponent<SideTile>();
@@ -547,7 +549,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < sortedTiles_.Length; i++)
         {
             GameObject obj = sortedTiles_[i];
-            obj.GetComponentInChildren<SpriteRenderer>().sortingOrder = i / MAP_WIDTH;
+            obj.GetComponentInChildren<SpriteRenderer>().sortingOrder = i / MAP_WIDTH + 1;
             temp_.Add(obj);
             // sortedTiles_를 순서대로 add
         }
@@ -564,5 +566,14 @@ public class MapManager : MonoBehaviour
         }
 
         return voidTiles;
+    }
+
+    public void DestroyMonsters(GameObject tile_)
+    {
+        for (int i = 0; i < tile_.GetComponent<RoadTile>().monsterCnt; i++)
+        {
+            GameManager.instance.RemoveMonster(tile_.transform.GetChild(i + 1).gameObject);
+            Destroy(tile_.transform.GetChild(i + 1).gameObject);
+        }
     }
 }

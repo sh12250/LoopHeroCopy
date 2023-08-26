@@ -19,6 +19,8 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    private GameObject battleTile;
+
     #region 배틀 매니저 필드
     // BattleWindow
     private GameObject battleWindow;
@@ -147,6 +149,8 @@ public class BattleManager : MonoBehaviour
     #region 타일에 있는 몬스터 이름을 비교하여, 미리 만들어진 MonsterBase(Clone) 에서 정보를 뽑아와 monstersInBattle 리스트에 담는 함수
     public void UpdateMonsterInfo(RaycastHit2D raycasthit_)
     {
+        battleTile = raycasthit_.collider.gameObject;
+
         // 마주친 몬스터의 숫자는 raycasthit_ 타일 하위의 (자식 오브젝트 갯수 - 1) 이다.
         monsterCount = raycasthit_.collider.transform.childCount - 1;
 
@@ -211,19 +215,14 @@ public class BattleManager : MonoBehaviour
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[9].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Fleshgolem")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "FleshGolem")
             {
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[10].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Mosquito")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "Moskito")
             {
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[11].CopyEnemyInfo());
-                //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
-            }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Scarecrow")
-            {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[12].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Scarecrow")
@@ -273,7 +272,7 @@ public class BattleManager : MonoBehaviour
     //전투 시작 종료 함수//////////////////////////////////////////////////////////////////////////////////////
 
     #region BattleWindow 를 찾고 사이즈를 줄이는 함수
-    public void CheckBattleWindow() 
+    public void CheckBattleWindow()
     {
         battleWindow = GameObject.Find("BattleWindow").gameObject;
         //battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
@@ -282,7 +281,7 @@ public class BattleManager : MonoBehaviour
     #endregion
 
     #region BattlewWindow 를 띄우는 함수
-    public void OpenBattleWindow() 
+    public void OpenBattleWindow()
     {
         battleWindow.transform.localScale = Vector3.one;
     }
@@ -299,7 +298,7 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
-        for (int i = 0; i < monsterCount; i++) 
+        for (int i = 0; i < monsterCount; i++)
         {
             battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[i]);
         }
@@ -312,6 +311,8 @@ public class BattleManager : MonoBehaviour
     #region 전투 종료 함수
     public void EndBattle()
     {
+        MapManager.instance.DestroyMonsters(battleTile.gameObject);
+        battleTile.GetComponent<RoadTile>().monsterCnt = 0;
         StopAllCoroutines();
         CloseBattleWindow();
         ResetMonsterArray();
@@ -389,6 +390,10 @@ public class BattleManager : MonoBehaviour
             {
                 if (enemy_.enemyHP <= 0)
                 {
+                    playerKnight_.heroEXP += enemy_.enemyItemChance;
+
+                    playerKnight_.LevelUp();
+
                     enemies_.Remove(enemy_);
 
                     if (enemies_.Count > 0)
@@ -427,7 +432,7 @@ public class BattleManager : MonoBehaviour
     {
         // enemies_가 빈 상태로 함수를 실행하는 경우 종료
         if (enemies_ == default || enemies_.Count < 1) { yield break; }
-        
+
         battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
 
         while (true)
@@ -554,22 +559,22 @@ public class BattleManager : MonoBehaviour
         if (targetEnemy_.enemyDEF >= playerDMG)
         {
             //Debug.LogFormat("[AttackTarget]: 플레이어의 공격이 가로막혔다\n몬스터 방어력: {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            if (targetEnemy_.enemyHP - playerKnight_.heroDamageMagic <= 0f) 
+            if (targetEnemy_.enemyHP - playerKnight_.heroDamageMagic <= 0f)
             {
                 targetEnemy_.enemyHP = 0f;
             }
-            else 
+            else
             {
                 targetEnemy_.enemyHP -= playerKnight_.heroDamageMagic;
             }
             //Debug.LogFormat("[AttackTarget]: 플레이어의 마법데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic, targetEnemy_.enemyHP);
-            if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic)) 
+            if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic))
             {
                 playerKnight_.heroHealth = playerKnight_.heroHealthMax;
                 ShowPlayerHPText(playerKnight_);
                 ShowPlayerPlusText(playerKnight_, targetEnemy_);
             }
-            else 
+            else
             {
                 playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic);
                 ShowPlayerHPText(playerKnight_);
@@ -583,11 +588,11 @@ public class BattleManager : MonoBehaviour
         else
         {
             Debug.LogFormat("[AttackTarget]: 플레이어의 공격\n몬스터 방어력 : {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            if (targetEnemy_.enemyHP - (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)) <= 0f) 
+            if (targetEnemy_.enemyHP - (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)) <= 0f)
             {
                 targetEnemy_.enemyHP = 0f;
             }
-            else 
+            else
             {
                 targetEnemy_.enemyHP -= (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF));
             }
@@ -632,11 +637,11 @@ public class BattleManager : MonoBehaviour
     {
         battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
 
-        if (enemy_.enemyID == 113) 
+        if (enemy_.enemyID == 113)
         {
             AudioManager.instance.PlaySound_LichAttack();
         }
-        else 
+        else
         {
             AudioManager.instance.PlaySound_EnemyAttack();
         }
@@ -681,12 +686,12 @@ public class BattleManager : MonoBehaviour
     #region 플레이어 Plus TMP 텍스트를 설정해주는 함수
     public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
     {
-        if (enemy_.enemyDEF >= playerDMG) 
+        if (enemy_.enemyDEF >= playerDMG)
         {
             battleWindow.GetComponent<BattleWindow>().playerPlus.text =
                 (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
         }
-        else 
+        else
         {
             battleWindow.GetComponent<BattleWindow>().playerPlus.text =
                 (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
@@ -702,7 +707,7 @@ public class BattleManager : MonoBehaviour
             /*Do Nothing*/
             battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
         }
-        else 
+        else
         {
             battleWindow.GetComponent<BattleWindow>().playerMinus.text =
                    (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
