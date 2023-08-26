@@ -75,6 +75,8 @@ public class HandManager : MonoBehaviour
                         BuildOnMap(myCard, "EtcTile");
                         break;
                 }
+
+                MapTime.MapTimeScale(0);
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -109,6 +111,7 @@ public class HandManager : MonoBehaviour
                 myHands[idx].GetComponent<CardController>().OnHand();
             }
 
+            MapTime.MapTimeScale(1);
         }
 
         // 디버그용

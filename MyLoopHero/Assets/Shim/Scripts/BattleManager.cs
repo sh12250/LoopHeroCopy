@@ -20,6 +20,8 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    private GameObject battleTile;
+
     #region 배틀 매니저 필드
     // BattleWindow
     private GameObject battleWindow;
@@ -152,6 +154,8 @@ public class BattleManager : MonoBehaviour
     #region 타일에 있는 몬스터 이름을 비교하여, 미리 만들어진 MonsterBase(Clone) 에서 정보를 뽑아와 monstersInBattle 리스트에 담는 함수
     public void UpdateMonsterInfo(RaycastHit2D raycasthit_)
     {
+        battleTile = raycasthit_.collider.gameObject;
+
         // 마주친 몬스터의 숫자는 raycasthit_ 타일 하위의 (자식 오브젝트 갯수 - 1) 이다.
         monsterCount = raycasthit_.collider.transform.childCount - 1;
 
@@ -273,7 +277,7 @@ public class BattleManager : MonoBehaviour
     //전투 시작 종료 함수//////////////////////////////////////////////////////////////////////////////////////
 
     #region BattleWindow 를 찾고 사이즈를 줄이는 함수
-    public void CheckBattleWindow() 
+    public void CheckBattleWindow()
     {
         battleWindow = GameObject.Find("BattleWindow").gameObject;
         //battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
@@ -290,7 +294,7 @@ public class BattleManager : MonoBehaviour
     //#endregion
 
     #region BattlewWindow 를 띄우는 함수
-    public void OpenBattleWindow() 
+    public void OpenBattleWindow()
     {
         battleWindow.transform.localScale = Vector3.one;
     }
@@ -363,6 +367,8 @@ public class BattleManager : MonoBehaviour
     #region 전투 종료 함수
     public void EndBattle()
     {
+        MapManager.instance.DestroyMonsters(battleTile.gameObject);
+        battleTile.GetComponent<RoadTile>().monsterCnt = 0;
         StopAllCoroutines();
         CloseBattleWindow();
         //CloseBossBattleWindow();
@@ -441,6 +447,10 @@ public class BattleManager : MonoBehaviour
             {
                 if (enemy_.enemyHP <= 0)
                 {
+                    playerKnight_.heroEXP += enemy_.enemyItemChance;
+
+                    playerKnight_.LevelUp();
+
                     enemies_.Remove(enemy_);
 
                     if (enemies_.Count > 0)
@@ -475,16 +485,7 @@ public class BattleManager : MonoBehaviour
         // enemies_가 빈 상태로 함수를 실행하는 경우 종료
         if (enemies_ == default || enemies_.Count < 1) { yield break; }
 
-
-        //if (enemy_.enemyID == 113)
-        //{
-        //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
-        //}
-        //else
-        //{
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
-        //}
-
+        battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
 
         while (true)
         {
@@ -615,22 +616,22 @@ public class BattleManager : MonoBehaviour
         if (targetEnemy_.enemyDEF >= playerDMG)
         {
             //Debug.LogFormat("[AttackTarget]: 플레이어의 공격이 가로막혔다\n몬스터 방어력: {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            if (targetEnemy_.enemyHP - playerKnight_.heroDamageMagic <= 0f) 
+            if (targetEnemy_.enemyHP - playerKnight_.heroDamageMagic <= 0f)
             {
                 targetEnemy_.enemyHP = 0f;
             }
-            else 
+            else
             {
                 targetEnemy_.enemyHP -= playerKnight_.heroDamageMagic;
             }
             //Debug.LogFormat("[AttackTarget]: 플레이어의 마법데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic, targetEnemy_.enemyHP);
-            if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic)) 
+            if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic))
             {
                 playerKnight_.heroHealth = playerKnight_.heroHealthMax;
                 ShowPlayerHPText(playerKnight_);
                 //ShowPlayerPlusText(playerKnight_, targetEnemy_);
             }
-            else 
+            else
             {
                 playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic);
                 ShowPlayerHPText(playerKnight_);
@@ -653,11 +654,11 @@ public class BattleManager : MonoBehaviour
         else
         {
             Debug.LogFormat("[AttackTarget]: 플레이어의 공격\n몬스터 방어력 : {0}, 플레이어 공격력 : {1}", targetEnemy_.enemyDEF, playerDMG);
-            if (targetEnemy_.enemyHP - (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)) <= 0f) 
+            if (targetEnemy_.enemyHP - (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)) <= 0f)
             {
                 targetEnemy_.enemyHP = 0f;
             }
-            else 
+            else
             {
                 targetEnemy_.enemyHP -= (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF));
             }
@@ -711,16 +712,16 @@ public class BattleManager : MonoBehaviour
     #region 몬스터가 플레이어를 공격하는 함수 (플레이어의 방어력에 따라 데미지 감소)
     public void AttackPlayer(Knight playerKnight_, Enemy enemy_)
     {
-        //if (enemy_.enemyID == 113) 
-        //{
-        //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossAttack();
-        //    AudioManager.instance.PlaySound_LichAttack();
-        //}
-        //else 
-        //{
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
+        battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
+
+        if (enemy_.enemyID == 113)
+        {
+            AudioManager.instance.PlaySound_LichAttack();
+        }
+        else
+        {
             AudioManager.instance.PlaySound_EnemyAttack();
-        //}
+        }
 
         // 만약 플레이어의 방어력이 몬스터의 공격력보다 높다면,
         if (playerKnight_.heroDefense >= enemy_.enemyDMG)
@@ -759,49 +760,35 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    //#region 플레이어 Plus TMP 텍스트를 설정해주는 함수
-    //public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
-    //{
-    //    if (enemy_.enemyDEF >= playerDMG) 
-    //    {
-    //        battleWindow.GetComponent<BattleWindow>().playerPlus.text =
-    //            (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
-    //    }
-    //    else 
-    //    {
-    //        battleWindow.GetComponent<BattleWindow>().playerPlus.text =
-    //            (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
-    //    }
-    //}
-    //#endregion
+    #region 플레이어 Plus TMP 텍스트를 설정해주는 함수
+    public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
+    {
+        if (enemy_.enemyDEF >= playerDMG)
+        {
+            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+                (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
+        }
+        else
+        {
+            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+                (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
+        }
+    }
+    #endregion
 
-    //#region 플레이어 Minus TMP 텍스트를 설정해주는 함수
-    //public void ShowPlayerMinusText(Knight playerKnight_, Enemy enemy_)
-    //{
-    //    if (playerKnight_.heroDefense >= enemy_.enemyDMG)
-    //    {
-    //        /*Do Nothing*/
-    //        battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
-    //    }
-    //    else 
-    //    {
-    //        battleWindow.GetComponent<BattleWindow>().playerMinus.text =
-    //               (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
-    //    }
-    //}
-    //#endregion
-
-    //#region 플레이어 Plus TMP 텍스트를 꺼주는 함수
-    //public void ClosdPlayerPlusText() 
-    //{
-    //    battleWindow.GetComponent<BattleWindow>().playerPlus.transform.localScale = Vector3.zero;
-    //}
-    //#endregion
-
-    //#region 플레이어 Minus TMP 텍스트를 꺼주는 함수
-    //public void ClosdPlayerMinusText()
-    //{
-    //    battleWindow.GetComponent<BattleWindow>().playerMinus.transform.localScale = Vector3.zero;
-    //}
-    //#endregion
+    #region 플레이어 Minus TMP 텍스트를 설정해주는 함수
+    public void ShowPlayerMinusText(Knight playerKnight_, Enemy enemy_)
+    {
+        if (playerKnight_.heroDefense >= enemy_.enemyDMG)
+        {
+            /*Do Nothing*/
+            battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
+        }
+        else
+        {
+            battleWindow.GetComponent<BattleWindow>().playerMinus.text =
+                   (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
+        }
+    }
+    #endregion
 }

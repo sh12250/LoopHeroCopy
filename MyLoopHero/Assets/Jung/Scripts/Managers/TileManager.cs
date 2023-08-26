@@ -43,39 +43,68 @@ public class TileManager : MonoBehaviour
         int y_ = idx_ / 21;
         int x_ = idx_ % 21;
 
-        if (allTiles_[(y_ - 1) * 21 + x_ - 1].CompareTag("RoadTile"))
+        if (y_ > 0)
         {
-            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ - 1]);
-        }
-        if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
-        {
-            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
-        }
-        if (allTiles_[(y_ - 1) * 21 + x_ + 1].CompareTag("RoadTile"))
-        {
-            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ + 1]);
+            if (x_ > 0)
+            {
+                if (allTiles_[(y_ - 1) * 21 + x_ - 1].CompareTag("RoadTile"))
+                {
+                    targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ - 1]);
+                }
+            }
+
+            if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+            }
+
+            if (x_ < MapManager.MAP_WIDTH - 1)
+            {
+                if (allTiles_[(y_ - 1) * 21 + x_ + 1].CompareTag("RoadTile"))
+                {
+                    targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_ + 1]);
+                }
+            }
         }
 
-        if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+        if (x_ > 0)
         {
-            targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
-        }
-        if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
-        {
-            targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+            if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+            }
         }
 
-        if (allTiles_[(y_ + 1) * 21 + x_ - 1].CompareTag("RoadTile"))
+        if (x_ < MapManager.MAP_WIDTH - 1)
         {
-            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ - 1]);
+            if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+            }
         }
-        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+
+        if (y_ < MapManager.MAP_LENGTH - 1)
         {
-            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
-        }
-        if (allTiles_[(y_ + 1) * 21 + x_ + 1].CompareTag("RoadTile"))
-        {
-            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ + 1]);
+            if (x_ > 0)
+            {
+                if (allTiles_[(y_ + 1) * 21 + x_ - 1].CompareTag("RoadTile"))
+                {
+                    targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ - 1]);
+                }
+            }
+
+            if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+            }
+
+            if (x_ < MapManager.MAP_WIDTH - 1)
+            {
+                if (allTiles_[(y_ + 1) * 21 + x_ + 1].CompareTag("RoadTile"))
+                {
+                    targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_ + 1]);
+                }
+            }
         }
     }
 
@@ -87,21 +116,36 @@ public class TileManager : MonoBehaviour
         int y_ = idx_ / 21;
         int x_ = idx_ % 21;
 
-        if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
+        if (y_ > 0)
         {
-            targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+            if (allTiles_[(y_ - 1) * 21 + x_].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[(y_ - 1) * 21 + x_]);
+            }
         }
-        if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+
+        if (y_ < MapManager.MAP_LENGTH - 1)
         {
-            targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+            if (allTiles_[(y_ + 1) * 21 + x_].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[(y_ + 1) * 21 + x_]);
+            }
         }
-        if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+
+        if (x_ > 0)
         {
-            targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+            if (allTiles_[y_ * 21 + x_ - 1].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[y_ * 21 + x_ - 1]);
+            }
         }
-        if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
+
+        if (x_ < MapManager.MAP_WIDTH - 1)
         {
-            targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+            if (allTiles_[y_ * 21 + x_ + 1].CompareTag("RoadTile"))
+            {
+                targetTiles_.Add(allTiles_[y_ * 21 + x_ + 1]);
+            }
         }
     }
     // 인접한 로드 타일 체크해서 리스트로 반환하는 함수들

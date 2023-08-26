@@ -237,25 +237,40 @@ public class EtcTile : MonoBehaviour
         int y_ = idx_ / 21;
         int x_ = idx_ % 21;
 
-        if (allTiles_[(y_ - 1) * 21 + x_].name == "ROCK"
-            || allTiles_[(y_ - 1) * 21 + x_].name == "MOUNT")
+        if (y_ > 0)
         {
-            targetCnt += 1;
+            if (allTiles_[(y_ - 1) * 21 + x_].name == "ROCK"
+                || allTiles_[(y_ - 1) * 21 + x_].name == "MOUNT")
+            {
+                targetCnt += 1;
+            }
         }
-        if (allTiles_[(y_ + 1) * 21 + x_].name == "ROCK"
-            || allTiles_[(y_ + 1) * 21 + x_].name == "MOUNT")
+
+        if (y_ < MapManager.MAP_LENGTH - 1)
         {
-            targetCnt += 1;
+            if (allTiles_[(y_ + 1) * 21 + x_].name == "ROCK"
+                || allTiles_[(y_ + 1) * 21 + x_].name == "MOUNT")
+            {
+                targetCnt += 1;
+            }
         }
-        if (allTiles_[y_ * 21 + x_ - 1].name == "ROCK"
-            || allTiles_[y_ * 21 + x_ - 1].name == "MOUNT")
+
+        if (x_ > 0)
         {
-            targetCnt += 1;
+            if (allTiles_[y_ * 21 + x_ - 1].name == "ROCK"
+                || allTiles_[y_ * 21 + x_ - 1].name == "MOUNT")
+            {
+                targetCnt += 1;
+            }
         }
-        if (allTiles_[y_ * 21 + x_ + 1].name == "ROCK"
-            || allTiles_[y_ * 21 + x_ + 1].name == "MOUNT")
+
+        if (x_ < MapManager.MAP_WIDTH - 1)
         {
-            targetCnt += 1;
+            if (allTiles_[y_ * 21 + x_ + 1].name == "ROCK"
+                || allTiles_[y_ * 21 + x_ + 1].name == "MOUNT")
+            {
+                targetCnt += 1;
+            }
         }
     }
 
