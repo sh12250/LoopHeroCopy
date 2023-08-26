@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -22,6 +23,9 @@ public class BattleManager : MonoBehaviour
     #region 배틀 매니저 필드
     // BattleWindow
     private GameObject battleWindow;
+
+    // BossBattleWindow
+    //private GameObject bossBattleWindow;
 
     // DeadWindow
     private GameObject deadWindow;
@@ -81,6 +85,7 @@ public class BattleManager : MonoBehaviour
         MakeMonsterList();
         GetPlayerInfo();
         CheckBattleWindow();
+        //CheckBossBattleWindow();
         CheckDeadWindow();
     }
 
@@ -211,19 +216,14 @@ public class BattleManager : MonoBehaviour
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[9].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Fleshgolem")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "FleshGolem")
             {
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[10].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Mosquito")
+            else if (raycasthit_.collider.transform.GetChild(i).name == "Moskito")
             {
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[11].CopyEnemyInfo());
-                //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
-            }
-            else if (raycasthit_.collider.transform.GetChild(i).name == "Scarecrow")
-            {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[12].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Scarecrow")
@@ -281,12 +281,27 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
+    //#region BossBattleWindow 를 찾고 사이즈를 줄이는 함수
+    //public void CheckBossBattleWindow()
+    //{
+    //    bossBattleWindow = GameObject.Find("BossBattleWindow").gameObject;
+    //    bossBattleWindow.transform.localScale = Vector3.zero;
+    //}
+    //#endregion
+
     #region BattlewWindow 를 띄우는 함수
     public void OpenBattleWindow() 
     {
         battleWindow.transform.localScale = Vector3.one;
     }
     #endregion
+
+    //#region BossBattlewWindow 를 띄우는 함수
+    //public void OpenBossBattleWindow()
+    //{
+    //    bossBattleWindow.transform.localScale = Vector3.one;
+    //}
+    //#endregion
 
     #region BattlewWindow 를 닫는 함수
     public void CloseBattleWindow()
@@ -295,13 +310,38 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
+    //#region BossBattlewWindow 를 닫는 함수
+    //public void CloseBossBattleWindow()
+    //{
+    //    bossBattleWindow.transform.localScale = Vector3.zero;
+    //}
+    //#endregion
+
     #region 전투 시작 함수
     public void StartBattle()
     {
         battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
-        for (int i = 0; i < monsterCount; i++) 
+
+        if (monstersInBattle[0].enemyID == 113) 
         {
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[i]);
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[1].SetActive(false);
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[2].SetActive(false);
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[3].SetActive(false);
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[4].SetActive(false);
+
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[0].GetComponent<RectTransform>().sizeDelta
+                   = new Vector2(70f * 1.6f, 80 * 1.6f);
+            battleWindow.GetComponent<BattleWindow>().monsterSpaces[0].GetComponent<RectTransform>().anchoredPosition
+                = new Vector2(0f, 25f);
+
+            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[0]);
+        }
+        else 
+        {
+            for (int i = 0; i < monsterCount; i++)
+            {
+                battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[i]);
+            }
         }
 
         OpenBattleWindow();
@@ -309,11 +349,23 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
+    //#region 보스 전투 시작 함수
+    //public void StartBossBattle()
+    //{
+    //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangePlayerIdle();
+    //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
+
+    //    OpenBossBattleWindow();
+    //    StartCoroutine(BattleCycle());
+    //}
+    //#endregion
+
     #region 전투 종료 함수
     public void EndBattle()
     {
         StopAllCoroutines();
         CloseBattleWindow();
+        //CloseBossBattleWindow();
         ResetMonsterArray();
         Time.timeScale = 1;
     }
@@ -403,11 +455,6 @@ public class BattleManager : MonoBehaviour
                         battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
                         Debug.Log("루프 탈출");
 
-                        //for (int i = 0; i < monstersInField.Count - 1; i++) 
-                        //{
-                        //    Destroy(monstersInField[i]);
-                        //}
-
                         EndBattle();
                         yield break;
                     }
@@ -427,8 +474,17 @@ public class BattleManager : MonoBehaviour
     {
         // enemies_가 빈 상태로 함수를 실행하는 경우 종료
         if (enemies_ == default || enemies_.Count < 1) { yield break; }
-        
-        battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
+
+
+        //if (enemy_.enemyID == 113)
+        //{
+        //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
+        //}
+        //else
+        //{
+            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
+        //}
+
 
         while (true)
         {
@@ -478,23 +534,28 @@ public class BattleManager : MonoBehaviour
                     break;
             }
 
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
-            //battleWindow.GetComponent<BattleWindow>().ShowEnemyHPText(enemies_);
+
+            //if (enemy_.enemyID == 113)
+            //{
+            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
+            //}
+            //else
+            //{
+                battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
+            //}
+
 
             if (enemy_.enemyHP <= 0)
             {
-                //Debug.LogFormat("리스트에서 자기자신 : {0}을 제거함, 제거 전 리스트 길이 : {1}", enemy_, enemies_.Count);
-                //enemies_.Remove(enemy_);
-                //Debug.Log("루프 탈출");
-                battleWindow.GetComponent<BattleWindow>().ChangeEnemyDeath(enemy_);
-                if (enemy_.enemyID == 113)
-                {
-                    AudioManager.instance.PlaySound_LichDeath();
-                }
-                else
-                {
-                    /*Do Nothing*/
-                }
+                //if (enemy_.enemyID == 113)
+                //{
+                //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossDeath();
+                //    AudioManager.instance.PlaySound_LichDeath();
+                //}
+                //else
+                //{
+                    battleWindow.GetComponent<BattleWindow>().ChangeEnemyDeath(enemy_);
+                //}
 
                 StopCoroutine(EnemyCycle(playerKnight_, enemy_, enemies_));
                 yield break;
@@ -567,17 +628,26 @@ public class BattleManager : MonoBehaviour
             {
                 playerKnight_.heroHealth = playerKnight_.heroHealthMax;
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+                //ShowPlayerPlusText(playerKnight_, targetEnemy_);
             }
             else 
             {
                 playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic);
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+                //ShowPlayerPlusText(playerKnight_, targetEnemy_);
             }
             //Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic, playerKnight_.heroHealth);
 
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyCharge(targetEnemy_);
+
+
+            //if (targetEnemy_.enemyID == 113)
+            //{
+            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossCharge();
+            //}
+            //else
+            //{
+                battleWindow.GetComponent<BattleWindow>().ChangeEnemyCharge(targetEnemy_);
+            //}
         }
         // 그 외 상황에서는,
         else
@@ -593,20 +663,31 @@ public class BattleManager : MonoBehaviour
             }
             Debug.LogFormat("[AttackTarget]: 플레이어의 가한데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF), targetEnemy_.enemyHP);
 
-            battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt1(targetEnemy_);
+
+
+            //if (targetEnemy_.enemyID == 113)
+            //{
+            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossHurt1();
+            //}
+            //else
+            //{
+                battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt1(targetEnemy_);
+            //}
+
+
 
             if (playerKnight_.heroHealthMax <= playerKnight_.heroHealth + (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF))))
             {
                 playerKnight_.heroHealth = playerKnight_.heroHealthMax;
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+                //ShowPlayerPlusText(playerKnight_, targetEnemy_);
                 Debug.LogFormat("[AttackTarget]: 현재 플레이어의 체력은 최대치이다. {0}", playerKnight_.heroHealth);
             }
             else
             {
                 playerKnight_.heroHealth += (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)));
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerPlusText(playerKnight_, targetEnemy_);
+                //ShowPlayerPlusText(playerKnight_, targetEnemy_);
                 Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF)), playerKnight_.heroHealth);
             }
         }
@@ -630,16 +711,16 @@ public class BattleManager : MonoBehaviour
     #region 몬스터가 플레이어를 공격하는 함수 (플레이어의 방어력에 따라 데미지 감소)
     public void AttackPlayer(Knight playerKnight_, Enemy enemy_)
     {
-        battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
-
-        if (enemy_.enemyID == 113) 
-        {
-            AudioManager.instance.PlaySound_LichAttack();
-        }
-        else 
-        {
+        //if (enemy_.enemyID == 113) 
+        //{
+        //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossAttack();
+        //    AudioManager.instance.PlaySound_LichAttack();
+        //}
+        //else 
+        //{
+            battleWindow.GetComponent<BattleWindow>().ChangeEnemyAttack(enemy_);
             AudioManager.instance.PlaySound_EnemyAttack();
-        }
+        //}
 
         // 만약 플레이어의 방어력이 몬스터의 공격력보다 높다면,
         if (playerKnight_.heroDefense >= enemy_.enemyDMG)
@@ -655,13 +736,13 @@ public class BattleManager : MonoBehaviour
             {
                 playerKnight_.heroHealth = 0f;
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerMinusText(playerKnight_, enemy_);
+                //ShowPlayerMinusText(playerKnight_, enemy_);
             }
             else
             {
                 playerKnight_.heroHealth -= enemy_.enemyDMG - playerKnight_.heroDefense;
                 ShowPlayerHPText(playerKnight_);
-                ShowPlayerMinusText(playerKnight_, enemy_);
+                //ShowPlayerMinusText(playerKnight_, enemy_);
             }
             // 데미지(몬스터 공격력 - 플레이어 방어력)를 플레이어 체력에서 뺀다.
             //Debug.LogFormat("[AttackPlayer]: {2}몬스터의 공격\n플레이어 방어력 : {0}, 몬스터 공격력 : {1}", playerKnight_.heroDefense, enemy_.enemyDMG, enemy_);
@@ -678,35 +759,49 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    #region 플레이어 Plus TMP 텍스트를 설정해주는 함수
-    public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
-    {
-        if (enemy_.enemyDEF >= playerDMG) 
-        {
-            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
-                (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
-        }
-        else 
-        {
-            battleWindow.GetComponent<BattleWindow>().playerPlus.text =
-                (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
-        }
-    }
-    #endregion
+    //#region 플레이어 Plus TMP 텍스트를 설정해주는 함수
+    //public void ShowPlayerPlusText(Knight playerKnight_, Enemy enemy_)
+    //{
+    //    if (enemy_.enemyDEF >= playerDMG) 
+    //    {
+    //        battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+    //            (0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic).ToString("F0");
+    //    }
+    //    else 
+    //    {
+    //        battleWindow.GetComponent<BattleWindow>().playerPlus.text =
+    //            (0.01f * playerKnight_.heroVamp * (playerKnight_.heroDamageMagic + (playerDMG - enemy_.enemyDEF))).ToString("F0");
+    //    }
+    //}
+    //#endregion
 
-    #region 플레이어 Minus TMP 텍스트를 설정해주는 함수
-    public void ShowPlayerMinusText(Knight playerKnight_, Enemy enemy_)
-    {
-        if (playerKnight_.heroDefense >= enemy_.enemyDMG)
-        {
-            /*Do Nothing*/
-            battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
-        }
-        else 
-        {
-            battleWindow.GetComponent<BattleWindow>().playerMinus.text =
-                   (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
-        }
-    }
-    #endregion
+    //#region 플레이어 Minus TMP 텍스트를 설정해주는 함수
+    //public void ShowPlayerMinusText(Knight playerKnight_, Enemy enemy_)
+    //{
+    //    if (playerKnight_.heroDefense >= enemy_.enemyDMG)
+    //    {
+    //        /*Do Nothing*/
+    //        battleWindow.GetComponent<BattleWindow>().playerMinus.text = "0";
+    //    }
+    //    else 
+    //    {
+    //        battleWindow.GetComponent<BattleWindow>().playerMinus.text =
+    //               (enemy_.enemyDMG - playerKnight_.heroDefense).ToString("F0");
+    //    }
+    //}
+    //#endregion
+
+    //#region 플레이어 Plus TMP 텍스트를 꺼주는 함수
+    //public void ClosdPlayerPlusText() 
+    //{
+    //    battleWindow.GetComponent<BattleWindow>().playerPlus.transform.localScale = Vector3.zero;
+    //}
+    //#endregion
+
+    //#region 플레이어 Minus TMP 텍스트를 꺼주는 함수
+    //public void ClosdPlayerMinusText()
+    //{
+    //    battleWindow.GetComponent<BattleWindow>().playerMinus.transform.localScale = Vector3.zero;
+    //}
+    //#endregion
 }

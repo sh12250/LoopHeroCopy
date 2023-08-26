@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -21,9 +19,9 @@ public class BattleWindow : MonoBehaviour
     public Sprite deathSprite;
 
     public GameObject[] monsterSpaces;
-    public TMP_Text[] monsterStatus;
-    public TMP_Text[] monsterPlus;
-    public TMP_Text[] monsterMinus;
+    //public TMP_Text[] monsterStatus;
+    //public TMP_Text[] monsterPlus;
+    //public TMP_Text[] monsterMinus;
 
     private string monsterMaxHP;
 
@@ -38,9 +36,9 @@ public class BattleWindow : MonoBehaviour
     private void InitMonsterArrays()
     {
         monsterSpaces = new GameObject[battleWindow.transform.childCount - 3];
-        monsterStatus = new TMP_Text[battleWindow.transform.childCount - 3];
-        monsterPlus = new TMP_Text[battleWindow.transform.childCount - 3];
-        monsterMinus = new TMP_Text[battleWindow.transform.childCount - 3];
+        //monsterStatus = new TMP_Text[battleWindow.transform.childCount - 3];
+        //monsterPlus = new TMP_Text[battleWindow.transform.childCount - 3];
+        //monsterMinus = new TMP_Text[battleWindow.transform.childCount - 3];
     }
 
     #region 이 스크립트를 들고 있는 오브젝트(배틀 윈도우) 하위의 게임 오브젝트들을 설정
@@ -58,9 +56,9 @@ public class BattleWindow : MonoBehaviour
         for (int i = 0; i < battleWindow.transform.childCount - 3; i++)
         {
             monsterSpaces[i] = gameObject.transform.GetChild(i + 3).gameObject;
-            monsterStatus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[0];
-            monsterPlus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[1];
-            monsterMinus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[2];
+            //monsterStatus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[0];
+            //monsterPlus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[1];
+            //monsterMinus[i] = monsterSpaces[i].transform.GetComponentsInChildren<TMP_Text>()[2];
         }
     }
     #endregion
@@ -228,9 +226,7 @@ public class BattleWindow : MonoBehaviour
             }
             else if (enemy_.enemyID == 113)
             {
-                
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyIdle;
-
             }
             else 
             {
@@ -312,7 +308,7 @@ public class BattleWindow : MonoBehaviour
             }
             else if (enemy_.enemyID == 113)
             {
-                
+
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyCharge;
             }
             else
@@ -395,7 +391,7 @@ public class BattleWindow : MonoBehaviour
             }
             else if (enemy_.enemyID == 113)
             {
-                
+
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyAttack;
             }
             else
@@ -561,7 +557,7 @@ public class BattleWindow : MonoBehaviour
             }
             else if (enemy_.enemyID == 113)
             {
-                
+
                 monsterSpaces[i].transform.GetComponent<Image>().sprite = MonsterSpawner.instance.enemies[13].enemyHurt_1;
             }
             else
