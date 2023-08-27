@@ -286,6 +286,8 @@ public class TileManager : MonoBehaviour
 
                 break;
         }
+
+        AudioManager.instance.PlaySound_BuildTile();
     }
 
     private void RememberTile(GameObject tile_, string name_)

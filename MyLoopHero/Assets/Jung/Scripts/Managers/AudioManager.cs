@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> sounds_Enemy;
 
     /// <summary>
-    /// 0: 하루의 시작, 1: 레벨업, 2: 퍽알림
+    /// 0: 하루의 시작, 1: 레벨업, 2: 퍽알림 3: 타일 배치
     /// </summary>
     public List<AudioClip> sounds_Etc;
 
@@ -212,6 +212,19 @@ public class AudioManager : MonoBehaviour
         soundPlayer_.GetComponent<AudioSource>().Stop();
 
         soundPlayer_.GetComponent<AudioSource>().clip = sounds_Etc[2];
+
+        soundPlayer_.enabled = true;
+
+        soundPlayer_.GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySound_BuildTile()
+    {
+        SoundPlayer soundPlayer_ = SoundPlayerPool.GetSoundPlayer();
+
+        soundPlayer_.GetComponent<AudioSource>().Stop();
+
+        soundPlayer_.GetComponent<AudioSource>().clip = sounds_Etc[3];
 
         soundPlayer_.enabled = true;
 
