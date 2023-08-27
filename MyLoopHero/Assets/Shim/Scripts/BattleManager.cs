@@ -37,17 +37,14 @@ public class BattleManager : MonoBehaviour
     public WaitForSecondsRealtime playerSpeed;
 
     // rayCastHit_.collider 에서 받아올 몬스터의 정보 리스트
+    //public GameObject monstersInBattle;
     public List<Enemy> monstersInBattle;
 
     // rayCastHit_.collider 의 child 수를 담을 변수
     public int monsterCount;
 
-    // rayCastHit_.collider 에서 받아온 child 를 담을 리스트
-    public List<GameObject> monstersInField;
-
     // 플레이어의 죽음 여부를 저장할 변수;
     public bool isPlayerDie;
-
 
 
     // 공격 성공 확률을 저장할 변수
@@ -105,7 +102,6 @@ public class BattleManager : MonoBehaviour
     public void MakeMonsterList()
     {
         monstersInBattle = new List<Enemy>();
-        monstersInField = new List<GameObject>();
     }
     #endregion
 
@@ -131,74 +127,70 @@ public class BattleManager : MonoBehaviour
         // for 문을 통해 몬스터의 정보를 순서대로 monstersInBattle 리스트에 넣는다. (타일의 첫번째 자식은 타일 이미지이므로 1번부터 돌린다.)
         for (int i = 1; i < monsterCount + 1; i++)
         {
-            monstersInField.Add(raycasthit_.collider.transform.GetChild(i).gameObject);
-
             #region 이름에 맞추어 알맞은 몬스터 정보값을 복사해 리스트에 넣는다.
             //Debug.LogFormat("리스트 길이 {0}, i 값: {1}, 어떤걸 들고 오지?: {2}", monstersInBattle.Count, i, raycasthit_.collider.transform.GetChild(i).name);
             if (raycasthit_.collider.transform.GetChild(i).name == "Slime")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[0].CopyEnemyInfo());
-                Debug.LogFormat("리스트 길이 {0}, i 값: {1}", monstersInBattle.Count, i);
-                //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[0].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[0]));
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "RedWolf")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[1].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[1].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[1]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Spider")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[2].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[2].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[2]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Skeleton")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[3].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[3].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[3]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Chest")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[4].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[4].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[4]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Ghost")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[5].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[5].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[5]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Vampire")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[6].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[6].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[6]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Ghoul")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[7].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[7].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[7]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Harpy")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[8].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[8].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[8]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Gargoyle")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[9].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[9].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[9]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "FleshGolem")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[10].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[10].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[10]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Moskito")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[11].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[11].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[11]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             else if (raycasthit_.collider.transform.GetChild(i).name == "Scarecrow")
             {
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[12].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[12].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[12]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
             }
             // ! 보스 생성시 이름 잘 보고 주석 풀 것
@@ -206,7 +198,7 @@ public class BattleManager : MonoBehaviour
             else if (raycasthit_.collider.transform.GetChild(i).name == "BOSS")
             {
                 Debug.Log(raycasthit_.collider.transform.GetChild(i).name);
-                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[13].CopyEnemyInfo());
+                monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[13].CopyEnemyInfo(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[13]));
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
 
                 AudioManager.instance.PlayMusic_LichBattle();
@@ -258,7 +250,6 @@ public class BattleManager : MonoBehaviour
         Time.timeScale = 0;
     }
     #endregion
-
 
     //전투 시작 종료 함수//////////////////////////////////////////////////////////////////////////////////////
 

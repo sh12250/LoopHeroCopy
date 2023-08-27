@@ -24,27 +24,25 @@ public class Enemy : MonoBehaviour
     //public float enemyItemTier = default;
     // } 몬스터 능력치
 
-    public Enemy CopyEnemyInfo() 
+    public Enemy CopyEnemyInfo(Enemy enemy_) 
     {
-        #region Legacy
-        //enemyIdle = enemyInfoBase_.enemyIdle;
-        //enemyCharge = enemyInfoBase_.enemyCharge;
-        //enemyAttack = enemyInfoBase_.enemyAttack;
-        //enemyHurt_0 = enemyInfoBase_.enemyHurt_0;
-        //enemyHurt_1 = enemyInfoBase_.enemyHurt_1;
-        //enemyDeath = enemyInfoBase_.enemyDeath;
+        enemyIdle = enemy_.enemyIdle;
+        enemyCharge = enemy_.enemyCharge;
+        enemyAttack = enemy_.enemyAttack;
+        enemyHurt_0 = enemy_.enemyHurt_0;
+        enemyHurt_1 = enemy_.enemyHurt_1;
+        enemyDeath = enemy_.enemyDeath;
 
-        //enemyID = enemyInfoBase_.enemyID;
-        //enemyName = enemyInfoBase_.enemyName;
-        //enemyHP = enemyInfoBase_.enemyHP;
-        //enemyDMG = enemyInfoBase_.enemyDMG;
-        //enemyDEF = enemyInfoBase_.enemyDEF;
-        //enemySpeed = enemyInfoBase_.enemySpeed;
-        //enemyEvade = enemyInfoBase_.enemyEvade;
-        //enemyRegen = enemyInfoBase_.enemyRegen;
-        //enemyItemChance = enemyInfoBase_.enemyItemChance;
-        //enemyItemTier = enemyInfoBase_.enemyItemTier;
-        #endregion
+        enemyID = enemy_.enemyID;
+        enemyName = enemy_.enemyName;
+        enemyHP = enemy_.enemyHP * (1 + (GameManager.instance.loopCnt * 0.6f));
+        enemyDMG = enemy_.enemyDMG * (1 + (GameManager.instance.loopCnt * 0.6f));
+        enemyDEF = enemy_.enemyDEF * (1 + (GameManager.instance.loopCnt * 0.6f));
+        enemySpeed = enemy_.enemySpeed;
+        enemyEvade = enemy_.enemyEvade;
+        enemyRegen = enemy_.enemyRegen;
+        enemyItemChance = enemy_.enemyItemChance;
+
         return (Enemy)this.MemberwiseClone();
     }
 }
