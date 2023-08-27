@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private Image exp;
 
     public const float DAYCYCLE = 24f;
-    public const float LOOPLIMIT = 10f;
+    public const int LOOPLIMIT = 10;
     public float globalTime;
     public int dayCnt;
     public int loopCnt;

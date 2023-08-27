@@ -208,6 +208,8 @@ public class BattleManager : MonoBehaviour
                 Debug.Log(raycasthit_.collider.transform.GetChild(i).name);
                 monstersInBattle.Add(MonsterSpawner.instance.GetComponentsInChildren<Enemy>()[13].CopyEnemyInfo());
                 //Debug.LogFormat("이 몬스터는 : {0}", monstersInBattle[i].enemyName);
+
+                AudioManager.instance.PlayMusic_LichBattle();
             }
             else
             {
