@@ -119,21 +119,24 @@ public class RoadTile : MonoBehaviour
 
     public void SetMonsterPosition(GameObject monster_)
     {
-        switch (monsterCnt)
-        {
-            case 1:
-                monster_.transform.localPosition = new Vector3(0.25f, 0.25f, 0);
-                break;
-            case 2:
-                monster_.transform.localPosition = new Vector3(-0.25f, 0.25f, 0);
-                break;
-            case 3:
-                monster_.transform.localPosition = new Vector3(-0.25f, -0.25f, 0);
-                break;
-            case 4:
-                monster_.transform.localPosition = new Vector3(0.25f, -0.25f, 0);
-                break;
-        }
+        monster_.transform.localPosition = Vector3.zero;
+
+        // LEGACY
+        //switch (monsterCnt)
+        //{
+        //    case 1:
+        //        monster_.transform.localPosition = new Vector3(0.25f, 0.25f, 0);
+        //        break;
+        //    case 2:
+        //        monster_.transform.localPosition = new Vector3(-0.25f, 0.25f, 0);
+        //        break;
+        //    case 3:
+        //        monster_.transform.localPosition = new Vector3(-0.25f, -0.25f, 0);
+        //        break;
+        //    case 4:
+        //        monster_.transform.localPosition = new Vector3(0.25f, -0.25f, 0);
+        //        break;
+        //}
     }
 
     private void Init()
