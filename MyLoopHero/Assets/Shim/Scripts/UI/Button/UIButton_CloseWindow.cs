@@ -35,15 +35,15 @@ public class UIButton_CloseWindow : UIButton
         base.DoPointerUp(eventData);
 
         // 만약 유니티 에디터로 실행 중일 경우에는,
-        if (UnityEditor.EditorApplication.isPlaying == true)
-        {
-            // 유니티 에디터의 재생을 꺼준다.
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
+        //if (UnityEditor.EditorApplication.isPlaying == true)
+        //{
+        //    // 유니티 에디터의 재생을 꺼준다.
+        //    UnityEditor.EditorApplication.isPlaying = false;
+        //}
+        //else
+        //{
             // 빌드된 게임을 종료한다.
             Application.Quit();
-        }
+        //}
     }
 }

@@ -8,7 +8,7 @@ public class UIButton_Continue : UIButton
 {
     private GameObject menu;
     private GameObject logo;
-
+    private GameObject speedButton;
 
     protected override void Awake()
     {
@@ -18,6 +18,7 @@ public class UIButton_Continue : UIButton
         // buttonText 에 button 하위의 TMP_Text 컴포넌트를 가진 오브젝트를 담는다.
         buttonText = button.GetComponentInChildren<TMP_Text>();
 
+        speedButton = GameObject.Find("SpeedButton").gameObject;
 
         // campMenu
         menu = button.transform.parent.gameObject;
@@ -45,6 +46,19 @@ public class UIButton_Continue : UIButton
         base.DoPointerUp(eventData);
         StartCoroutine(PlayAnimation());
         isPressMenu = false;
+
+        if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1") 
+        {
+            Time.timeScale = 1;
+        }
+        else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1.5") 
+        {
+            Time.timeScale = 1.5f;
+        }
+        else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 2") 
+        {
+            Time.timeScale = 2;
+        }
     }
 
     #region AnimationCoroutine

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -61,8 +60,7 @@ public class PlayerInMap : MonoBehaviour
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
                         BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
-                        //MapTime.MapTimeScale(0);
-                        Time.timeScale = 0;
+                        MapTime.MapTimeScale(0f);
                         BattleManager.instance.StartBattle();
                         #endregion
                     }
@@ -93,8 +91,8 @@ public class PlayerInMap : MonoBehaviour
                         BattleManager.instance.GetPlayerInfo();
                         BattleManager.instance.UpdateMonsterInfo(hit_Tiles);
                         BattleManager.instance.CheckPlayerDeath(BattleManager.instance.playerKnight);
-                        //MapTime.MapTimeScale(0);
-                        Time.timeScale = 0;
+                        MapTime.MapTimeScale(0f);
+                        //Time.timeScale = 0;
                         BattleManager.instance.StartBattle();
                     }
                     #endregion

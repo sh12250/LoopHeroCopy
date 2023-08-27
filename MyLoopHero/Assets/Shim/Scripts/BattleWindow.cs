@@ -19,11 +19,10 @@ public class BattleWindow : MonoBehaviour
     public Sprite deathSprite;
 
     public GameObject[] monsterSpaces;
+    public Animation bossEncounter;
     //public TMP_Text[] monsterStatus;
     //public TMP_Text[] monsterPlus;
     //public TMP_Text[] monsterMinus;
-
-    private string monsterMaxHP;
 
 
     private void Awake()

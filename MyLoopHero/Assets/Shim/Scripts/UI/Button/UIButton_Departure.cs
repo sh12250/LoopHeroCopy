@@ -22,6 +22,8 @@ public class UIButton_Departure : UIButton
         // buttonText 에 button 하위의 TMP_Text 컴포넌트를 가진 오브젝트를 담는다.
         buttonText = button.GetComponentInChildren<TMP_Text>();
 
+        MapTime.MapTimeScale(0);
+
         // title
         title = GameObject.Find("Title").gameObject;
         // background
@@ -70,6 +72,6 @@ public class UIButton_Departure : UIButton
         travelUI.GetComponent<RectTransform>().anchoredPosition = travelUIMovePosition;
 
         AudioManager.instance.PlayMusic_Basic();
-        MapTime.MapTimeScale(1);
+        Time.timeScale = 1;
     }
 }

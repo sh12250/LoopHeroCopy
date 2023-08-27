@@ -63,17 +63,16 @@ public class MonsterSpawner : MonoBehaviour
         {
             enemies[i].enemyID = monsterCSVConverter.enemyID[i];
             enemies[i].enemyName = monsterCSVConverter.enemyName[i];
-            enemies[i].enemyHP = monsterCSVConverter.enemyHP[i];
-            enemies[i].enemyDMG = monsterCSVConverter.enemyDMG[i];
-            enemies[i].enemyDEF = monsterCSVConverter.enemyDEF[i];
+            enemies[i].enemyHP = monsterCSVConverter.enemyHP[i] + (monsterCSVConverter.enemyHP[i] * GameManager.instance.loopCnt * 0.5f);
+            enemies[i].enemyDMG = monsterCSVConverter.enemyDMG[i] + (monsterCSVConverter.enemyDMG[i] * GameManager.instance.loopCnt * 0.3f);
+            enemies[i].enemyDEF = monsterCSVConverter.enemyDEF[i] + (monsterCSVConverter.enemyDEF[i] * GameManager.instance.loopCnt * 0.3f);
             enemies[i].enemySpeed = monsterCSVConverter.enemySpeed[i];
-            enemies[i].enemyEvade = monsterCSVConverter.enemyEvade[i];
-            enemies[i].enemyRegen = monsterCSVConverter.enemyRegen[i];
+            enemies[i].enemyEvade = monsterCSVConverter.enemyEvade[i] + (monsterCSVConverter.enemyEvade[i] * GameManager.instance.loopCnt * 0.2f);
+            enemies[i].enemyRegen = monsterCSVConverter.enemyRegen[i] + (monsterCSVConverter.enemyRegen[i] * GameManager.instance.loopCnt * 0.2f);
             enemies[i].enemyItemChance = monsterCSVConverter.enemyItemChance[i];
             //enemies[i].enemyItemTier = monsterCSVConverter.enemyItemTier[i];
         }
     }
-
 
     private void GiveEnemySprite()
     {

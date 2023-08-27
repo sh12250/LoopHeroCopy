@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Shim/Scenes/PlayScene.unity
-    guid: cd6e3d2caae0cdc418a62dae47068faf
+    guid: db194f678ad60334eabba2c2dddecdec
+  - enabled: 1
+    path: Assets/Jung/Scenes/PlayScene.unity
+    guid: 27cc73ced7808a24e9af168cd8e0e7e0
   m_configObjects: {}

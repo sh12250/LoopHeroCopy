@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using Unity.VisualScripting;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,8 +10,10 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     private GameObject ui_Inventory;
 
     // 현재 드래그 중인 아이콘의 RectTransform.transform 값을 알아오기 위한 변수
-    private RectTransform rectHolding;
+    public RectTransform rectHolding { get; private set; }
 
+    // rectHolding 의 인덱스를 저장하기 위한 변수
+    private int rectHoldingIdx;
 
     // 마우스의 ScreenToWorldPoint 좌표를 저장하기 위한 변수
     private Vector3 mouseLocation;
@@ -32,6 +29,9 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     // 드래그 시작좌표를 저장하기 위한 변수
     private Vector2 itemDefaultLocation;
+
+    // SpeedButton
+    private GameObject speedButton;
     #endregion
 
 
@@ -44,7 +44,7 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         // ui_Inventory와 RectHolding의 컴포넌트를 불러온다.
         ui_Inventory = this.gameObject;
         rectHolding = GetComponent<RectTransform>();
-
+        speedButton = GameObject.Find("SpeedButton").gameObject;
         #region 로그 확인용 코드
         // GameObject invenEquip = GameObject.FindGameObjectWithTag("InvenEquip");
         // collidertsInUI_Inventory의 하위 box collider를 모두 담는다.
@@ -104,18 +104,24 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         // 조건문 { 만약 마우스 좌클릭을 했을 때
         if (Input.GetMouseButtonDown(0))
         {
-            // 1. 만약 레이가 검출한 콜라이더가 있을 경우
-            if (hit_.collider != null && hit_.collider.GetComponent<Image>().sprite == null)
+            // 1. 만약 레이가 검출한 콜라이더가 없을 경우
+            if (hit_.collider != null && hit_.collider.tag == "Inven") 
+            {
+                isDragging = false;
+            }
+            // 2. 만약 레이가 검출한 콜라이더가 있을 경우
+            else if (hit_.collider != null && hit_.collider.GetComponent<Image>().sprite == null)
             {
                 // 지금 검출한 아이콘의 transform 값을 RectHolding에 저장한다.
-                rectHolding = (RectTransform)hit_.transform;
+                rectHolding = hit_.transform.GetComponent<RectTransform>();
+                rectHoldingIdx = rectHolding.GetSiblingIndex();
+                Debug.Log(rectHoldingIdx);
+
+                rectHolding.transform.SetAsLastSibling();
+                Time.timeScale = 0;
+
                 // isDragging 값을 true 바꾼다. 드래그를 시작
                 isDragging = true;
-            }
-            // 2. 만약 레이가 검출한 콜라이더가 없을 경우
-            else
-            {
-                /*Do Nothing*/
             }
         }
         // 조건문 } 만약 마우스 좌클릭을 했을 때
@@ -154,10 +160,22 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
             //    hit_.transform.name, hit_.transform.gameObject.layer);
             #endregion
 
+            // 드래그 중이고, 검출된 EquipSlot 레이어가 없다면
             if (hit_.collider == null)
             {
-                // 드래그 중이고, 검출된 EquipSlot 레이어가 없다면
                 rectHolding.anchoredPosition = itemDefaultLocation;
+                if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1")
+                {
+                    Time.timeScale = 1;
+                }
+                else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1.5")
+                {
+                    Time.timeScale = 1.5f;
+                }
+                else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 2")
+                {
+                    Time.timeScale = 2;
+                }
                 isDragging = false;
             }
             else if (hit_.collider != null)
@@ -174,9 +192,6 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     UI_DragZone_Inven.instance.itemInInvenCnt -= 1;
-
-                    rectHolding.anchoredPosition = itemDefaultLocation;
-                    isDragging = false;
                 }
                 else if (hit_.collider.name == "Equip_Slot_Ring" && rectHolding.CompareTag("Ring"))
                 {
@@ -190,9 +205,6 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     UI_DragZone_Inven.instance.itemInInvenCnt -= 1;
-
-                    rectHolding.anchoredPosition = itemDefaultLocation;
-                    isDragging = false;
                 }
                 else if (hit_.collider.name == "Equip_Slot_Shield" && rectHolding.CompareTag("Shield"))
                 {
@@ -206,9 +218,6 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     UI_DragZone_Inven.instance.itemInInvenCnt -= 1;
-
-                    rectHolding.anchoredPosition = itemDefaultLocation;
-                    isDragging = false;
                 }
                 else if (hit_.collider.name == "Equip_Slot_Armor" && rectHolding.CompareTag("Armor"))
                 {
@@ -222,27 +231,29 @@ public class UI_Inventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
                     rectHolding.GetComponentsInChildren<Image>()[1].color = Color.black;
 
                     UI_DragZone_Inven.instance.itemInInvenCnt -= 1;
-
-                    rectHolding.anchoredPosition = itemDefaultLocation;
-                    isDragging = false;
                 }
                 else
                 {
-                    rectHolding.anchoredPosition = itemDefaultLocation;
-                    isDragging = false;
+                    /*Do Nothing*/
                 }
+                    rectHolding.anchoredPosition = itemDefaultLocation;
+                    rectHolding.transform.SetSiblingIndex(rectHoldingIdx);
+
+                    if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1")
+                    {
+                        Time.timeScale = 1;
+                    }
+                    else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1.5")
+                    {
+                        Time.timeScale = 1.5f;
+                    }
+                    else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 2")
+                    {
+                        Time.timeScale = 2;
+                    }
+
+                    isDragging = false;
             }
-            else
-            {
-                /*Do Nothing*/
-                //Debug.Log("뭔가 이상함");
-            }
-            #region LEGACY
-            //else if (rectHolding.tag == UI_DragZone_Equip.equipSlots[3].tag)
-            //{
-            //    UI_DragZone_Equip.ChangeSlotSprite(UI_DragZone_Equip.equipSlots[3]);
-            //}
-            #endregion
         }
         else if (isDragging == false)
         {

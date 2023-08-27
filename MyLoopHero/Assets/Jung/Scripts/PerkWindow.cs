@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +19,15 @@ public class PerkWindow : MonoBehaviour
 
     public int perkCnt;
 
+    private GameObject speedButton;
+
     private void Awake()
     {
         perkCnt = 0;
 
         transform.localScale = Vector3.zero;
+
+        speedButton = GameObject.Find("SpeedButton").gameObject;
     }
 
     public void OpenWindow()
@@ -35,7 +37,7 @@ public class PerkWindow : MonoBehaviour
             SetPerks();
             transform.localScale = Vector3.one;
 
-            MapTime.MapTimeScale(0);
+            Time.timeScale = 0;
         }
     }
 
@@ -44,7 +46,18 @@ public class PerkWindow : MonoBehaviour
         transform.localScale = Vector3.zero;
         perkCnt -= 1;
 
-        MapTime.MapTimeScale(1);
+        if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1")
+        {
+            Time.timeScale = 1;
+        }
+        else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 1.5")
+        {
+            Time.timeScale = 1.5f;
+        }
+        else if (speedButton.GetComponentInChildren<TMP_Text>().text == "x 2")
+        {
+            Time.timeScale = 2;
+        }
     }
 
     public void SetPerks()

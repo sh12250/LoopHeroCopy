@@ -77,9 +77,9 @@ public class MonsterCSVConverter : MonoBehaviour
 
     private void ReadCSV()
     {
-        monsterDataFile = AssetDatabase.
-            LoadAssetAtPath<TextAsset>
-            ("Assets/Shim/DataFiles/MonsterDatabase.csv");
+        monsterDataFile = Resources.
+            Load<TextAsset>
+            ("DataFiles/MonsterDatabase");
     }
 
     private void CheckCSVRowColumn()

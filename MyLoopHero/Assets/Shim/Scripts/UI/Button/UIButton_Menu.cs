@@ -90,6 +90,8 @@ public class UIButton_Menu : UIButton
             StartCoroutine(PlayAnimation());
             MakeBaseState();
             isPressMenu = true;
+
+            Time.timeScale = 0;
         }
     }
 

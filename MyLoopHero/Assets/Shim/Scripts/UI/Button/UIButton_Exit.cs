@@ -42,13 +42,13 @@ public class UIButton_Exit : UIButton
     {
         base.DoPointerUp(eventData);
 
-        if (UnityEditor.EditorApplication.isPlaying == true) 
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else 
-        {
+        //if (UnityEditor.EditorApplication.isPlaying == true) 
+        //{
+        //    UnityEditor.EditorApplication.isPlaying = false;
+        //}
+        //else 
+        //{
             Application.Quit();
-        }
+        //}
     }
 }

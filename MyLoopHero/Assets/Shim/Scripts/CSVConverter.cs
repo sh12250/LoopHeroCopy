@@ -96,7 +96,7 @@ public class CSVConverter : MonoBehaviour
 
     private void ReadCSV()
     {
-        itemDataFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Shim/DataFiles/ItemDatabase.csv");
+        itemDataFile = Resources.Load<TextAsset>("DataFiles/ItemDatabase");
         //Debug.Log(itemDataFile);
     }
 

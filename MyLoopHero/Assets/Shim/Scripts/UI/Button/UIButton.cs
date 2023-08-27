@@ -27,9 +27,6 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     protected static bool isPressTravel;
     protected static bool isPressBuild;
 
-
-
-
     // } 버튼 필드
 
 

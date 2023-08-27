@@ -31,14 +31,19 @@ public class ScrollingBackground : MonoBehaviour
             if (X_ <= 1)
             {
                 yield return moveTime;
+                if (Time.timeScale == 0)
+                {
+                    /*Do Nothing*/
+                }
+                else
+                {
+                    backGround.GetComponent<RectTransform>().anchoredPosition =
+                        new Vector2(X_, Y_);
 
-                backGround.GetComponent<RectTransform>().anchoredPosition =
-                    new Vector2(X_, Y_);
-
-                X_ -= 1.6f;
-                Y_ -= 0.9f;
+                    X_ -= 1.6f;
+                    Y_ -= 0.9f;                
+                }
             }
-
             else
             {
                 yield break;

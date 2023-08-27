@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 
 public class BattleManager : MonoBehaviour
@@ -26,11 +24,11 @@ public class BattleManager : MonoBehaviour
     // BattleWindow
     private GameObject battleWindow;
 
-    // BossBattleWindow
-    //private GameObject bossBattleWindow;
-
     // DeadWindow
     private GameObject deadWindow;
+
+    // VictoryWindow
+    private GameObject victoryWindow;
 
     // rayCastHit_.collider 에서 받아올 플레이어의 정보
     public Knight playerKnight;
@@ -47,9 +45,6 @@ public class BattleManager : MonoBehaviour
     // rayCastHit_.collider 에서 받아온 child 를 담을 리스트
     public List<GameObject> monstersInField;
 
-    // 몬스터들의 공격속도를 WaitForSecondsRealtime 에 캐싱할 배열
-    public WaitForSecondsRealtime[] monsterSpeedArray;
-
     // 플레이어의 죽음 여부를 저장할 변수;
     public bool isPlayerDie;
 
@@ -65,30 +60,14 @@ public class BattleManager : MonoBehaviour
     public Enemy target;
     #endregion
 
-
-    #region 몬스터 공격 속드 WaitForSecondsRealtime 에 캐싱
-    //public WaitForSecondsRealtime slimeBossSpeed = new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
-    //public WaitForSecondsRealtime ratwolfAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.75f, 0.95f));
-    //public WaitForSecondsRealtime spiderAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.91f, 1.11f));
-    //public WaitForSecondsRealtime skelGargoFlesh = new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
-    //public WaitForSecondsRealtime chestAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.7f, 0.9f));
-    //public WaitForSecondsRealtime ghostAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.85f, 1.05f));
-    //public WaitForSecondsRealtime vampireAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.5f, 07f));
-    //public WaitForSecondsRealtime ghoulAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.32f, 0.52f));
-    //public WaitForSecondsRealtime harpyAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.8f, 1f));
-    //public WaitForSecondsRealtime mosquitoAttackSpeed = new WaitForSecondsRealtime(Random.Range(1.1f, 1.3f));
-    //public WaitForSecondsRealtime scarecrowAttackSpeed = new WaitForSecondsRealtime(Random.Range(0.45f, 0.65f));
-    #endregion
-
-
     private void Awake()
     {
         isPlayerDie = false;
         MakeMonsterList();
         GetPlayerInfo();
         CheckBattleWindow();
-        //CheckBossBattleWindow();
         CheckDeadWindow();
+        CheckVictoryWindow();
     }
 
     private void FixedUpdate()
@@ -136,19 +115,6 @@ public class BattleManager : MonoBehaviour
         //battleWindow.GetComponent<BattleWindow>().ChangeEnemyNull();
         monstersInBattle.Clear();
     }
-    #endregion
-
-    #region 몬스터 공격 속도 WaitForSecondsRealtime 에 캐싱하는 함수
-    //private void CachingMonsterSpeed() 
-    //{
-    //    monsterSpeedArray = new WaitForSecondsRealtime[]{ };
-
-    //    for (int i = 0; i < MonsterSpawner.instance.enemies.Length; i++) 
-    //    {
-    //        monsterSpeedArray[i] = new WaitForSecondsRealtime(MonsterSpawner.instance.enemies[i].enemySpeed * 2);
-    //         ex. Slime 은 monsterSpeedArray[0] 으로 WaitForSecondRealtime(0.6 * 2) 의 값을 가지게 된다.
-    //    }
-    //}
     #endregion
 
     #region 타일에 있는 몬스터 이름을 비교하여, 미리 만들어진 MonsterBase(Clone) 에서 정보를 뽑아와 monstersInBattle 리스트에 담는 함수
@@ -271,8 +237,26 @@ public class BattleManager : MonoBehaviour
     {
         StopAllCoroutines();
         deadWindow.transform.localScale = Vector3.one;
+        Time.timeScale = 0;
     }
     #endregion
+
+    #region VictoryWindow 를 찾고 SetActive(false) 하는 함수
+    public void CheckVictoryWindow() 
+    {
+        victoryWindow = GameObject.Find("VictoryWindow");
+        victoryWindow.transform.localScale = Vector3.zero;
+    }
+    #endregion
+
+    #region 게임 승리 함수
+    public void OpenVictoryWindow() 
+    {
+        victoryWindow.transform.localScale = Vector3.one;
+        Time.timeScale = 0;
+    }
+    #endregion
+
 
     //전투 시작 종료 함수//////////////////////////////////////////////////////////////////////////////////////
 
@@ -285,14 +269,6 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    //#region BossBattleWindow 를 찾고 사이즈를 줄이는 함수
-    //public void CheckBossBattleWindow()
-    //{
-    //    bossBattleWindow = GameObject.Find("BossBattleWindow").gameObject;
-    //    bossBattleWindow.transform.localScale = Vector3.zero;
-    //}
-    //#endregion
-
     #region BattlewWindow 를 띄우는 함수
     public void OpenBattleWindow()
     {
@@ -300,26 +276,12 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    //#region BossBattlewWindow 를 띄우는 함수
-    //public void OpenBossBattleWindow()
-    //{
-    //    bossBattleWindow.transform.localScale = Vector3.one;
-    //}
-    //#endregion
-
     #region BattlewWindow 를 닫는 함수
     public void CloseBattleWindow()
     {
         battleWindow.transform.localScale = Vector3.zero;
     }
     #endregion
-
-    //#region BossBattlewWindow 를 닫는 함수
-    //public void CloseBossBattleWindow()
-    //{
-    //    bossBattleWindow.transform.localScale = Vector3.zero;
-    //}
-    //#endregion
 
     #region 전투 시작 함수
     public void StartBattle()
@@ -334,9 +296,9 @@ public class BattleManager : MonoBehaviour
             battleWindow.GetComponent<BattleWindow>().monsterSpaces[4].SetActive(false);
 
             battleWindow.GetComponent<BattleWindow>().monsterSpaces[0].GetComponent<RectTransform>().sizeDelta
-                   = new Vector2(70f * 1.6f, 80 * 1.6f);
+                   = new Vector2(70f * 1.8f, 80 * 1.8f);
             battleWindow.GetComponent<BattleWindow>().monsterSpaces[0].GetComponent<RectTransform>().anchoredPosition
-                = new Vector2(0f, 25f);
+                = new Vector2(0f, 30f);
 
             battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(monstersInBattle[0]);
         }
@@ -353,27 +315,25 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    //#region 보스 전투 시작 함수
-    //public void StartBossBattle()
-    //{
-    //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangePlayerIdle();
-    //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
-
-    //    OpenBossBattleWindow();
-    //    StartCoroutine(BattleCycle());
-    //}
-    //#endregion
-
     #region 전투 종료 함수
-    public void EndBattle()
+    public void EndBattle(Enemy enemy_)
     {
-        MapManager.instance.DestroyMonsters(battleTile.gameObject);
-        battleTile.GetComponent<RoadTile>().monsterCnt = 0;
-        StopAllCoroutines();
-        CloseBattleWindow();
-        //CloseBossBattleWindow();
-        ResetMonsterArray();
-        Time.timeScale = 1;
+        if (enemy_.enemyID == 113) 
+        {
+            /*Do Nothing*/
+            StopAllCoroutines();
+            CloseBattleWindow();
+            OpenVictoryWindow();
+        }
+        else 
+        {
+            MapManager.instance.DestroyMonsters(battleTile.gameObject);
+            battleTile.GetComponent<RoadTile>().monsterCnt = 0;
+            StopAllCoroutines();
+            CloseBattleWindow();
+            ResetMonsterArray();
+            MapTime.MapTimeScale(1f);
+        }
     }
     #endregion
 
@@ -436,43 +396,50 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(1 - (playerKnight.heroAttackSpeed * 0.01f));
             battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
 
-            if (playerKnight_.heroHealth <= 0)
+            if (Time.timeScale == 0) 
             {
-                OpenDeadWindow();
-                battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
-                AudioManager.instance.PlaySound_HeroDeath();
-                yield break;
+                /*Do Nothing*/
             }
-            else if (playerKnight_.heroHealth > 0)
+            else 
             {
-                if (enemy_.enemyHP <= 0)
+                if (playerKnight_.heroHealth <= 0)
                 {
-                    playerKnight_.heroEXP += enemy_.enemyItemChance;
-
-                    playerKnight_.LevelUp();
-
-                    enemies_.Remove(enemy_);
-
-                    if (enemies_.Count > 0)
+                    battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
+                    AudioManager.instance.PlaySound_HeroDeath();
+                    OpenDeadWindow();
+                    yield break;
+                }
+                else if (playerKnight_.heroHealth > 0)
+                {
+                    if (enemy_.enemyHP <= 0)
                     {
-                        target = enemies_[0];
+                        playerKnight_.heroEXP += enemy_.enemyItemChance;
 
+                        playerKnight_.LevelUp();
+
+                        enemies_.Remove(enemy_);
+
+                        if (enemies_.Count > 0)
+                        {
+                            target = enemies_[0];
+
+                            AttackAll(playerKnight_, enemies_);
+                            AttackTarget(playerKnight_, enemy_);
+                        }
+                        else
+                        {
+                            battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
+                            Debug.Log("루프 탈출");
+
+                            EndBattle(enemy_);
+                            yield break;
+                        }
+                    }
+                    else if (enemy_.enemyHP > 0)
+                    {
                         AttackAll(playerKnight_, enemies_);
                         AttackTarget(playerKnight_, enemy_);
                     }
-                    else
-                    {
-                        battleWindow.GetComponent<BattleWindow>().ChangePlayerIdle();
-                        Debug.Log("루프 탈출");
-
-                        EndBattle();
-                        yield break;
-                    }
-                }
-                else if (enemy_.enemyHP > 0)
-                {
-                    AttackAll(playerKnight_, enemies_);
-                    AttackTarget(playerKnight_, enemy_);
                 }
             }
         }
@@ -487,93 +454,83 @@ public class BattleManager : MonoBehaviour
 
         battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
 
+
         while (true)
         {
             switch (enemy_.enemyID)
             {
                 case 100:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 1.8f));
                     break;
                 case 101:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.75f, 0.95f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.75f, 2.25f));
                     break;
                 case 102:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.91f, 1.11f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.91f, 2.73f));
                     break;
                 case 103:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.9f));
                     break;
                 case 104:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.7f, 0.9f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.7f, 2.1f));
                     break;
                 case 105:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.85f, 1.05f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.85f, 2.5f));
                     break;
                 case 106:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.5f, 07f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.5f, 1.5f));
                     break;
                 case 107:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.32f, 0.52f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.32f, 0.96f));
                     break;
                 case 108:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.8f, 1f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.8f, 2.4f));
                     break;
                 case 109:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 1.5f));
                     break;
                 case 110:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.5f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.3f, 0.9f));
                     break;
                 case 111:
-                    yield return new WaitForSecondsRealtime(Random.Range(1.1f, 1.3f));
+                    yield return new WaitForSecondsRealtime(Random.Range(1.1f, 3.3f));
                     break;
                 case 112:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.45f, 0.65f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.45f, 1.35f));
                     break;
                 case 113:
-                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 0.8f));
+                    yield return new WaitForSecondsRealtime(Random.Range(0.6f, 1.8f));
                     break;
             }
-
-
-            //if (enemy_.enemyID == 113)
-            //{
-            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossIdle();
-            //}
-            //else
-            //{
                 battleWindow.GetComponent<BattleWindow>().ChangeEnemyIdle(enemy_);
-            //}
 
-
-            if (enemy_.enemyHP <= 0)
+            if(Time.timeScale == 0) 
             {
-                //if (enemy_.enemyID == 113)
-                //{
-                //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossDeath();
-                //    AudioManager.instance.PlaySound_LichDeath();
-                //}
-                //else
-                //{
-                    battleWindow.GetComponent<BattleWindow>().ChangeEnemyDeath(enemy_);
-                //}
-
-                StopCoroutine(EnemyCycle(playerKnight_, enemy_, enemies_));
-                yield break;
+                /*Do Nothing*/
             }
-            else if (enemy_.enemyHP > 0)
+            else
             {
-                if (playerKnight_.heroHealth <= 0)
+                if (enemy_.enemyHP <= 0)
                 {
-                    OpenDeadWindow();
-                    battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
-                    AudioManager.instance.PlaySound_HeroDeath();
+                    battleWindow.GetComponent<BattleWindow>().ChangeEnemyDeath(enemy_);
+
+                    StopCoroutine(EnemyCycle(playerKnight_, enemy_, enemies_));
                     yield break;
                 }
-                else if (playerKnight_.heroHealth > 0)
+                else if (enemy_.enemyHP > 0)
                 {
-                    AttackPlayer(playerKnight_, enemy_);
-                    CheckCounter(playerKnight_, enemy_);
+                    if (playerKnight_.heroHealth <= 0)
+                    {
+                        battleWindow.GetComponent<BattleWindow>().ChangePlayerDeath();
+                        AudioManager.instance.PlaySound_HeroDeath();
+                        OpenDeadWindow();
+                        yield break;
+                    }
+                    else if (playerKnight_.heroHealth > 0)
+                    {
+                        AttackPlayer(playerKnight_, enemy_);
+                        CheckCounter(playerKnight_, enemy_);
+                    }
                 }
             }
         }
@@ -637,18 +594,8 @@ public class BattleManager : MonoBehaviour
                 ShowPlayerHPText(playerKnight_);
                 //ShowPlayerPlusText(playerKnight_, targetEnemy_);
             }
-            //Debug.LogFormat("[AttackTarget]: 플레이어의 흡혈 : {0}, 플레이어의 체력 : {1}", 0.01f * playerKnight_.heroVamp * playerKnight_.heroDamageMagic, playerKnight_.heroHealth);
 
-
-
-            //if (targetEnemy_.enemyID == 113)
-            //{
-            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossCharge();
-            //}
-            //else
-            //{
                 battleWindow.GetComponent<BattleWindow>().ChangeEnemyCharge(targetEnemy_);
-            //}
         }
         // 그 외 상황에서는,
         else
@@ -665,15 +612,7 @@ public class BattleManager : MonoBehaviour
             Debug.LogFormat("[AttackTarget]: 플레이어의 가한데미지 : {0}, 남은 적의 체력 : {1}", playerKnight_.heroDamageMagic + (playerDMG - targetEnemy_.enemyDEF), targetEnemy_.enemyHP);
 
 
-
-            //if (targetEnemy_.enemyID == 113)
-            //{
-            //    bossBattleWindow.GetComponent<BossBattleWindow>().ChangeBossHurt1();
-            //}
-            //else
-            //{
                 battleWindow.GetComponent<BattleWindow>().ChangeEnemyHurt1(targetEnemy_);
-            //}
 
 
 
