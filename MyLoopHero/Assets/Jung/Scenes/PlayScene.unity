@@ -17002,6 +17002,7 @@ MonoBehaviour:
   hurt1Sprite: {fileID: 0}
   deathSprite: {fileID: 0}
   monsterSpaces: []
+  bossEncounter: {fileID: 0}
 --- !u!1001 &1039719252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21643,6 +21644,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f207b6a6d81e324bad5131f2dd0b0d8, type: 3}
   - {fileID: 8300000, guid: 8a8f68373056b0946b837d817db13250, type: 3}
   - {fileID: 8300000, guid: 0ec793600a27be94abc1765674e90258, type: 3}
+  - {fileID: 8300000, guid: e52fdf75a25f3c14c9ccb0a68250c1b9, type: 3}
 --- !u!4 &1307893183
 Transform:
   m_ObjectHideFlags: 0
